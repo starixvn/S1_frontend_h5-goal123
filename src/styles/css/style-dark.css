@@ -1,0 +1,113 @@
+html.dark body {
+  background: #333;
+}
+
+html.dark header {
+  background: #191919;
+}
+
+html.dark header .Join, html.dark header .Login {
+  color: #fff;
+  background: rgba(25, 25, 25, 0.95);
+}
+
+html.dark main .swiper-container {
+  background: #000;
+}
+
+html.dark main #Marquee {
+  background: #000;
+}
+
+html.dark main #Marquee button {
+  color: #fff;
+  font-size: 3vw;
+}
+
+html.dark main #Marquee .icon {
+  color: #fff;
+  background: #000;
+}
+
+html.dark main .sideBar {
+  background: #191919;
+}
+
+html.dark main .thBar {
+  background: #191919;
+}
+
+html.dark main .thBar a {
+  color: #fab515;
+  border-right: 1px solid #333;
+}
+
+html.dark main .thBar a.icon:before {
+  color: #fff;
+}
+
+html.dark main .gameList {
+  background: #333;
+}
+
+html.dark main .gameList a.open {
+  -webkit-box-shadow: 1px 2px 4px 0px #191919;
+          box-shadow: 1px 2px 4px 0px #191919;
+}
+
+html.dark footer {
+  background: #333;
+}
+
+html.dark footer a {
+  border-right: 1px solid #191919;
+  border-bottom: 2px solid #191919;
+}
+
+html.dark footer a .circleAnimation, html.dark footer a span {
+  color: #6f6f6f;
+}
+
+html.dark footer a.open {
+  border-bottom: 2px solid #e92529;
+}
+
+html.dark .dropdown > .dropdown-container {
+  background: #191919;
+}
+
+html.dark #popup {
+  background: rgba(25, 25, 25, 0.95);
+}
+
+html.dark .header {
+  background: #191919;
+}
+
+html.dark .tag {
+  background: #191919;
+}
+
+html.dark .main {
+  background: #191919;
+}
+
+html.dark .bankSlip {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+html.dark .buttonBox button {
+  border: 1px solid #333;
+  -webkit-box-shadow: 0px 3px #000;
+          box-shadow: 0px 3px #000;
+  background: #333;
+}
+
+html.dark .functionList {
+  background: #191919;
+}
+
+html.dark #Loading {
+  background: rgba(25, 25, 25, 0.95);
+}
+/*# sourceMappingURL=style-dark.css.map */

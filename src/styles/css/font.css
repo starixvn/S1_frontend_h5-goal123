@@ -1,0 +1,592 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.woff?v=202003") format("woff");
+}
+
+.icon:before, .icon:after {
+  font-family: 'icomoon';
+  font-size: 5vw;
+}
+
+.icon-moon:before {
+  font-size: 14vw;
+}
+
+.icon-CirclePay:before {
+  font-size: 12vw !important;
+}
+
+.icon-Eeziepay:before {
+  font-size: 7vw !important;
+}
+
+.icon-OneClickPay:before {
+  font-size: 14vw !important;
+}
+
+.icon-VNPay:before {
+  font-size: 3vw !important;
+}
+
+.icon-equalizer:before {
+  font-size: 6vw;
+}
+
+.icon-search {
+  -webkit-transform: translateY(35%) !important;
+          transform: translateY(35%) !important;
+}
+
+.icon-hockey:before {
+  font-size: 3vw;
+  margin-bottom: 1vw;
+}
+
+.icon-member:before {
+  font-size: 6.3vw !important;
+}
+
+.icon-cog:before {
+  font-size: 6.3vw !important;
+}
+
+.icon-paytrust88:before {
+  font-size: 5vw !important;
+}
+
+.icon-JDpay:before {
+  font-size: 4vw !important;
+}
+
+.icon-information-solid:before {
+  content: "\e951";
+}
+
+.icon-minus:before {
+  content: "\e94e";
+}
+
+.icon-plus:before {
+  content: "\e94f";
+}
+
+.icon-alarm:before {
+  content: "\e950";
+}
+
+.icon-bell:before {
+  content: "\e950";
+}
+
+.icon-home:before {
+  content: "\e900";
+}
+
+.icon-newspaper:before {
+  content: "\e91a";
+}
+
+.icon-pencil:before {
+  content: "\e91b";
+}
+
+.icon-camera:before {
+  content: "\e919";
+}
+
+.icon-connection:before {
+  content: "\e91c";
+}
+
+.icon-books:before {
+  content: "\e94b";
+}
+
+.icon-library:before {
+  content: "\e921";
+}
+
+.icon-files-empty:before {
+  content: "\e925";
+}
+
+.icon-folder-upload:before {
+  content: "\e934";
+}
+
+.icon-coin-dollar:before {
+  content: "\e93b";
+}
+
+.icon-credit-card:before {
+  content: "\e93f";
+}
+
+.icon-phone:before {
+  content: "\e942";
+}
+
+.icon-history:before {
+  content: "\e94d";
+}
+
+.icon-calendar:before {
+  content: "\e953";
+}
+
+.icon-mobile:before {
+  content: "\e958";
+}
+
+.icon-user-plus:before {
+  content: "\e973";
+}
+
+.icon-spinner11:before {
+  content: "\e984";
+}
+
+.icon-search:before {
+  content: "\e986";
+}
+
+.icon-key:before {
+  content: "\e98d";
+}
+
+.icon-key2:before {
+  content: "\e98e";
+}
+
+.icon-lock:before {
+  content: "\e98f";
+}
+
+.icon-equalizer:before {
+  content: "\e992";
+}
+
+.icon-cog:before {
+  content: "\e994";
+}
+
+.icon-cogs:before {
+  content: "\e995";
+}
+
+.icon-bin:before {
+  content: "\e9ac";
+}
+
+.icon-sphere:before {
+  content: "\e9c9";
+}
+
+.icon-eye:before {
+  content: "\e9ce";
+}
+
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+
+.icon-sun:before {
+  content: "\e9d4";
+}
+
+.icon-contrast:before {
+  content: "\e9d5";
+}
+
+.icon-star-empty:before {
+  content: "\e9d7";
+}
+
+.icon-star-full:before {
+  content: "\e9d9";
+}
+
+.icon-warning:before {
+  content: "\ea07";
+}
+
+.icon-plus1:before {
+  content: "\ea0a";
+}
+
+.icon-cancel-circle:before {
+  content: "\ea0d";
+}
+
+.icon-checkmark:before {
+  content: "\ea10";
+}
+
+.icon-exit:before {
+  content: "\ea14";
+}
+
+.icon-arrow-up-left2:before {
+  content: "\ea39";
+}
+
+.icon-arrow-up2:before {
+  content: "\ea3a";
+}
+
+.icon-arrow-up-right2:before {
+  content: "\ea3b";
+}
+
+.icon-arrow-right2:before {
+  content: "\ea3c";
+}
+
+.icon-arrow-down-right2:before {
+  content: "\ea3d";
+}
+
+.icon-arrow-down2:before {
+  content: "\ea3e";
+}
+
+.icon-arrow-down-left2:before {
+  content: "\ea3f";
+}
+
+.icon-arrow-left2:before {
+  content: "\ea40";
+}
+
+.icon-circle-right:before {
+  content: "\ea42";
+}
+
+.icon-checkbox-checked:before {
+  content: "\ea52";
+}
+
+.icon-checkbox-unchecked:before {
+  content: "\ea53";
+}
+
+.icon-radio-unchecked:before {
+  content: "\ea56";
+}
+
+.icon-new-tab:before {
+  content: "\ea7e";
+}
+
+.icon-facebook:before {
+  content: "\ea90";
+}
+
+.icon-facebook2:before {
+  content: "\ea91";
+}
+
+.icon-instagram:before {
+  content: "\ea92";
+}
+
+.icon-twitter:before {
+  content: "\ea96";
+}
+
+.icon-IcoMoon:before {
+  content: "\eaea";
+}
+
+.icon-Unionpay:before {
+  content: "\e93d";
+}
+
+.icon-Alipay:before {
+  content: "\e93e";
+}
+
+.icon-JDpay:before {
+  content: "\e940";
+}
+
+.icon-ThaiQR:before {
+  content: "\e941";
+}
+
+.icon-WeChatPay:before {
+  content: "\e943";
+}
+
+.icon-virtual-sports:before {
+  content: "\e93a";
+}
+
+.icon-statement1:before {
+  content: "\e938";
+}
+
+.icon-GPI:before {
+  content: "\e945";
+}
+
+.icon-JOKER:before {
+  content: "\e946";
+}
+
+.icon-OW:before {
+  content: "\e947";
+}
+
+.icon-PG:before {
+  content: "\e948";
+}
+
+.icon-SG:before {
+  content: "\e949";
+}
+
+.icon-YGG:before {
+  content: "\e94a";
+}
+
+.icon-statement:before {
+  content: "\e937";
+}
+
+.icon-kelo:before {
+  content: "\e931";
+}
+
+.icon-lottery:before {
+  content: "\e932";
+}
+
+.icon-AB:before {
+  content: "\e92b";
+}
+
+.icon-AG:before {
+  content: "\e92c";
+}
+
+.icon-DG:before {
+  content: "\e92d";
+}
+
+.icon-PP:before {
+  content: "\e92e";
+}
+
+.icon-SA:before {
+  content: "\e92f";
+}
+
+.icon-hockey:before {
+  content: "\e930";
+}
+
+.icon-nova-casino:before {
+  content: "\e929";
+}
+
+.icon-ow-casino:before {
+  content: "\e92a";
+}
+
+.icon-CirclePay:before {
+  content: "\e91f";
+}
+
+.icon-Eeziepay:before {
+  content: "\e920";
+}
+
+.icon-Help2Pay:before {
+  content: "\e922";
+}
+
+.icon-OneClickPay:before {
+  content: "\e923";
+}
+
+.icon-VNPay:before {
+  content: "\e924";
+}
+
+.icon-paytrust88:before {
+  content: "\e93c";
+}
+
+.icon-MOMO:before {
+  content: "\e926";
+}
+
+.icon-VIETTELPAY:before {
+  content: "\e927";
+}
+
+.icon-ZALO:before {
+  content: "\e928";
+}
+
+.icon-member:before {
+  content: "\e90a";
+}
+
+.icon-esport:before {
+  content: "\e911";
+}
+
+.icon-F1:before {
+  content: "\e912";
+}
+
+.icon-football:before {
+  content: "\e913";
+}
+
+.icon-badminton:before {
+  content: "\e914";
+}
+
+.icon-baseball:before {
+  content: "\e915";
+}
+
+.icon-basketball:before {
+  content: "\e916";
+}
+
+.icon-soccer:before {
+  content: "\e917";
+}
+
+.icon-tennis:before {
+  content: "\e918";
+}
+
+.icon-balance:before {
+  content: "\e901";
+}
+
+.icon-casino:before {
+  content: "\e902";
+}
+
+.icon-contact:before {
+  content: "\e903";
+}
+
+.icon-deposit:before {
+  content: "\e904";
+}
+
+.icon-email:before {
+  content: "\e905";
+}
+
+.icon-game:before {
+  content: "\e906";
+}
+
+.icon-keno:before {
+  content: "\e907";
+}
+
+.icon-livecasino:before {
+  content: "\e908";
+}
+
+.icon-marquee:before {
+  content: "\e909";
+}
+
+.icon-promotion:before {
+  content: "\e90b";
+}
+
+.icon-sports:before {
+  content: "\e90c";
+}
+
+.icon-transfer:before {
+  content: "\e90d";
+}
+
+.icon-vip:before {
+  content: "\e90e";
+}
+
+.icon-e-sports:before {
+  content: "\e90f";
+}
+
+.icon-withdrawal:before {
+  content: "\e910";
+}
+
+.icon-QQpay:before {
+  content: "\e944";
+}
+
+.icon-gift:before {
+  content: "\e939";
+}
+
+.icon-like:before {
+  content: "\e936";
+}
+
+.icon-thumbs-up:before {
+  content: "\e936";
+}
+
+.icon-approve:before {
+  content: "\e936";
+}
+
+.icon-chat:before {
+  content: "\e935";
+}
+
+.icon-bubbles:before {
+  content: "\e935";
+}
+
+.icon-talk:before {
+  content: "\e935";
+}
+
+.icon-message:before {
+  content: "\e935";
+}
+
+.icon-conversation:before {
+  content: "\e935";
+}
+
+.icon-moon:before {
+  content: "\e91d";
+}
+
+.icon-message-typing:before {
+  content: "\e933";
+}
+
+.icon-error_outline:before {
+  content: "\e952";
+}
+
+.icon-error:before {
+  content: "\e954";
+}
+
+.icon-keyboard_arrow_right:before {
+  content: "\e94c";
+}
+
+.icon-cake:before {
+  content: "\e91e";
+}
+/*# sourceMappingURL=font.css.map */
