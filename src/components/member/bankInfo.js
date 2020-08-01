@@ -276,7 +276,7 @@ const BankInfo = () => {
 
 		setPopBox({
 			isOpen: true,
-			title: "",
+			title: i18n.lbl_ImportantNote,
 			content: i18n["lbl_CheckConfirm"],
 			hasBtn: true,
 			btnBar: (
