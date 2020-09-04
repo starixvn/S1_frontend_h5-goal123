@@ -7,26 +7,26 @@ html.dark header {
 }
 
 html.dark header .Join, html.dark header .Login {
-  color: #fff;
+  color: white;
   background: rgba(25, 25, 25, 0.95);
 }
 
 html.dark main .swiper-container {
-  background: #000;
+  background: black;
 }
 
 html.dark main #Marquee {
-  background: #000;
+  background: black;
 }
 
 html.dark main #Marquee button {
-  color: #fff;
+  color: white;
   font-size: 3vw;
 }
 
 html.dark main #Marquee .icon {
-  color: #fff;
-  background: #000;
+  color: white;
+  background: black;
 }
 
 html.dark main .sideBar {
@@ -38,12 +38,12 @@ html.dark main .thBar {
 }
 
 html.dark main .thBar a {
-  color: #fab515;
+  color: #fab617;
   border-right: 1px solid #333;
 }
 
 html.dark main .thBar a.icon:before {
-  color: #fff;
+  color: white;
 }
 
 html.dark main .gameList {

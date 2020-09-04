@@ -157,15 +157,20 @@ class CateGoryContent extends Component {
 		if (this.state.category !== _category) {
 			this.setState({ category: _category });
 		}
+
 		let firstItem = this.RefItems[
 			_category
-		].First.current.getBoundingClientRect();
+		]?.First.current.getBoundingClientRect();
 
-		const offset_y = -this.props.top;
-		const y = firstItem.top + window.pageYOffset + offset_y;
-		window.scrollTo({ top: y, behavior: "smooth" });
+		if (firstItem) {
+			const offset_y = -this.props.top;
+			const y = firstItem.top + window.pageYOffset + offset_y;
+			console.log(y);
+			window.scrollTo({ top: y, behavior: "smooth" });
+		}
 	};
 	render() {
+		console.log(this.state.category);
 		let sideBarItems = [];
 		let products = [];
 		productList.forEach(item => {
@@ -173,7 +178,6 @@ class CateGoryContent extends Component {
 			sideBarItems.push(
 				<CategoryItem
 					key={`category-${item.category}`}
-					categoryIcon={item.categoryIcon}
 					onClick={
 						!item._blank
 							? this.selectCategory.bind(null, item.category)
@@ -261,7 +265,15 @@ class CateGoryContent extends Component {
 
 		return (
 			<div className="content">
-				<div className="sideBar">{sideBarItems}</div>
+				<div className="sideBar">
+					<CategoryItem
+						key={`category-sidebar`}
+						onClick={this.selectCategory.bind(null, "≡")}
+						isOpen={`${this.state.category === "≡" ? " open" : ""}`}
+						translation="≡"
+					/>
+					{sideBarItems}
+				</div>
 				<div className="gameList">{products}</div>
 			</div>
 		);
@@ -270,9 +282,7 @@ class CateGoryContent extends Component {
 
 const CategoryItem = props => {
 	return (
-		<button
-			className={`icon icon-${props.categoryIcon}${props.isOpen}`}
-			onClick={props.onClick}>
+		<button className={props.isOpen} onClick={props.onClick}>
 			<div>{props.translation}</div>
 		</button>
 	);

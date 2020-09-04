@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import Swiper from "react-id-swiper";
-import "../../styles/css/swiper.css";
 import config from "../../config";
 import { api_GetBanner } from "../../service/api/site";
 import {
@@ -50,26 +49,28 @@ export const ClickLink = (
 	}
 };
 
-const Panel = ({ ImgFolder }) => {
+const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 	const [banner, setBanner] = useState([]);
 	const { userInfo } = useContext(userInfoContext);
 	const { setNav } = useContext(navContext);
 
 	useEffect(() => {
 		let mounted = true;
-		api_GetBanner(ImgFolder, "", userInfo.langId).then(res => {
-			if (res.data.errorCode === 0 && mounted) {
-				setBanner(res.data.data);
+		api_GetBanner(ImgFolder, "", userInfo.langId, filterHideInHome).then(
+			res => {
+				if (res.data.errorCode === 0 && mounted) {
+					setBanner(res.data.data);
+				}
 			}
-		});
+		);
 
 		return () => (mounted = false);
-	}, [userInfo, ImgFolder]);
+	}, [userInfo, ImgFolder, filterHideInHome]);
 
-	let rows = banner.map(b => {
+	let rows = banner?.map((b, b_idx) => {
 		let _imgFolder = b.imgFolder ?? ImgFolder;
 		let lang =
-			b.fromDB || b.lang.includes(userInfo.langId)
+			b.fromDB || b.lang?.includes(userInfo.langId)
 				? userInfo.langId
 				: "en";
 		let actionLinkByLang = b.fromDB
@@ -95,7 +96,7 @@ const Panel = ({ ImgFolder }) => {
 					userInfo.isLogin,
 					setNav
 				)}
-				key={`${lang}-${b.img}`}>
+				key={`${lang}-${b.img}-${b_idx}`}>
 				<img src={imgSRC} className="banner" alt={b.img ?? ""} />
 			</button>
 		);

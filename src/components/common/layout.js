@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import Footer from "./footer";
 import Header from "./header";
 import { navContext, i18nContext, defNavPanel } from "../common/context";
-import "../../styles/css/style-dark.css";
-import "../../styles/css/style.css";
-import "../../styles/css/font.css";
 import { useMatch, useLocation } from "@reach/router";
 import path from "../../path";
 

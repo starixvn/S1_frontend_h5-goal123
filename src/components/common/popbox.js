@@ -1,11 +1,35 @@
 import React, { useContext } from "react";
-import { popBoxContext } from "../common/context";
+import { popBoxContext, i18nContext } from "../common/context";
+import TurnoverAccumulated from "./popbox.turnover";
+
+export const defPopBoxType = {
+	default: "default",
+	TurnoverAccumulated: "TurnoverAccumulated"
+};
 
 const PopUp = () => {
 	const { popBox, setPopBox } = useContext(popBoxContext);
+	const { i18n } = useContext(i18nContext);
+
 	const handlePopBox = () => {
 		setPopBox(prevState => ({ ...prevState, isOpen: false }));
 	};
+
+	let content = null;
+	switch (popBox.popBoxType) {
+		case defPopBoxType.TurnoverAccumulated:
+			content = <TurnoverAccumulated {...popBox} />;
+			break;
+
+		default:
+			content = (
+				<div className="popTxt">
+					{popBox.content}
+					{popBox.hasBtn === true ? popBox.btnBar : <></>}
+				</div>
+			);
+			break;
+	}
 
 	return (
 		<div id="popup" className={`${popBox.isOpen ? "show" : ""}`}>
@@ -20,12 +44,9 @@ const PopUp = () => {
 						<span></span>
 					</div>
 				)}
-				{popBox.title}
+				{popBox.title ?? i18n.lbl_ImportantNote}
 			</div>
-			<div className="popTxt">
-				{popBox.content}
-				{popBox.hasBtn === true ? popBox.btnBar : <></>}
-			</div>
+			{content}
 		</div>
 	);
 };

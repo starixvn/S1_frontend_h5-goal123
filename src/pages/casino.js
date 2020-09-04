@@ -260,7 +260,6 @@ class Panel extends React.Component {
 				(_nav === defNav.FAVOURITE.key &&
 					this.state.favorite.includes(`${tpId}_${g.gameId}`)) ||
 				_nav === defNav.ALLGAMES.key;
-
 			return (
 				matchNav &&
 				(gameCategory === null || g.category1 === gameCategory) &&

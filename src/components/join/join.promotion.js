@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { userInfoContext, i18nContext, navContext } from "../common/context";
 import Swiper from "react-id-swiper";
-import "../../styles/css/swiper.css";
 import { ClickLink } from "../common/swipperBanner";
-import config from "../../config";
+import config, { siteInfo } from "../../config";
 
 export default ({ banner, ImgFolder, ClickClose, title, isOpen }) => {
 	const { userInfo } = useContext(userInfoContext);
@@ -42,7 +41,8 @@ export default ({ banner, ImgFolder, ClickClose, title, isOpen }) => {
 		);
 	});
 
-	let signUpHint = i18n.msg_CreditSignUpHint_2?.replace("{0}", "Goal123");
+	let siteName = siteInfo().siteName;
+	let signUpHint = i18n.msg_CreditSignUpHint_2?.replace("{0}", siteName);
 	return isOpen ? (
 		<div id="welcome" style={{ display: "block" }}>
 			<div
@@ -54,10 +54,9 @@ export default ({ banner, ImgFolder, ClickClose, title, isOpen }) => {
 				<Autoplay Rows={rows} />
 			</div>
 			<div className="wecTxt">
-				{i18n.msg_CreditSignUpHint_1 ?? "Dear Valued customer,"}
+				{i18n.msg_CreditSignUpHint_1}
 				<br></br>
-				{signUpHint ??
-					"Welcome to Goal123, upon registration please visit the said link and enjoy our games."}
+				{signUpHint}
 				<div className="btn-group">
 					<button className="orange openPopup" onClick={ClickClose}>
 						{i18n.lbl_Close}

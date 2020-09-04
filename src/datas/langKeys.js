@@ -283,8 +283,15 @@ export default [
 	"lbl_RotationHint_2",
 	"lbl_RotationHint_3",
 	"lbl_RotationHint_4",
+	"lbl_Bonus",
+	"lbl_Cash",
 	"lbl_Welcome",
 	"lbl_Close",
 	"msg_CreditSignUpHint_1",
-	"msg_CreditSignUpHint_2"
+	"msg_CreditSignUpHint_2",
+	"lbl_TpWallet_1",
+	"lbl_PromoCategory_1",
+	"lbl_PromoCategory_2",
+	"lbl_PromoCategory_3",
+	"lbl_PromoCategory_4"
 ];

@@ -10,13 +10,13 @@ import { LOGOUT } from "../../service/auth";
 import { api_SetLanguage } from "../../service/api/account";
 import ThemeMode from "../member/profile.themeMode";
 import path from "../../path";
-import enPic from "../../styles/img/en.jpg";
-import vnPic from "../../styles/img/vn.jpg";
+import { siteInfo } from "../../config";
+import DefLangs from "../../datas/defLangs";
 
-const languageList = [
-	{ value: "en", displayText: "English", img: enPic },
-	{ value: "vn", displayText: "Tiếng Việt", img: vnPic }
-];
+const languageList = () => {
+	let _siteInfo = siteInfo();
+	return _siteInfo.siteLangList.map(l => DefLangs[l]);
+};
 
 export default () => {
 	const { i18n } = useContext(i18nContext);
@@ -27,6 +27,7 @@ export default () => {
 	const [redirectPath, setRedirectPath] = useState(null);
 	const isMountedRef = useRef(null);
 
+	let _languageList = languageList();
 	useEffect(() => {
 		isMountedRef.current = true;
 		return () => (isMountedRef.current = false);
@@ -41,13 +42,13 @@ export default () => {
 	useEffect(() => {
 		if (userInfo.langId && isMountedRef.current) {
 			setUserLanguage(prevState => {
-				return languageList.find(l => l.value === userInfo.langId) ===
+				return _languageList.find(l => l.value === userInfo.langId) ===
 					undefined
 					? "en"
 					: userInfo.langId;
 			});
 		}
-	}, [userInfo.langId]);
+	}, [userInfo.langId, _languageList]);
 
 	const selectLanguage = language => {
 		if (userLanguage !== language) {
@@ -102,7 +103,7 @@ export default () => {
 		});
 	};
 
-	let arr = languageList.map(item => {
+	let arr = _languageList.map(item => {
 		return (
 			<Item
 				key={`lang-${item.value}`}
@@ -140,7 +141,7 @@ const Item = props => {
 		<div
 			className={`${props.userLanguage === props.value ? "open" : ""}`}
 			onClick={props.selectLanguage.bind(null, props.value)}>
-			<img src={props.img} alt="" />
+			<img src={`./styles/img/${props.img}`} alt="" />
 			<span className="text">{props.displayText}</span>
 		</div>
 	);

@@ -12,12 +12,11 @@ import { GET_LANG_ID } from "../../service/language";
 import themeList from "../../datas/theme";
 import useInterval from "../hook/useInterval";
 import { getUrlParameter, setCookie, deleteCookie } from "../common/common";
+import i18nDefault from "../../datas/i18nDefault";
 
 export const Wrapper = ({ children }) => {
-	const [i18n, seti18n] = useState({
-		lbl_ImportantNote: "Important Note",
-		msg_ApiServerError: "API Server Error"
-	});
+	const [i18n, seti18n] = useState(i18nDefault);
+
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
 		langId: GET_LANG_ID(),
@@ -157,7 +156,7 @@ export const Wrapper = ({ children }) => {
 		api_GetTranslationData(userInfo.langId).then(
 			res => {
 				if (isMountedRef.current) {
-					seti18n(() => res.data.data);
+					seti18n(prevState => ({ ...prevState, ...res.data.data }));
 				}
 			},
 			err => {

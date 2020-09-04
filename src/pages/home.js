@@ -71,7 +71,7 @@ const IndexPage = () => {
 						};
 
 						const RedirectToDeposit = () => {
-							setRedirectPath(path.deposit.root);
+							setRedirectPath(`/${path.deposit.root}`);
 							ClosePopUp();
 						};
 

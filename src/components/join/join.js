@@ -4,7 +4,6 @@ import InputboxPWD from "../common/inputbox.password";
 import Dropdown from "../common/dropdown";
 import Checkbox from "../common/checkbox";
 import Tips from "./tips";
-import logo from "../../styles/img/logo.png";
 import {
 	api_ExistsUserName,
 	api_ExistsEmail,
@@ -28,6 +27,7 @@ import { useMatch, Redirect } from "@reach/router";
 import path from "../../path";
 import config from "../../config";
 import PromoPopup from "./join.promotion";
+import Logo from "../../styles/img/logo.png";
 
 const colName = ["UserName", "Password", "Email", "Currency"];
 
@@ -641,7 +641,7 @@ const Join = () => {
 					<span></span>
 					<span></span>
 				</div>
-				<img src={logo} alt="" />
+				<img src={Logo} alt="Goal123" />
 				<div className="title">{i18n.lbl_JoinNow}</div>
 
 				<Inputbox

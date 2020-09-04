@@ -15,7 +15,8 @@ const defStatus = {
 	LockAll: "LockAll",
 	RealName: "RealName",
 	Phone_BDay: "Phone_BDay",
-	RealName_Phone_BDay: "RealName_Phone_BDay"
+	RealName_Phone_BDay: "RealName_Phone_BDay",
+	BDay: "BDay"
 };
 
 const monthOptions = [
@@ -48,6 +49,23 @@ const initWarningState = {
 	}
 };
 
+const defColumns = {
+	RealName: "RealName",
+	Birthday: "Birthday",
+	Phone: "Phone"
+};
+
+const defCheckList = {
+	RealName: [defColumns.RealName],
+	Phone_BDay: [defColumns.Birthday, defColumns.Phone],
+	RealName_Phone_BDay: [
+		defColumns.RealName,
+		defColumns.Birthday,
+		defColumns.Phone
+	],
+	BDay: [defColumns.Birthday]
+};
+
 const Panel = () => {
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
@@ -57,12 +75,6 @@ const Panel = () => {
 	const [yearSelectedIdx, setYearSelectedIdx] = useState();
 	const [monthSelectedIdx, setMonthSelectedIdx] = useState();
 	const [daySelectedIdx, setDaySelectedIdx] = useState();
-
-	const [checklistState, setChecklistState] = useState({
-		RealName: false,
-		Birthday: false,
-		Phone: false
-	});
 
 	const country = userInfo.country ? userInfo.country : userInfo.perCountry;
 	const isMountedRef = useRef(null);
@@ -87,6 +99,8 @@ const Panel = () => {
 		status = defStatus.RealName_Phone_BDay;
 	} else if (!userInfo.accountName) {
 		status = defStatus.RealName;
+	} else if (!userInfo.birth_d) {
+		status = defStatus.BDay;
 	}
 
 	let infoList = [
@@ -166,36 +180,49 @@ const Panel = () => {
 		}
 	};
 
-	const checkInputboxHandler = (col, e) => {
-		const val = e.target.value;
+	const checkPhone = val => {
 		let checked = true;
 		let message = "";
-
-		if (col === "RealName") {
-			if (val === "") {
-				checked = false;
-				message = i18n["msg_EnterRealName"];
-			}
+		if (val === "" || isNaN(val)) {
+			checked = false;
+			message = i18n["msg_EnterPhoneNumber"];
 		}
 
-		if (col === "Phone") {
-			if (val === "" || isNaN(val)) {
-				checked = false;
-				message = i18n["msg_EnterPhoneNumber"];
-			}
+		return { checked, message };
+	};
+
+	const checkRealName = val => {
+		let checked = true;
+		let message = "";
+		if (val === "" || val === null || val === undefined) {
+			checked = false;
+			message = i18n["msg_EnterRealName"];
 		}
 
+		return { checked, message };
+	};
+
+	const checkSwitch = (val, colName) => {
+		if (colName === "RealName") {
+			return checkRealName(val);
+		} else if (colName === "Phone") {
+			return checkPhone(val);
+		} else {
+			return { checked: true, message: "" };
+		}
+	};
+
+	const checkInputboxHandler = (col, e) => {
+		const val = e.target.value;
+		let result = checkSwitch(val, col);
 		setWarningState(prevState => {
 			return {
 				...prevState,
 				[col]: {
-					status: !checked,
-					msg: message
+					status: !result.checked,
+					msg: result.message
 				}
 			};
-		});
-		setChecklistState(prevState => {
-			return { ...prevState, [col]: checked };
 		});
 	};
 
@@ -205,79 +232,65 @@ const Panel = () => {
 			...prevState,
 			[col]: val
 		}));
-
-		if (status === defStatus.Phone_BDay) {
-			setChecklistState(prevState => {
-				return { ...prevState, RealName: true };
-			});
-		} else if (status === defStatus.RealName) {
-			setChecklistState(prevState => {
-				return { ...prevState, Birthday: true, Phone: true };
-			});
-		}
 	};
 
-	const checkSubmitHandler = () => {
+	const checkSubmitHandler = _status => {
 		let checked = true;
 		let year = yearOptions[yearSelectedIdx]?.value;
 		let month = monthOptions[monthSelectedIdx]?.value;
 		let day = daySelectedIdx + 1;
 
-		setUserValueState(prevState => ({
-			...prevState,
-			Birth: `${year} / ${month} / ${day}`
-		}));
-
-		if (year === undefined || month === undefined || day === undefined) {
-			setWarningState(prevState => {
-				return {
-					...prevState,
-					Birthday: {
-						status: true,
-						msg: i18n.msg_SelectBirthDay
-					}
-				};
-			});
-			setChecklistState(prevState => {
-				return { ...prevState, Birthday: false };
-			});
-		} else {
-			setWarningState(prevState => {
-				return {
-					...prevState,
-					Birthday: {
-						status: false,
-						msg: ""
-					}
-				};
-			});
-			setChecklistState(prevState => {
-				return { ...prevState, Birthday: true };
-			});
-		}
-
-		for (let i in checklistState) {
-			if (checklistState[i] === false && i !== "Birthday") {
-				let message = "";
-				checked = false;
+		let checkList = defCheckList[_status];
+		for (let i in checkList) {
+			let col = checkList[i];
+			if (col === defColumns.Birthday) {
+				if (
+					year === undefined ||
+					month === undefined ||
+					day === undefined
+				) {
+					setWarningState(prevState => {
+						return {
+							...prevState,
+							Birthday: {
+								status: true,
+								msg: i18n.msg_SelectBirthDay
+							}
+						};
+					});
+					checked = false;
+				} else {
+					setWarningState(prevState => {
+						return {
+							...prevState,
+							Birthday: {
+								status: false,
+								msg: ""
+							}
+						};
+					});
+				}
+			} else {
+				let result = checkSwitch(userValueState[col], col);
 				setWarningState(prevState => {
-					if (i === "RealName") {
-						message = i18n["msg_EnterRealName"];
-					} else if (i === "Phone") {
-						message = i18n["msg_EnterPhoneNumber"];
-					}
 					return {
 						...prevState,
-						[i]: {
-							status: true,
-							msg: message
+						[col]: {
+							status: !result.checked,
+							msg: result.message
 						}
 					};
 				});
+				checked = checked ? result.checked : false;
 			}
 		}
 
 		if (checked) {
+			setUserValueState(prevState => ({
+				...prevState,
+				Birth: `${year} / ${month} / ${day}`
+			}));
+
 			const closePopbox = ({ _redirectPath }) => {
 				setPopBox({ isOpen: false });
 				if (_redirectPath) {
@@ -287,13 +300,14 @@ const Panel = () => {
 
 			const setProfile = () => {
 				let profileData = {
-					AccountName: userValueState.RealName,
+					AccountName:
+						userValueState.RealName ?? userInfo.accountName,
 					Birth_d: `${day}`,
 					Birth_m: `${month}`,
 					Birth_y: `${year}`,
 					CountryCode: country,
 					AreaCode: aCode,
-					PhoneNo: userValueState.Phone
+					PhoneNo: userValueState.Phone ?? userInfo.phoneNo
 				};
 
 				api_SetProfile(profileData).then(
@@ -383,7 +397,7 @@ const Panel = () => {
 				);
 			};
 
-			if (status === defStatus.Phone_BDay) {
+			if (status === defStatus.Phone_BDay || status === defStatus.BDay) {
 				setProfile();
 			} else {
 				setPopBox({
@@ -443,7 +457,8 @@ const Panel = () => {
 					) : null}
 
 					{status === defStatus.RealName_Phone_BDay ||
-					status === defStatus.Phone_BDay ? (
+					status === defStatus.Phone_BDay ||
+					status === defStatus.BDay ? (
 						<Birthday
 							i18n={i18n}
 							userValueState={userValueState}
@@ -488,7 +503,7 @@ const Panel = () => {
 						<div className="btn-group">
 							<button
 								className="orange"
-								onClick={checkSubmitHandler}>
+								onClick={checkSubmitHandler.bind(this, status)}>
 								{i18n["lbl_Submit"]}
 							</button>
 						</div>

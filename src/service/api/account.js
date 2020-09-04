@@ -41,3 +41,6 @@ export const api_GetMsgCount = () => accountRequest.post("/GetMsgCount");
 
 export const api_ChangePassword = ({ OldPassword, NewPassword }) =>
 	accountRequest.post("/ChangePassword", { OldPassword, NewPassword });
+
+export const api_account_GetCustBonusWallet = () =>
+	accountRequest.post("/GetCustBonusWallet");

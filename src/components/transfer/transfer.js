@@ -13,6 +13,7 @@ import InputBox from "../common/inputbox";
 import Dropdown from "../common/dropdown";
 import ReloadSpin from "../common/reloadSpin";
 import Loading from "../common/loading";
+import { defPopBoxType } from "../common/popbox";
 
 const Panel = () => {
 	const { i18n } = useContext(i18nContext);
@@ -28,11 +29,13 @@ const Panel = () => {
 	const [toSelectedIdx, setToSelectedIdx] = useState(1);
 	const [recentDatas, setRecentDatas] = useState([]);
 	const [loading, setLoading] = useState(true);
+
 	const isMountedRef = useRef(null);
 	useEffect(() => {
 		isMountedRef.current = true;
 		return () => (isMountedRef.current = false);
 	});
+
 	useEffect(() => {
 		api_GetWalletInfo().then(
 			res => {
@@ -189,13 +192,23 @@ const Panel = () => {
 
 			setLoading(true);
 			api_Transfer({
-				TpId: getWalletInfo[fromSelectedIdx].TpId ?? 1,
+				TpId: 1,
 				amount: real_amount,
 				direction: direction
 			}).then(
 				res => {
 					if (isMountedRef.current) {
-						if (res.data.errorCode !== 0) {
+						if (res.data.errorCode === 9) {
+							setLoading(false);
+							setPopBox({
+								isOpen: true,
+								popBoxType: defPopBoxType.TurnoverAccumulated,
+								currencyId: userInfo.currencyId,
+								turnover: res.data.data.turnover,
+								rollover: res.data.data.rollover
+							});
+						} else if (res.data.errorCode !== 0) {
+							setLoading(false);
 							setPopBox({
 								isOpen: true,
 								title: i18n["lbl_ImportantNote"],

@@ -1,3 +1,4 @@
+import { siteInfo } from "../config";
 const GetCookie = name => {
 	if (typeof document !== `undefined`) {
 		let match = document.cookie.match(
@@ -10,8 +11,9 @@ const GetCookie = name => {
 };
 
 export const GET_LANG_ID = userLangId => {
-	let siteDefLangId = "en";
-	let siteLangList = ["en", "vn"];
+	let _siteInfo = siteInfo();
+	let siteDefLangId = _siteInfo.siteDefaultLang;
+	let siteLangList = _siteInfo.siteLangList;
 
 	let langId = userLangId ? userLangId : GetCookie("LangId");
 	let browserDefLang =

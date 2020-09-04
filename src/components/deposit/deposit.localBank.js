@@ -20,6 +20,7 @@ import moment from "moment";
 import PageVerify from "./deposit.pageVerify";
 import path from "../../path";
 import Loading from "../common/loading";
+import Promotion from "./deposit.promotion";
 
 export const Panel = props => props.children;
 
@@ -263,7 +264,7 @@ export const Main = props => {
 				<Step step={3} total={2} />
 				<div className="inputBox">
 					<DropdownIMG
-						mainKey={"onlineBanking-bankList"}
+						mainKey={"localBank-bankList"}
 						onSelectItem={SelectBank}
 						options={bankList}
 						selectedIdx={selBank?.idx}
@@ -286,6 +287,7 @@ export const Main = props => {
 					onChange={EditAmount}
 					Warning={warning}
 				/>
+				<Promotion />
 				<div className="btn-group">
 					<Link to="../" className="white">
 						{i18n.lbl_Back}

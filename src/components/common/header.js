@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import logoItem from "../../styles/img/logo.png";
 import { Redirect, Link } from "@reach/router";
 // import SubMenu from "../subMenu/subMenu";
 import {
@@ -15,6 +14,7 @@ import LoginPanel from "../login/login";
 import ReloadSpin from "./reloadSpin";
 import { number_format, isConvert } from "./common";
 import path from "../../path";
+import Logo from "../../styles/img/logo.png";
 
 const HeaderTitle = ({ title }) => <div className="title">{title}</div>;
 
@@ -22,8 +22,8 @@ const Header = ({ title, hideLogo }) => {
 	return (
 		<header className={title ? "header" : ""} id="header">
 			{hideLogo ? null : (
-				<a href="#">
-					<img src={logoItem} alt="logo" />
+				<a href="/">
+					<img src={Logo} alt="logo" />
 				</a>
 			)}
 			{title ? <HeaderTitle title={title} /> : <HeaderBtn />}
