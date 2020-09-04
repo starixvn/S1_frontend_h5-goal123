@@ -27,7 +27,7 @@ const ShortcutBar = props => {
 	};
 
 	return (
-		<div className="thBar" ref={props._ref}>
+		<div className="thBar">
 			<NavLink
 				to={`/${path.deposit.root}`}
 				className="icon icon-deposit"

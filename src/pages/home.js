@@ -14,8 +14,6 @@ import { Redirect } from "@reach/router";
 import { api_GetWalletInfo } from "../service/api/account";
 
 const IndexPage = () => {
-	const _shortcutBar = useRef(null);
-	const [shortcutBarLocate, setShortcutBarLocate] = useState(null);
 	const { userInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
@@ -26,12 +24,6 @@ const IndexPage = () => {
 			setRedirectPath(null);
 		}
 	}, [redirectPath]);
-
-	useEffect(() => {
-		if (_shortcutBar.current !== null) {
-			setShortcutBarLocate(_shortcutBar.current?.getBoundingClientRect());
-		}
-	}, []);
 
 	useEffect(() => {
 		let cookieName = `balanceHint${userInfo.userName}`;
@@ -121,8 +113,8 @@ const IndexPage = () => {
 		<>
 			<Slider />
 			<Marquee />
-			<Category shortcutBarLocate={shortcutBarLocate} />
-			<ShortcutBar _ref={_shortcutBar} />
+			<Category />
+			<ShortcutBar />
 		</>
 	);
 };

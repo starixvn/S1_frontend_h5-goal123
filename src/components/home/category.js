@@ -90,13 +90,14 @@ class CateGoryContent extends Component {
 		this.mounted = false;
 		this.RefItems = {};
 		this.setCategory = false;
-		productList.forEach(item => {
+		productList.forEach((item, idx) => {
 			this.RefItems[`${item.category}`] = {
 				First: React.createRef(),
 				Last: React.createRef()
 			};
 		});
 		this.checkScrollTimer = null;
+		this.sideBarRef = React.createRef();
 	}
 	ScrollBarListener = () => {
 		if (!this.setCategory) {
@@ -107,15 +108,15 @@ class CateGoryContent extends Component {
 					this.RefItems[k].Last.current ??
 					this.RefItems[k].First.current;
 				let x = item.getBoundingClientRect();
-
 				if (
-					x.bottom >= this.props.top + 50 &&
+					x.bottom >=
+						this.sideBarRef.current.getBoundingClientRect().bottom +
+							50 &&
 					currentCategory === null
 				) {
 					currentCategory = k;
 				}
 			});
-
 			if (
 				currentCategory !== null &&
 				this.state.category !== currentCategory
@@ -147,6 +148,8 @@ class CateGoryContent extends Component {
 	}
 	componentDidMount() {
 		this.mounted = true;
+
+		window.scrollTo({ top: 0, behavior: "smooth" });
 		window.addEventListener("mousewheel", this.ScrollBarListener, false);
 		window.addEventListener("touchmove", this.ScrollBarListener, {
 			passive: false
@@ -163,14 +166,13 @@ class CateGoryContent extends Component {
 		]?.First.current.getBoundingClientRect();
 
 		if (firstItem) {
-			const offset_y = -this.props.top;
+			const offset_y = -this.sideBarRef.current.getBoundingClientRect()
+				.bottom;
 			const y = firstItem.top + window.pageYOffset + offset_y;
-			console.log(y);
 			window.scrollTo({ top: y, behavior: "smooth" });
 		}
 	};
 	render() {
-		console.log(this.state.category);
 		let sideBarItems = [];
 		let products = [];
 		productList.forEach(item => {
@@ -265,7 +267,7 @@ class CateGoryContent extends Component {
 
 		return (
 			<div className="content">
-				<div className="sideBar">
+				<div className="sideBar" ref={this.sideBarRef}>
 					<CategoryItem
 						key={`category-sidebar`}
 						onClick={this.selectCategory.bind(null, "≡")}
