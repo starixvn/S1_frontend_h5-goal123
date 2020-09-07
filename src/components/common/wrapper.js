@@ -8,7 +8,6 @@ import {
 	api_GetMsgCount
 } from "../../service/api/account";
 import { IS_LOGGED_IN } from "../../service/auth";
-import { GET_LANG_ID } from "../../service/language";
 import themeList from "../../datas/theme";
 import useInterval from "../hook/useInterval";
 import { getUrlParameter, setCookie, deleteCookie } from "../common/common";
@@ -19,7 +18,7 @@ export const Wrapper = ({ children }) => {
 
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
-		langId: GET_LANG_ID(),
+		langId: "vn",
 		userName: i18n.lbl_Guest
 	});
 	const [popBox, setPopBox] = useState({
@@ -34,7 +33,7 @@ export const Wrapper = ({ children }) => {
 		main: null
 	});
 	const [msgCount, setMsgCount] = useState(0);
-	const [theme, setTheme] = useState(themeList.dark);
+	const [theme, setTheme] = useState(themeList.default);
 
 	const isMountedRef = useRef(null);
 	useEffect(() => {

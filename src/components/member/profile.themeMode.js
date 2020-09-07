@@ -12,6 +12,7 @@ const Panel = () => {
 			setTheme(_theme);
 		}
 	};
+
 	return (
 		<div className="mode">
 			<i className="icon icon-contrast">{i18n.lbl_Themes}</i>
