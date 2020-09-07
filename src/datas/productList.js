@@ -21,6 +21,30 @@ import Keno from "../styles/img/keno.jpg";
 import Lottery from "../styles/img/lottery.jpg";
 import Number_game from "../styles/img/number_game.jpg";
 
+export const defGameInfo = {
+	Sports: { tpId: 1, gameId: 1 },
+	VirtualSports: { tpId: 1, gameId: 180 },
+	eSports: { tpId: 1, gameId: 43 },
+	LIVEcasinoDG: { tpId: 4, gameId: 4 },
+	LIVEcasinoPP: { gameId: 101, tpId: 5 },
+	LIVEcasinoAE: { gameId: 15, tpId: 15 },
+	LIVEcasinoAG: { gameId: 3, tpId: 3 },
+	LIVEcasinoAB: { gameId: 12, tpId: 12 },
+	LIVEcasinoSA: { gameId: 2, tpId: 2 },
+	Casino_ow: { gameId: 208, tpId: 1 },
+	Casino_PP: { tpId: 5 },
+	Casino_SG: { tpId: 10 },
+	Casino_PG: { tpId: 14 },
+	Casino_JOKER: { tpId: 9 },
+	Casino_YGG: { tpId: 8 },
+	Casino_GPI: { tpId: 6 },
+	Fishing: { gameId: 10, tpId: 7 },
+	Indo4d: { gameId: 223, tpId: 1 },
+	Keno: { gameId: 202, tpId: 1 },
+	lottery: { gameId: 220, tpId: 1 },
+	NumberGame: { gameId: 161, tpId: 1 }
+};
+
 const gameList = [
 	{
 		category: "sports",
@@ -28,16 +52,14 @@ const gameList = [
 		translateKey: "lbl_Sports",
 		items: [
 			{
+				...defGameInfo.Sports,
 				icon: "soccer",
-				gameId: 1,
-				tpId: 1,
 				img: Sport,
 				spanTextKey: "lbl_Sports"
 			},
 			{
+				...defGameInfo.VirtualSports,
 				icon: "virtual-sports",
-				gameId: 180,
-				tpId: 1,
 				img: Virtual_sports,
 				spanTextKey: "lbl_VirtualSports"
 			}
@@ -49,10 +71,9 @@ const gameList = [
 		translateKey: "lbl_eSports",
 		items: [
 			{
+				...defGameInfo.eSports,
 				icon: "e-sports",
-				gameId: 43,
 				img: Esports,
-				tpId: 1,
 				spanTextKey: "lbl_eSports"
 			}
 		]
@@ -65,33 +86,27 @@ const gameList = [
 		comingSoonImg: `coming_soon.jpg`,
 		items: [
 			{
-				gameId: 4,
-				tpId: 4,
+				...defGameInfo.LIVEcasinoDG,
 				img: LIVEcasino_DG
 			},
 			{
-				gameId: 101,
-				tpId: 5,
+				...defGameInfo.LIVEcasinoPP,
 				img: LIVEcasino_PP
 			},
 			{
-				gameId: 15,
-				tpId: 15,
+				...defGameInfo.LIVEcasinoAE,
 				img: LIVEcasino_AE
 			},
 			{
-				gameId: 3,
-				tpId: 3,
+				...defGameInfo.LIVEcasinoAG,
 				img: LIVEcasino_AG
 			},
 			{
-				gameId: 12,
-				tpId: 12,
+				...defGameInfo.LIVEcasinoAB,
 				img: LIVEcasino_AB
 			},
 			{
-				gameId: 2,
-				tpId: 2,
+				...defGameInfo.LIVEcasinoSA,
 				img: LIVEcasino_SA
 			}
 		]
@@ -104,38 +119,37 @@ const gameList = [
 		comingSoonImg: Coming_soon,
 		items: [
 			{
-				gameId: 208,
-				tpId: 1,
+				...defGameInfo.Casino_ow,
 				img: Casino_ow
 			},
 			{
-				tpId: 5,
-				parameter: { tpId: 5 },
+				...defGameInfo.Casino_PP,
+				parameter: { tpId: defGameInfo.Casino_PP.tpId },
 				img: Casino_PP
 			},
 			{
-				tpId: 10,
-				parameter: { tpId: 10 },
+				...defGameInfo.Casino_SG,
+				parameter: { tpId: defGameInfo.Casino_SG.tpId },
 				img: Casino_SG
 			},
 			{
-				tpId: 14,
-				parameter: { tpId: 14 },
+				...defGameInfo.Casino_PG,
+				parameter: { tpId: defGameInfo.Casino_PG.tpId },
 				img: Casino_PG
 			},
 			{
-				tpId: 9,
-				parameter: { tpId: 9 },
+				...defGameInfo.Casino_JOKER,
+				parameter: { tpId: defGameInfo.Casino_JOKER.tpId },
 				img: Casino_JOKER
 			},
 			{
-				tpId: 8,
-				parameter: { tpId: 8 },
+				...defGameInfo.Casino_YGG,
+				parameter: { tpId: defGameInfo.Casino_YGG.tpId },
 				img: Casino_YGG
 			},
 			{
-				tpId: 6,
-				parameter: { tpId: 6 },
+				...defGameInfo.Casino_GPI,
+				parameter: { tpId: defGameInfo.Casino_GPI.tpId },
 				img: Casino_GPI
 			}
 		]
@@ -146,9 +160,8 @@ const gameList = [
 		translateKey: "lbl_Fishing",
 		items: [
 			{
+				...defGameInfo.Fishing,
 				icon: "game",
-				gameId: 10,
-				tpId: 7,
 				img: Fish,
 				spanTextKey: "lbl_Fishing"
 			}
@@ -160,31 +173,27 @@ const gameList = [
 		translateKey: "lbl_Lottery",
 		items: [
 			{
+				...defGameInfo.Indo4d,
 				icon: "lottery",
-				gameId: 223,
-				tpId: 1,
 				img: Id4d,
 				spanTextKey: "lbl_Indo4d",
 				allowCurrency: [4, 15]
 			},
 			{
+				...defGameInfo.Keno,
 				icon: "keno",
-				gameId: 202,
-				tpId: 1,
 				img: Keno,
 				spanTextKey: "lbl_Keno"
 			},
 			{
+				...defGameInfo.lottery,
 				icon: "lottery",
-				gameId: 220,
-				tpId: 1,
 				img: Lottery,
 				spanTextKey: "lbl_Lottery"
 			},
 			{
+				...defGameInfo.NumberGame,
 				icon: "lottery",
-				gameId: 161,
-				tpId: 1,
 				img: Number_game,
 				spanTextKey: "lbl_NumberGame"
 			}

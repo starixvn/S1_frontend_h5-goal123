@@ -12,6 +12,7 @@ import { readCookie, setCookie } from "../components/common/common";
 import path from "../path";
 import { Redirect } from "@reach/router";
 import { api_GetWalletInfo } from "../service/api/account";
+import Submenu from "../components/home/submenu";
 
 const IndexPage = () => {
 	const { userInfo } = useContext(userInfoContext);
@@ -115,6 +116,7 @@ const IndexPage = () => {
 			<Marquee />
 			<Category />
 			<ShortcutBar />
+			<Submenu />
 		</>
 	);
 };

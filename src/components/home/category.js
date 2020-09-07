@@ -79,6 +79,7 @@ const Category = props => {
 			top={props.shortcutBarLocate?.bottom}
 			casinoTpIds={casinoTpIds}
 			userCurrencyId={userInfo.currencyId}
+			setNav={setNav}
 		/>
 	);
 };
@@ -171,6 +172,10 @@ class CateGoryContent extends Component {
 			const y = firstItem.top + window.pageYOffset + offset_y;
 			window.scrollTo({ top: y, behavior: "smooth" });
 		}
+	};
+	showSubMenu = _category => {
+		this.selectCategory(_category);
+		this.props.setNav(defNavPanel.subMenu);
 	};
 	render() {
 		let sideBarItems = [];
@@ -270,7 +275,7 @@ class CateGoryContent extends Component {
 				<div className="sideBar" ref={this.sideBarRef}>
 					<CategoryItem
 						key={`category-sidebar`}
-						onClick={this.selectCategory.bind(null, "≡")}
+						onClick={this.showSubMenu.bind(null, "≡")}
 						isOpen={`${this.state.category === "≡" ? " open" : ""}`}
 						translation="≡"
 					/>

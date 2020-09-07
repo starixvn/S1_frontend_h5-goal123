@@ -293,5 +293,7 @@ export default [
 	"lbl_PromoCategory_1",
 	"lbl_PromoCategory_2",
 	"lbl_PromoCategory_3",
-	"lbl_PromoCategory_4"
+	"lbl_PromoCategory_4",
+	"lbl_Slots",
+	"lbl_Promotions"
 ];
