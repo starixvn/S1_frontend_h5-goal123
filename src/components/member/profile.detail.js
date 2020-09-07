@@ -9,15 +9,8 @@ import {
 	api_SetProfile,
 	api_GetCustProfile
 } from "../../service/api/accountStrict";
+import { api_ExistsEmail } from "../../service/api/site";
 import path from "../../path";
-
-const defStatus = {
-	LockAll: "LockAll",
-	RealName: "RealName",
-	Phone_BDay: "Phone_BDay",
-	RealName_Phone_BDay: "RealName_Phone_BDay",
-	BDay: "BDay"
-};
 
 const monthOptions = [
 	{ value: 1, id: 0, displayKey: "lbl_Month1" },
@@ -35,7 +28,7 @@ const monthOptions = [
 ];
 
 const initWarningState = {
-	RealName: {
+	AccountName: {
 		status: false,
 		msg: ""
 	},
@@ -46,31 +39,24 @@ const initWarningState = {
 	Phone: {
 		status: false,
 		msg: ""
+	},
+	Email: {
+		status: false,
+		msg: ""
 	}
 };
 
 const defColumns = {
-	RealName: "RealName",
+	AccountName: "AccountName",
 	Birthday: "Birthday",
-	Phone: "Phone"
-};
-
-const defCheckList = {
-	RealName: [defColumns.RealName],
-	Phone_BDay: [defColumns.Birthday, defColumns.Phone],
-	RealName_Phone_BDay: [
-		defColumns.RealName,
-		defColumns.Birthday,
-		defColumns.Phone
-	],
-	BDay: [defColumns.Birthday]
+	Phone: "Phone",
+	Email: "Email"
 };
 
 const Panel = () => {
 	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
-	const [userValueState, setUserValueState] = useState({});
 	const [warningState, setWarningState] = useState(initWarningState);
 	const [yearSelectedIdx, setYearSelectedIdx] = useState();
 	const [monthSelectedIdx, setMonthSelectedIdx] = useState();
@@ -91,17 +77,18 @@ const Panel = () => {
 		}
 	}, [redirectPath]);
 
+	const initUserValue = {
+		AccountName: userInfo.accountName ?? "",
+		Birth_d: userInfo.Birth_d ?? "",
+		Birth_m: userInfo.Birth_m ?? "",
+		Birth_y: userInfo.Birth_y ?? "",
+		PhoneNo: userInfo.phoneNo ?? "",
+		Email: userInfo.email ?? ""
+	};
+
+	const [userValue, setuserValue] = useState(initUserValue);
+
 	let aCode = country ? areaCode[country].AreaCode : "";
-	let status = defStatus.LockAll;
-	if (userInfo.accountName && !userInfo.phoneNo) {
-		status = defStatus.Phone_BDay;
-	} else if (!userInfo.accountName && !userInfo.phoneNo) {
-		status = defStatus.RealName_Phone_BDay;
-	} else if (!userInfo.accountName) {
-		status = defStatus.RealName;
-	} else if (!userInfo.birth_d) {
-		status = defStatus.BDay;
-	}
 
 	let infoList = [
 		{
@@ -183,6 +170,11 @@ const Panel = () => {
 	const checkPhone = val => {
 		let checked = true;
 		let message = "";
+
+		if (userInfo.phoneNo) {
+			return { checked, message };
+		}
+
 		if (val === "" || isNaN(val)) {
 			checked = false;
 			message = i18n["msg_EnterPhoneNumber"];
@@ -191,9 +183,14 @@ const Panel = () => {
 		return { checked, message };
 	};
 
-	const checkRealName = val => {
+	const checkAccountName = val => {
 		let checked = true;
 		let message = "";
+
+		if (userInfo.accountName) {
+			return { checked, message };
+		}
+
 		if (val === "" || val === null || val === undefined) {
 			checked = false;
 			message = i18n["msg_EnterRealName"];
@@ -202,25 +199,113 @@ const Panel = () => {
 		return { checked, message };
 	};
 
-	const checkSwitch = (val, colName) => {
-		if (colName === "RealName") {
-			return checkRealName(val);
-		} else if (colName === "Phone") {
-			return checkPhone(val);
-		} else {
-			return { checked: true, message: "" };
+	const checkEmail = val => {
+		let checked = true;
+		let message = "";
+		const regx = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+		if (userInfo.email) {
+			return { checked, message };
 		}
+
+		if (val === "" || val === null) {
+			checked = false;
+			message = i18n["msg_MailWrongFormat"];
+		} else {
+			if (!regx.test(val)) {
+				checked = false;
+				message = i18n["msg_MailWrongFormat"];
+			}
+		}
+
+		if (checked) {
+			api_ExistsEmail({
+				Email: val
+			}).then(
+				response => {
+					if (isMountedRef.current) {
+						const res = response.data;
+						if (res.errorCode === 0) {
+							if (res.data === true) {
+								setWarningState(prevState => {
+									return {
+										...prevState,
+										Email: {
+											status: true,
+											msg: i18n["msg_MailExisted"]
+										}
+									};
+								});
+							}
+						} else {
+							setPopBox({
+								isOpen: true,
+								title: i18n.lbl_ImportantNote,
+								content: response.data.message
+							});
+						}
+					}
+				},
+				err => {
+					if (isMountedRef.current) {
+						setPopBox({
+							isOpen: true,
+							title: i18n.lbl_ImportantNote,
+							content: i18n.msg_ApiServerError
+						});
+					}
+				}
+			);
+		}
+
+		return { checked, message };
+	};
+
+	const checkBirth = () => {
+		let checked = true;
+		let message = "";
+
+		if (userInfo.birth_d && userInfo.birth_m && userInfo.birth_y) {
+			return { checked, message };
+		}
+
+		let year = yearOptions[yearSelectedIdx]?.value;
+		let month = monthOptions[monthSelectedIdx]?.value;
+		let day = daySelectedIdx + 1;
+
+		if (!year || !month || !day) {
+			checked = false;
+			message = i18n["msg_SelectBirthDay"];
+		}
+
+		return { checked, message };
 	};
 
 	const checkInputboxHandler = (col, e) => {
 		const val = e.target.value;
-		let result = checkSwitch(val, col);
+		let checked = true;
+		let msg = "";
+
+		if (col === "AccountName") {
+			let result = checkAccountName(val);
+			checked = result.checked;
+			msg = result.message;
+		} else if (col === "Email") {
+			let result = checkEmail(val);
+			checked = result.checked;
+			msg = result.message;
+		} else {
+			let result = checkPhone(val);
+			checked = result.checked;
+			msg = result.message;
+		}
+
 		setWarningState(prevState => {
 			return {
 				...prevState,
 				[col]: {
-					status: !result.checked,
-					msg: result.message
+					status: !checked,
+					msg: msg
 				}
 			};
 		});
@@ -228,69 +313,61 @@ const Panel = () => {
 
 	const EditField = (col, e) => {
 		let val = e.target.value;
-		setUserValueState(prevState => ({
+
+		if (col === "AccountName") {
+			val = val.replace(/[\W]/g, "");
+		} else if (col === "Phone") {
+			val = val.replace(/^(0+)|[^\d]+/g, "");
+		}
+
+		setuserValue(prevState => ({
 			...prevState,
 			[col]: val
 		}));
 	};
 
-	const checkSubmitHandler = _status => {
-		let checked = true;
-		let year = yearOptions[yearSelectedIdx]?.value;
-		let month = monthOptions[monthSelectedIdx]?.value;
-		let day = daySelectedIdx + 1;
+	const checkAll = () => {
+		let _accountNameCheck = checkAccountName(
+			userInfo.accountName ?? userValue.AccountName
+		);
+		let _emailCheck = checkEmail(userValue.Email);
+		let _phoneCheck = checkPhone(userValue.Phone);
+		let _birthCheck = checkBirth();
 
-		let checkList = defCheckList[_status];
-		for (let i in checkList) {
-			let col = checkList[i];
-			if (col === defColumns.Birthday) {
-				if (
-					year === undefined ||
-					month === undefined ||
-					day === undefined
-				) {
-					setWarningState(prevState => {
-						return {
-							...prevState,
-							Birthday: {
-								status: true,
-								msg: i18n.msg_SelectBirthDay
-							}
-						};
-					});
-					checked = false;
-				} else {
-					setWarningState(prevState => {
-						return {
-							...prevState,
-							Birthday: {
-								status: false,
-								msg: ""
-							}
-						};
-					});
+		let checked =
+			_accountNameCheck.checked &&
+			_emailCheck.checked &&
+			_phoneCheck.checked &&
+			_birthCheck.checked;
+
+		if (!checked) {
+			setWarningState(prev => ({
+				...prev,
+				AccountName: {
+					status: !_accountNameCheck.checked,
+					msg: _accountNameCheck.message
+				},
+				Birthday: {
+					status: !_birthCheck.checked,
+					msg: _birthCheck.message
+				},
+				Phone: {
+					status: !_phoneCheck.checked,
+					msg: _phoneCheck.message
+				},
+				Email: {
+					status: !_emailCheck.checked,
+					msg: _emailCheck.message
 				}
-			} else {
-				let result = checkSwitch(userValueState[col], col);
-				setWarningState(prevState => {
-					return {
-						...prevState,
-						[col]: {
-							status: !result.checked,
-							msg: result.message
-						}
-					};
-				});
-				checked = checked ? result.checked : false;
-			}
+			}));
 		}
+		return checked;
+	};
+
+	const checkSubmitHandler = () => {
+		let checked = checkAll();
 
 		if (checked) {
-			setUserValueState(prevState => ({
-				...prevState,
-				Birth: `${year} / ${month} / ${day}`
-			}));
-
 			const closePopbox = ({ _redirectPath }) => {
 				setPopBox({ isOpen: false });
 				if (_redirectPath) {
@@ -300,14 +377,14 @@ const Panel = () => {
 
 			const setProfile = () => {
 				let profileData = {
-					AccountName:
-						userValueState.RealName ?? userInfo.accountName,
-					Birth_d: `${day}`,
-					Birth_m: `${month}`,
-					Birth_y: `${year}`,
+					AccountName: userValue.AccountName ?? userInfo.accountName,
+					Birth_d: `${daySelectedIdx + 1}`,
+					Birth_m: `${monthOptions[monthSelectedIdx]?.value}`,
+					Birth_y: `${yearOptions[yearSelectedIdx]?.value}`,
 					CountryCode: country,
 					AreaCode: aCode,
-					PhoneNo: userValueState.Phone ?? userInfo.phoneNo
+					PhoneNo: userValue.Phone ?? userInfo.phoneNo,
+					Email: userValue.Email ?? userInfo.email
 				};
 
 				api_SetProfile(profileData).then(
@@ -397,26 +474,22 @@ const Panel = () => {
 				);
 			};
 
-			if (status === defStatus.Phone_BDay || status === defStatus.BDay) {
-				setProfile();
-			} else {
-				setPopBox({
-					isOpen: true,
-					title: i18n.lbl_ImportantNote,
-					content: i18n.msg_ConfirmRealNameAlert,
-					hasBtn: true,
-					btnBar: (
-						<div className="btn-group">
-							<button className="blue" onClick={closePopbox}>
-								{i18n["lbl_Cancel"]}
-							</button>
-							<button className="orange" onClick={setProfile}>
-								{i18n["lbl_Submit"]}
-							</button>
-						</div>
-					)
-				});
-			}
+			setPopBox({
+				isOpen: true,
+				title: i18n.lbl_ImportantNote,
+				content: i18n.msg_ConfirmRealNameAlert,
+				hasBtn: true,
+				btnBar: (
+					<div className="btn-group">
+						<button className="blue" onClick={closePopbox}>
+							{i18n["lbl_Cancel"]}
+						</button>
+						<button className="orange" onClick={setProfile}>
+							{i18n["lbl_Submit"]}
+						</button>
+					</div>
+				)
+			});
 		}
 	};
 
@@ -441,74 +514,76 @@ const Panel = () => {
 		<Redirect to={redirectPath} noThrow />
 	) : (
 		<>
-			{status !== defStatus.LockAll ? (
-				<>
-					{status === defStatus.RealName ||
-					status === defStatus.RealName_Phone_BDay ? (
-						<Inputbox
-							icon="icon-member"
-							inputType="text"
-							placeholder={i18n["lbl_RealName"]}
-							onBlur={checkInputboxHandler.bind(null, "RealName")}
-							onChange={EditField.bind(null, "RealName")}
-							Warning={warningState.RealName}
-							value={userValueState.RealName}
-						/>
-					) : null}
+			{!userInfo.accountName ? (
+				<Inputbox
+					icon="icon-member"
+					inputType="text"
+					placeholder={i18n["lbl_RealName"]}
+					onBlur={checkInputboxHandler.bind(null, "AccountName")}
+					onChange={EditField.bind(null, "AccountName")}
+					Warning={warningState.AccountName}
+					value={userValue.AccountName}
+				/>
+			) : null}
 
-					{status === defStatus.RealName_Phone_BDay ||
-					status === defStatus.Phone_BDay ||
-					status === defStatus.BDay ? (
-						<Birthday
-							i18n={i18n}
-							userValueState={userValueState}
-							monthOptions={monthOptions}
-							dateOptions={dateOptions}
-							yearOptions={yearOptions}
-							yearSelectedIdx={yearSelectedIdx}
-							monthSelectedIdx={monthSelectedIdx}
-							daySelectedIdx={daySelectedIdx}
-							Warning={warningState.Birthday}
-							dropdownStateHandler={
-								dropdownStateHandler
-							}></Birthday>
-					) : null}
+			{!userInfo.email ? (
+				<Inputbox
+					icon="icon-email"
+					inputType="text"
+					placeholder={i18n["lbl_Email"]}
+					onBlur={checkInputboxHandler.bind(null, "Email")}
+					onChange={EditField.bind(null, "Email")}
+					Tips={i18n["lbl_EmailToolTip"]}
+					Warning={warningState.Email}
+					value={userValue.Email}
+				/>
+			) : null}
 
-					{status === defStatus.RealName_Phone_BDay ||
-					status === defStatus.Phone_BDay ? (
-						<div className="inputBox parts">
-							<span className="countryCode">{aCode}</span>
+			{!userInfo.birth_d || !userInfo.birth_m || !userInfo.birth_y ? (
+				<Birthday
+					i18n={i18n}
+					userValue={userValue}
+					monthOptions={monthOptions}
+					dateOptions={dateOptions}
+					yearOptions={yearOptions}
+					yearSelectedIdx={yearSelectedIdx}
+					monthSelectedIdx={monthSelectedIdx}
+					daySelectedIdx={daySelectedIdx}
+					Warning={warningState.Birthday}
+					dropdownStateHandler={dropdownStateHandler}></Birthday>
+			) : null}
 
-							<Inputbox
-								icon="icon-phone"
-								inputType="tel"
-								placeholder={i18n["lbl_Phone"]}
-								onBlur={checkInputboxHandler.bind(
-									null,
-									"Phone"
-								)}
-								onChange={EditField.bind(null, "Phone")}
-								value={userValueState.Phone}
-							/>
-							<div
-								className={`errortip ${
-									warningState.Phone.status ? "open" : ""
-								}`}>
-								{warningState.Phone.msg}
-							</div>
-						</div>
-					) : null}
+			{!userInfo.phoneNo ? (
+				<div className="inputBox parts">
+					<span className="countryCode">{aCode}</span>
 
-					{status !== 4 ? (
-						<div className="btn-group">
-							<button
-								className="orange"
-								onClick={checkSubmitHandler.bind(this, status)}>
-								{i18n["lbl_Submit"]}
-							</button>
-						</div>
-					) : null}
-				</>
+					<Inputbox
+						icon="icon-phone"
+						inputType="tel"
+						placeholder={i18n["lbl_Phone"]}
+						onBlur={checkInputboxHandler.bind(null, "Phone")}
+						onChange={EditField.bind(null, "Phone")}
+						value={userValue.Phone}
+						WarningIcon={warningState.Phone.status}
+					/>
+					<div
+						className={`errortip ${
+							warningState.Phone.status ? "open" : ""
+						}`}>
+						{warningState.Phone.msg}
+					</div>
+				</div>
+			) : null}
+
+			{!userInfo.accountName ||
+			!userInfo.birth_d ||
+			!userInfo.phoneNo ||
+			!userInfo.email ? (
+				<div className="btn-group">
+					<button className="orange" onClick={checkSubmitHandler}>
+						{i18n["lbl_Submit"]}
+					</button>
+				</div>
 			) : null}
 
 			<div className="info">

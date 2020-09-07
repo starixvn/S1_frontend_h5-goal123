@@ -6,7 +6,7 @@ import Checkbox from "../common/checkbox";
 import Tips from "./tips";
 import {
 	api_ExistsUserName,
-	api_ExistsEmail,
+	// api_ExistsEmail,
 	api_Register,
 	api_GetSiteCurrencyList,
 	api_GetBanner
@@ -29,12 +29,17 @@ import config from "../../config";
 import PromoPopup from "./join.promotion";
 import Logo from "../../styles/img/logo.png";
 
-const colName = ["UserName", "Password", "Email", "Currency"];
+const colName = [
+	"UserName",
+	"Password",
+	// "Email",
+	"Currency"
+];
 
 const initState = {
 	UserName: "",
 	Password: "",
-	Email: "",
+	// Email: "",
 	Currency: null,
 	Checkbox: false
 };
@@ -48,10 +53,10 @@ const initWarningState = {
 		status: false,
 		msg: ""
 	},
-	Email: {
-		status: false,
-		msg: ""
-	},
+	// Email: {
+	// 	status: false,
+	// 	msg: ""
+	// },
 	Currency: {
 		status: false
 	},
@@ -64,7 +69,7 @@ const initWarningState = {
 const initChecklistState = {
 	UserName: false,
 	Password: false,
-	Email: false,
+	// Email: false,
 	Checkbox: false
 };
 
@@ -89,7 +94,7 @@ const Join = () => {
 	const [showTipsState, setShowTipsState] = useState({
 		UserName: false,
 		Password: false,
-		Email: false,
+		// Email: false,
 		Currency: false
 	});
 
@@ -339,104 +344,104 @@ const Join = () => {
 		});
 	};
 
-	const emailCheck = val => {
-		let checked = false;
-		let message = "";
-		const regx = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+	// const emailCheck = val => {
+	// 	let checked = false;
+	// 	let message = "";
+	// 	const regx = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
-		if (val === "") {
-			checked = false;
-			message = i18n["msg_MailWrongFormat"];
-		} else if (val != null) {
-			if (!regx.test(val)) {
-				checked = false;
-				message = i18n["msg_MailWrongFormat"];
-			} else {
-				checked = true;
-			}
-		}
+	// 	if (val === "") {
+	// 		checked = false;
+	// 		message = i18n["msg_MailWrongFormat"];
+	// 	} else if (val != null) {
+	// 		if (!regx.test(val)) {
+	// 			checked = false;
+	// 			message = i18n["msg_MailWrongFormat"];
+	// 		} else {
+	// 			checked = true;
+	// 		}
+	// 	}
 
-		return { checked, message };
-	};
+	// 	return { checked, message };
+	// };
 
-	const checkEmailHandler = (colName, e) => {
-		const val = e.target.value;
+	// const checkEmailHandler = (colName, e) => {
+	// 	const val = e.target.value;
 
-		let result = emailCheck(val);
-		if (val !== "") {
-			if (result.checked) {
-				setWarningState(prevState => {
-					return {
-						...prevState,
-						[colName]: {
-							status: false,
-							msg: ""
-						}
-					};
-				});
-				api_ExistsEmail({
-					Email: val
-				}).then(
-					response => {
-						if (isMountedRef.current) {
-							const res = response.data;
-							if (res.errorCode === 0) {
-								if (res.data === true) {
-									setShowTipsState(prevState => {
-										return { ...prevState, Email: false };
-									});
-									setWarningState(prevState => {
-										return {
-											...prevState,
-											Email: {
-												status: true,
-												msg: i18n["msg_MailExisted"]
-											}
-										};
-									});
-								} else {
-									setChecklistState(prevState => {
-										return {
-											...prevState,
-											Email: result.checked
-										};
-									});
-								}
-							} else {
-								setPopBox({
-									isOpen: true,
-									title: i18n.lbl_ImportantNote,
-									content: response.data.message
-								});
-							}
-						}
-					},
-					err => {
-						if (isMountedRef.current) {
-							setPopBox({
-								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: i18n.msg_ApiServerError
-							});
-						}
-					}
-				);
-			} else {
-				setShowTipsState(prevState => {
-					return { ...prevState, Email: false };
-				});
-				setWarningState(prevState => {
-					return {
-						...prevState,
-						[colName]: {
-							status: !result.checked,
-							msg: result.message
-						}
-					};
-				});
-			}
-		}
-	};
+	// 	let result = emailCheck(val);
+	// 	if (val !== "") {
+	// 		if (result.checked) {
+	// 			setWarningState(prevState => {
+	// 				return {
+	// 					...prevState,
+	// 					[colName]: {
+	// 						status: false,
+	// 						msg: ""
+	// 					}
+	// 				};
+	// 			});
+	// 			api_ExistsEmail({
+	// 				Email: val
+	// 			}).then(
+	// 				response => {
+	// 					if (isMountedRef.current) {
+	// 						const res = response.data;
+	// 						if (res.errorCode === 0) {
+	// 							if (res.data === true) {
+	// 								setShowTipsState(prevState => {
+	// 									return { ...prevState, Email: false };
+	// 								});
+	// 								setWarningState(prevState => {
+	// 									return {
+	// 										...prevState,
+	// 										Email: {
+	// 											status: true,
+	// 											msg: i18n["msg_MailExisted"]
+	// 										}
+	// 									};
+	// 								});
+	// 							} else {
+	// 								setChecklistState(prevState => {
+	// 									return {
+	// 										...prevState,
+	// 										Email: result.checked
+	// 									};
+	// 								});
+	// 							}
+	// 						} else {
+	// 							setPopBox({
+	// 								isOpen: true,
+	// 								title: i18n.lbl_ImportantNote,
+	// 								content: response.data.message
+	// 							});
+	// 						}
+	// 					}
+	// 				},
+	// 				err => {
+	// 					if (isMountedRef.current) {
+	// 						setPopBox({
+	// 							isOpen: true,
+	// 							title: i18n.lbl_ImportantNote,
+	// 							content: i18n.msg_ApiServerError
+	// 						});
+	// 					}
+	// 				}
+	// 			);
+	// 		} else {
+	// 			setShowTipsState(prevState => {
+	// 				return { ...prevState, Email: false };
+	// 			});
+	// 			setWarningState(prevState => {
+	// 				return {
+	// 					...prevState,
+	// 					[colName]: {
+	// 						status: !result.checked,
+	// 						msg: result.message
+	// 					}
+	// 				};
+	// 			});
+	// 		}
+	// 	}
+	// };
 
 	const [currencyState, setcurrencyState] = useState(
 		currencyDefaultSelectIdx
@@ -486,11 +491,14 @@ const Join = () => {
 
 		let UserName = usernameCheck(userValueState.UserName);
 		let Password = passwordCheck(userValueState.Password);
-		let Email = emailCheck(userValueState.Email);
+		// let Email = emailCheck(userValueState.Email);
 		let Checkbox = checkboxState;
 
 		checked =
-			UserName.checked && Password.checked && Email.checked && Checkbox;
+			UserName.checked &&
+			Password.checked &&
+			// && Email.checked
+			Checkbox;
 
 		for (let i in checklistState) {
 			if (checklistState[i] === false) {
@@ -511,7 +519,7 @@ const Join = () => {
 			let regData = {
 				UserName: userValueState.UserName,
 				Userpwd: userValueState.Password,
-				Email: userValueState.Email,
+				// Email: userValueState.Email,
 				CurrencyId: userValueState.Currency.id,
 				UserLang: defaultLangId
 			};
@@ -585,8 +593,8 @@ const Join = () => {
 			setWarningState(prevState => ({
 				...prevState,
 				UserName: { status: !UserName.checked, msg: UserName.message },
-				Password: { status: !Password.checked, msg: Password.message },
-				Email: { status: !Email.checked, msg: Email.message }
+				Password: { status: !Password.checked, msg: Password.message }
+				// Email: { status: !Email.checked, msg: Email.message }
 			}));
 		}
 	};
@@ -671,7 +679,7 @@ const Join = () => {
 					Tips={i18n["lbl_PasswordTooltip"]}
 					Warning={warningState.Password}
 					value={userValueState.Password}></InputboxPWD>
-
+				{/* 
 				<Inputbox
 					icon="icon-email"
 					inputType="text"
@@ -683,7 +691,7 @@ const Join = () => {
 					showTips={showTipsState.Email}
 					Tips={i18n["lbl_EmailToolTip"]}
 					Warning={warningState.Email}
-					value={userValueState.Email}></Inputbox>
+					value={userValueState.Email}></Inputbox> */}
 
 				{hideCurrency ? null : (
 					<div className="inputBox">
@@ -692,7 +700,10 @@ const Join = () => {
 							colName={colName[3]}
 							selectedIdx={currencyState}
 							options={siteCurrencyState}
-							clickDropdown={showTipsHandler}
+							clickDropdown={showTipsHandler.bind(
+								null,
+								"Currency"
+							)}
 							onSelectItem={dropdownStateHandler}
 							value={userValueState.Currency}
 							i18n={i18n}></Dropdown>

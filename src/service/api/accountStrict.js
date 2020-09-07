@@ -10,7 +10,8 @@ export const api_SetProfile = ({
 	Birth_y,
 	CountryCode,
 	AreaCode,
-	PhoneNo
+	PhoneNo,
+	Email
 }) =>
 	accountStrictRequest.post("/SetProfile", {
 		AccountName,
@@ -19,7 +20,8 @@ export const api_SetProfile = ({
 		Birth_y,
 		CountryCode,
 		AreaCode,
-		PhoneNo
+		PhoneNo,
+		Email
 	});
 
 export const api_SetCustBankInfo = ({ AccountName, AccountNo, SysId }) =>

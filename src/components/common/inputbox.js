@@ -18,7 +18,7 @@ const Inputbox = props => {
 				}
 				max={props.max ? props.max : null}
 			/>
-			{props.Warning?.status ? (
+			{props.Warning?.status || props.WarningIcon ? (
 				<div className="icon-module">
 					<i className="icon icon-warning"></i>
 				</div>
@@ -30,12 +30,14 @@ const Inputbox = props => {
 					}`}>
 					{props.Tips}
 				</div>
-			) : props.Warning?.status ? (
+			) : props.WarningIcon || props.Warning?.status ? (
 				<div
 					className={`${props.ClassName}${
-						props.Warning.status ? " open" : ""
+						props.WarningIcon || props.Warning?.status
+							? " open"
+							: ""
 					}`}>
-					{props.Warning.msg}
+					{props.WarningIcon ? null : props.Warning.msg}
 				</div>
 			) : null}
 		</div>
