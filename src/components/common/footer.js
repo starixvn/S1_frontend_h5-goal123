@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, Match } from "@reach/router";
 import { userInfoContext, i18nContext } from "../common/context";
 import path from "../../path";
+import { siteInfo } from "../../config";
 
 const defChatLangSubUrl = {
 	en: 1,
@@ -131,7 +132,7 @@ const Footer = () => {
 
 				<a
 					target="_blank"
-					href={`https://direct.lc.chat/11638088/${
+					href={`https://direct.lc.chat/${siteInfo().liveChatId}/${
 						defChatLangSubUrl[userInfo.langId] ?? ""
 					}`}
 					className="">
