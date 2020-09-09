@@ -271,14 +271,13 @@ class CateGoryContent extends Component {
 		});
 
 		return (
-			<div className="content">
+			<div id="content">
+				<div className="menuBtn">
+					<button onClick={this.showSubMenu.bind(null, "≡")}>
+						<span>≡</span>
+					</button>
+				</div>
 				<div className="sideBar" ref={this.sideBarRef}>
-					<CategoryItem
-						key={`category-sidebar`}
-						onClick={this.showSubMenu.bind(null, "≡")}
-						isOpen={`${this.state.category === "≡" ? " open" : ""}`}
-						translation="≡"
-					/>
 					{sideBarItems}
 				</div>
 				<div className="gameList">{products}</div>

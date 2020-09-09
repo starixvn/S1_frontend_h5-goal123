@@ -23,6 +23,7 @@ import Number_game from "../styles/img/number_game.jpg";
 
 export const defGameInfo = {
 	Sports: { tpId: 1, gameId: 1 },
+	CockFighting: { tpId: 17 },
 	VirtualSports: { tpId: 1, gameId: 180 },
 	eSports: { tpId: 1, gameId: 43 },
 	LIVEcasinoDG: { tpId: 4, gameId: 4 },
@@ -42,7 +43,11 @@ export const defGameInfo = {
 	Indo4d: { gameId: 223, tpId: 1 },
 	Keno: { gameId: 202, tpId: 1 },
 	lottery: { gameId: 220, tpId: 1 },
-	NumberGame: { gameId: 161, tpId: 1 }
+	NumberGame: { gameId: 161, tpId: 1 },
+	sabaClub: {
+		tpId: 1,
+		gameId: 200
+	}
 };
 
 const gameList = [

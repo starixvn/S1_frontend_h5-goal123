@@ -468,8 +468,12 @@ header .headerButton .icon-chat .amount {
 
 main {
   width: 100%;
-  height: calc(100% - 12vw);
   padding-top: 12vw;
+  background: #0f2346;
+}
+
+main #content {
+  position: relative;
 }
 
 main.stopScroll {
@@ -480,14 +484,22 @@ main .swiper-container {
   z-index: 5;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  position: static;
+}
+
+main .swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: auto;
+  margin-top: -5vw;
+}
+
+main .swiper-pagination {
+  z-index: 2;
 }
 
 main .banner {
-  background: white;
   width: 100%;
   height: auto;
   display: block;
-  top: 12vw;
   z-index: 3;
 }
 
@@ -502,10 +514,7 @@ main #Marquee {
           align-items: center;
   -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  z-index: 4;
   width: 100%;
-  top: 49.5vw;
   overflow: hidden;
 }
 
@@ -554,12 +563,8 @@ main #Marquee > div.open {
 
 main .sideBar {
   background: #1D3662;
-  width: 100%;
   -webkit-box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 55vw;
-  z-index: 3;
   overflow-y: scroll;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -569,6 +574,8 @@ main .sideBar {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-left: 11vw;
+  width: calc(100% - 11vw);
 }
 
 main .sideBar button {
@@ -583,23 +590,6 @@ main .sideBar button {
   height: 10vw;
 }
 
-main .sideBar button:first-child {
-  font-size: 7vw;
-}
-
-main .sideBar button:first-child div {
-  -webkit-transform: scaleX(2);
-          transform: scaleX(2);
-}
-
-main .sideBar button.open {
-  border-radius: 10px;
-  background: #1E85EC;
-  -webkit-transition: 0.7s;
-  transition: 0.7s;
-  padding: 0 5vw;
-}
-
 main .sideBar button.icon:before {
   width: 100%;
   font-size: 8vw;
@@ -612,9 +602,7 @@ main .sideBar button.icon div {
 }
 
 main .gameList {
-  position: absolute;
-  top: 70vw;
-  padding-bottom: 16vw;
+  padding-bottom: 30vw;
   padding-top: 1vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3433,6 +3421,11 @@ span.important {
   pointer-events: auto;
   -webkit-animation: submenu 0.5s forwards;
           animation: submenu 0.5s forwards;
+  overflow: scroll;
+}
+
+.submenu .thBar {
+  position: absolute;
 }
 
 .submenu img {
@@ -3496,7 +3489,7 @@ span.important {
   padding-bottom: 3vw;
 }
 
-.submenu .side-nav a, .submenu .side-nav button {
+.submenu .side-nav a, .submenu .side-nav button, .submenu .side-nav div {
   font-size: 5vw;
   color: white;
   line-height: 14vw;
@@ -3506,11 +3499,43 @@ span.important {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.submenu .side-nav a:before, .submenu .side-nav button:before {
+.submenu .side-nav a > ul, .submenu .side-nav button > ul, .submenu .side-nav div > ul {
+  display: none;
+  width: 100%;
+}
+
+.submenu .side-nav a > ul li, .submenu .side-nav button > ul li, .submenu .side-nav div > ul li {
+  border-top: 1px solid #1D3662;
+  padding-left: 9vw;
+}
+
+.submenu .side-nav a > ul li a, .submenu .side-nav button > ul li a, .submenu .side-nav div > ul li a {
+  font-size: 4vw;
+  line-height: 10vw;
+}
+
+.submenu .side-nav a > ul.open, .submenu .side-nav button > ul.open, .submenu .side-nav div > ul.open {
+  display: block;
+}
+
+.submenu .side-nav a:before, .submenu .side-nav button:before, .submenu .side-nav div:before {
   font-size: 7vw;
   margin-right: 2vw;
+}
+
+.submenu .side-nav a i, .submenu .side-nav button i, .submenu .side-nav div i {
+  position: absolute;
+  right: 1vw;
+}
+
+.submenu .side-nav a i.open, .submenu .side-nav button i.open, .submenu .side-nav div i.open {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .submenu .thBar {
@@ -3549,5 +3574,32 @@ span.important {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.menuBtn {
+  width: 10vw;
+  height: 15vw;
+  position: absolute;
+  background: #1D3662;
+  padding-left: 1vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menuBtn button {
+  background: #1E85EC;
+  width: 10vw;
+  height: 9vw;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+}
+
+.menuBtn span {
+  font-size: 6vw;
 }
 /*# sourceMappingURL=style.css.map */

@@ -296,5 +296,7 @@ export default [
 	"lbl_PromoCategory_4",
 	"lbl_Slots",
 	"lbl_Promotions",
-	"msg_OTPSendCode"
+	"msg_OTPSendCode",
+	"lbl_CockFighting",
+	"lbl_SabaClub"
 ];

@@ -19,14 +19,36 @@ import ShortcutBar from "./shortcutBar";
 
 const defSubMenus = [
 	{
-		displayKey: "lbl_Home",
-		path: "/",
-		icon: "icon icon-home"
-	},
-	{
 		...defGameInfo.Sports,
 		displayKey: "lbl_Sports",
 		icon: "icon icon-sports"
+	},
+	{
+		...defGameInfo.CockFighting,
+		displayKey: "lbl_CockFighting",
+		icon: "icon icon-cock"
+	},
+	{
+		displayKey: "lbl_Games",
+		icon: "icon icon-kelo",
+		subItems: [
+			{
+				...defGameInfo.sabaClub,
+				displayKey: "lbl_SabaClub"
+			},
+			{
+				...defGameInfo.Fishing,
+				displayKey: "lbl_Fishing"
+			},
+			{
+				...defGameInfo.Keno,
+				displayKey: "lbl_Keno"
+			},
+			{
+				...defGameInfo.lottery,
+				displayKey: "lbl_Lottery"
+			}
+		]
 	},
 	{
 		...defGameInfo.eSports,
@@ -36,28 +58,62 @@ const defSubMenus = [
 	{
 		displayKey: "lbl_Slots",
 		path: `/${path.casino.root}`,
-		icon: "icon icon-e-sports"
+		icon: "icon icon-casino"
 	},
 	{
 		displayKey: "lbl_LiveCasino",
-		path: `/`,
-		icon: "icon icon-livecasino"
+		icon: "icon icon-livecasino",
+		subItems: [
+			{
+				...defGameInfo.LIVEcasinoDG,
+				displayKey: "DG"
+			},
+			{
+				...defGameInfo.LIVEcasinoAB,
+				displayKey: "AB"
+			},
+			{
+				...defGameInfo.LIVEcasinoAG,
+				displayKey: "AG"
+			},
+			{
+				...defGameInfo.LIVEcasinoPP,
+				displayKey: "PP"
+			},
+			{
+				...defGameInfo.LIVEcasinoSA,
+				displayKey: "SA"
+			},
+			{
+				...defGameInfo.LIVEcasinoAE,
+				displayKey: "AE"
+			}
+		]
 	},
 	{
 		displayKey: "lbl_Promotions",
 		path: `/${path.promotion.root}`,
-		icon: "icon icon-livecasino"
+		icon: "icon icon-gift"
 	}
 ];
 
 export default () => {
 	const { i18n } = useContext(i18nContext);
 	const { userInfo } = useContext(userInfoContext);
-
 	const { nav, setNav } = useContext(navContext);
+	const [isOpenSubMenu, setIsOpenSubMenu] = useState([]);
+
+	const handleSubMenu = displayKey => {
+		if (isOpenSubMenu.includes(displayKey)) {
+			setIsOpenSubMenu(prevS => prevS.filter(s => s !== displayKey));
+		} else {
+			setIsOpenSubMenu(prevS => [...prevS, displayKey]);
+		}
+	};
 
 	const closeNavPanel = () => {
 		setNav(() => null);
+		setIsOpenSubMenu([]);
 	};
 
 	let openPanel = nav === defNavPanel.subMenu;
@@ -84,12 +140,21 @@ export default () => {
 				userInfo={userInfo}
 				setNav={setNav}
 				closeNavPanel={closeNavPanel}
+				handleSubMenu={handleSubMenu}
+				isOpenSubMenu={isOpenSubMenu}
 			/>
 		</div>
 	);
 };
 
-const SubMenuList = ({ i18n, userInfo, setNav, closeNavPanel }) => {
+const SubMenuList = ({
+	i18n,
+	userInfo,
+	setNav,
+	closeNavPanel,
+	handleSubMenu,
+	isOpenSubMenu
+}) => {
 	const clickGame = ({ tpId, gameId }) => {
 		GET_ENTER_PAGE({
 			langId: userInfo.langId,
@@ -104,6 +169,39 @@ const SubMenuList = ({ i18n, userInfo, setNav, closeNavPanel }) => {
 
 	let rows = defSubMenus.map(s => {
 		let key = `submenu-${s.displayKey}`;
+		let hasSubItem = false;
+		let _subItems = null;
+		if (s.subItems) {
+			let subItemContent = s.subItems?.map(c => {
+				return (
+					<li
+						key={`${key}-${c.displayKey}`}
+						onClick={clickGame.bind(this, c)}>
+						<button>
+							{i18n[c.displayKey] ?? c.displayKey}
+							{_subItems}
+						</button>
+					</li>
+				);
+			});
+
+			hasSubItem = subItemContent.length > 0;
+			if (hasSubItem) {
+				let isOpen = isOpenSubMenu.includes(s.displayKey);
+				_subItems = (
+					<>
+						<i
+							className={`icon icon-keyboard_arrow_right1${
+								isOpen ? " open" : ""
+							}`}></i>
+						<ul className={isOpen ? "open" : ""}>
+							{subItemContent}
+						</ul>
+					</>
+				);
+			}
+		}
+
 		if (s.path) {
 			return (
 				<Link
@@ -111,16 +209,25 @@ const SubMenuList = ({ i18n, userInfo, setNav, closeNavPanel }) => {
 					onClick={closeNavPanel}
 					key={key}
 					className={s.icon}>
-					{i18n[s.displayKey]}
+					{i18n[s.displayKey] ?? s.displayKey}
+					{_subItems}
 				</Link>
 			);
 		} else {
-			return (
+			return hasSubItem ? (
+				<div
+					key={key}
+					onClick={handleSubMenu.bind(this, s.displayKey)}
+					className={s.icon}>
+					{i18n[s.displayKey] ?? s.displayKey}
+					{_subItems}
+				</div>
+			) : (
 				<button
 					key={key}
 					onClick={clickGame.bind(this, s)}
 					className={s.icon}>
-					{i18n[s.displayKey]}
+					{i18n[s.displayKey] ?? s.displayKey}
 				</button>
 			);
 		}
