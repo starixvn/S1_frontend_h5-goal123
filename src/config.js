@@ -4,7 +4,8 @@ export const siteInfo = () => {
 	return {
 		siteName: "Goal123",
 		siteDefaultLang: "en",
-		siteLangList: ["en", "vn"]
+		siteLangList: ["en", "vn"],
+		liveChatId: 12171870
 	};
 };
 
