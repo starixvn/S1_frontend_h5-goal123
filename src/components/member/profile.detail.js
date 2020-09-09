@@ -7,9 +7,11 @@ import areaCode from "../../datas/areaCode";
 import moment from "moment";
 import {
 	api_SetProfile,
-	api_GetCustProfile
+	api_GetCustProfile,
+	api_VerifyPhone
 } from "../../service/api/accountStrict";
 import { api_ExistsEmail } from "../../service/api/site";
+import { defPopBoxType } from "../common/popbox";
 import path from "../../path";
 
 const monthOptions = [
@@ -44,13 +46,6 @@ const initWarningState = {
 		status: false,
 		msg: ""
 	}
-};
-
-const defColumns = {
-	AccountName: "AccountName",
-	Birthday: "Birthday",
-	Phone: "Phone",
-	Email: "Email"
 };
 
 const Panel = () => {
@@ -107,7 +102,8 @@ const Panel = () => {
 		{
 			infoTitle: "phoneNo",
 			colTitle: i18n["lbl_Phone"],
-			content: `(${aCode})${userInfo.phoneNo}`
+			content: `(${aCode})${userInfo.phoneNo}`,
+			isVerified: userInfo.phoneVerified
 		},
 		{
 			infoTitle: "userName",
@@ -493,6 +489,68 @@ const Panel = () => {
 		}
 	};
 
+	const clickOtp = () => {
+		const closePopbox = () => {
+			setPopBox({ isOpen: false });
+		};
+
+		const clickSubmit = (otpCode, requestId) => {
+			console.log(otpCode, requestId);
+			api_VerifyPhone({
+				request_id: requestId,
+				code: otpCode
+			}).then(
+				res => {
+					if (isMountedRef.current) {
+						if (res.data.errorCode === 0) {
+							setUserInfo(prev => ({
+								...prev,
+								PhoneVerified: true
+							}));
+
+							setPopBox({ isOpen: false });
+						} else {
+							setPopBox({
+								isOpen: true,
+								title: "OTP Certification",
+								content: res.data.message,
+								hasBtn: true,
+								btnBar: (
+									<div className="btn-group">
+										<button
+											className="blue"
+											onClick={closePopbox}>
+											{i18n["lbl_Cancel"]}
+										</button>
+									</div>
+								)
+							});
+						}
+					}
+				},
+				err => {
+					if (isMountedRef.current) {
+						setPopBox({
+							isOpen: true,
+							title: i18n.lbl_ImportantNote,
+							content: i18n.msg_ApiServerError
+						});
+					}
+				}
+			);
+		};
+
+		const openOtpPopbox = () => {
+			setPopBox({
+				isOpen: true,
+				popBoxType: defPopBoxType.Otp,
+				title: "OTP Certification",
+				clickSubmit: clickSubmit
+			});
+		};
+		openOtpPopbox();
+	};
+
 	let arr = infoList
 		.filter(item => {
 			return (
@@ -501,11 +559,17 @@ const Panel = () => {
 			);
 		})
 		.map(item => {
+			let _isVerified =
+				item.infoTitle === "phoneNo" ? item.isVerified : null;
+
 			return (
 				<ColumnItem
 					key={`profile-${item.infoTitle}`}
 					title={item.colTitle}
 					content={item.content}
+					infoTitle={item.infoTitle}
+					clickOtp={clickOtp}
+					isVerified={_isVerified}
 				/>
 			);
 		});
@@ -635,8 +699,19 @@ const Birthday = props => {
 const ColumnItem = props => {
 	return (
 		<li>
-			<span className="title">{props.title}</span>
+			<span className="title">
+				{props.title}
+				{props.isVerified ? <i class="icon icon-checkmark"></i> : null}
+			</span>
 			<span>{props.content}</span>
+			{props.infoTitle === "phoneNo" && !props.isVerified ? (
+				<>
+					<button className="otpBtn" onClick={props.clickOtp}>
+						<span className="icon icon-mobile"></span>
+						<span>Mobile verification</span>
+					</button>
+				</>
+			) : null}
 		</li>
 	);
 };
