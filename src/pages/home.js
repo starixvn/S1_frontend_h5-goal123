@@ -115,7 +115,7 @@ const IndexPage = () => {
 			<Slider />
 			<Marquee />
 			<Category />
-			<ShortcutBar />
+			{userInfo.isLogin ? <ShortcutBar /> : null}
 			<Submenu />
 		</>
 	);
