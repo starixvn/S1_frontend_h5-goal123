@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as ct from "../common/context";
-import { api_GetTranslationData } from "../../service/api/site";
 import { api_GetCustProfile } from "../../service/api/accountStrict";
 import {
 	api_GetBalnace,
@@ -11,10 +10,10 @@ import { IS_LOGGED_IN } from "../../service/auth";
 import themeList from "../../datas/theme";
 import useInterval from "../hook/useInterval";
 import { getUrlParameter, setCookie, deleteCookie } from "../common/common";
-import i18nDefault from "../../datas/i18nDefault";
+import i18nConfig from "../../i18n/config";
 
 export const Wrapper = ({ children }) => {
-	const [i18n, seti18n] = useState(i18nDefault);
+	const [i18n, seti18n] = useState(i18nConfig());
 
 	const [userInfo, setUserInfo] = useState({
 		isLogin: null,
@@ -152,20 +151,7 @@ export const Wrapper = ({ children }) => {
 	}, [userInfo.isLogin, userInfo.regTime, userInfo.userName, i18n]);
 
 	useEffect(() => {
-		api_GetTranslationData(userInfo.langId).then(
-			res => {
-				if (isMountedRef.current) {
-					seti18n(prevState => ({ ...prevState, ...res.data.data }));
-				}
-			},
-			err => {
-				if (err.response) {
-					console.log("error status", err.response.status);
-				} else {
-					console.log("error", err);
-				}
-			}
-		);
+		seti18n(i18nConfig(userInfo.langId));
 	}, [userInfo.langId]);
 
 	return (

@@ -1,11 +1,4 @@
 import { siteRequest } from "./base";
-import langKeys from "../../datas/langKeys";
-
-export const api_GetTranslationData = (langId, data) =>
-	siteRequest.post(
-		`/GetTranslationData${langId ? `/${langId}` : ""}`,
-		data ? data : langKeys
-	);
 
 export const api_ExistsUserName = ({ UserName }) =>
 	siteRequest.post(`/ExistsUserName`, { UserName: UserName });

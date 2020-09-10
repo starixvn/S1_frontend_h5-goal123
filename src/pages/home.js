@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Slider from "../components/home/slider";
 import Marquee from "../components/home/marquee";
 import Category from "../components/home/category";

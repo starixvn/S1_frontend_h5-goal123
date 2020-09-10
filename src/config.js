@@ -3,7 +3,7 @@ export const siteName = "Goal123";
 export const siteInfo = () => {
 	return {
 		siteName: "Goal123",
-		siteDefaultLang: "en",
+		siteDefaultLang: "vn",
 		siteLangList: ["en", "vn"],
 		liveChatId: 12171870
 	};

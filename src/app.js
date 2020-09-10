@@ -1,6 +1,5 @@
 import React from "react";
 import path from "./path";
-import langKeys from "./datas/langKeys";
 import { Wrapper } from "./components/common/wrapper";
 import PopBox from "./components/common/popbox";
 import { Router, createHistory, LocationProvider } from "@reach/router";
@@ -65,7 +64,7 @@ import Whoami from "./pages/whoami";
 const Index = () => {
 	let history = createHistory(window);
 	return (
-		<Wrapper pageLangKeys={langKeys}>
+		<Wrapper>
 			<LocationProvider history={history}>
 				<Layout>
 					<Router>
