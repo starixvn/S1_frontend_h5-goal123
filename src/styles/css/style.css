@@ -474,6 +474,7 @@ main {
 
 main #content {
   position: relative;
+  top: 30vw;
 }
 
 main.stopScroll {
@@ -484,7 +485,7 @@ main .swiper-container {
   z-index: 5;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position: fixed;
 }
 
 main .swiper-container-horizontal > .swiper-pagination-bullets {
@@ -514,7 +515,10 @@ main #Marquee {
           align-items: center;
   -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  z-index: 3;
   width: 100%;
+  top: 38vw;
   overflow: hidden;
 }
 
@@ -565,6 +569,8 @@ main .sideBar {
   background: #1D3662;
   -webkit-box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 1;
   overflow-y: scroll;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -603,7 +609,7 @@ main .sideBar button.icon div {
 
 main .gameList {
   padding-bottom: 30vw;
-  padding-top: 1vw;
+  padding-top: 15vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -781,12 +787,11 @@ footer > a .circleAnimation {
       -ms-flex-align: center;
           align-items: center;
   color: #64789b;
-  top: -9vw;
 }
 
 footer > a .circleAnimation > div {
   position: relative;
-  bottom: -9.5vw;
+  bottom: 6vw;
 }
 
 footer > a .circleAnimation > div:before {
@@ -2521,11 +2526,14 @@ button.clickBtn:before {
   border: 0;
   padding: 0;
   width: 22vw;
-  font-size: 12px;
+  font-size: 3vw;
+  background: transparent;
+  white-space: nowrap;
 }
 
 .inputdate .text {
   margin-right: 1vw;
+  font-size: 3vw;
 }
 
 .inputdate ::-webkit-datetime-edit {
@@ -3583,7 +3591,7 @@ span.important {
 .menuBtn {
   width: 10vw;
   height: 15vw;
-  position: absolute;
+  position: fixed;
   background: #1D3662;
   padding-left: 1vw;
   display: -webkit-box;
@@ -3592,6 +3600,7 @@ span.important {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  z-index: 2;
 }
 
 .menuBtn button {

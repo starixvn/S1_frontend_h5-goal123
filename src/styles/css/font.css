@@ -62,6 +62,10 @@
   content: "\e988";
 }
 
+.icon-balance:before {
+  content: "\e989";
+}
+
 .icon-icon_777:before {
   content: "\e985";
 }
@@ -386,7 +390,7 @@
   content: "\e918";
 }
 
-.icon-balance:before {
+.icon-balance1:before {
   content: "\e901";
 }
 
