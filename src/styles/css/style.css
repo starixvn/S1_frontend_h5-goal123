@@ -428,7 +428,7 @@ header .headerButton {
 header .headerButton > button {
   border-radius: 3px;
   color: white;
-  padding: 1vw 3vw;
+  padding: 1vw 2vw;
   margin-left: 5px;
   background: #fab617;
 }
@@ -3517,7 +3517,7 @@ span.important {
   padding-left: 9vw;
 }
 
-.submenu .side-nav a > ul li a, .submenu .side-nav button > ul li a, .submenu .side-nav div > ul li a {
+.submenu .side-nav a > ul li a, .submenu .side-nav a > ul li button, .submenu .side-nav button > ul li a, .submenu .side-nav button > ul li button, .submenu .side-nav div > ul li a, .submenu .side-nav div > ul li button {
   font-size: 4vw;
   line-height: 10vw;
   border: 0;
