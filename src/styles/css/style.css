@@ -484,7 +484,7 @@ main .swiper-container {
   z-index: 5;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  position: static;
+  position: relative;
 }
 
 main .swiper-container-horizontal > .swiper-pagination-bullets {
@@ -1013,6 +1013,9 @@ footer > a.open .circleAnimation + span {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  background: white;
+  border-radius: 5px;
+  max-height: 9vw;
 }
 
 .dropdown > .dropdown-container .dropdown-item .bankLogo img {
@@ -1756,6 +1759,9 @@ footer > a.open .circleAnimation + span {
   float: left;
   width: calc(100% / 3);
   margin: 2vw 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .depositType div a {
@@ -1798,7 +1804,6 @@ footer > a.open .circleAnimation + span {
 .depositType div span {
   margin-top: 1vw;
   text-align: center;
-  white-space: nowrap;
 }
 
 .depositType div .title {
@@ -3398,9 +3403,9 @@ span.important {
       -ms-flex-direction: column;
           flex-direction: column;
   width: calc(100% - 16vw);
-  padding: 4vw 8vw;
-  height: calc(100% - 8vw);
-  position: fixed;
+  padding: 4vw 8vw 20vw;
+  min-height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   color: white;
@@ -3410,7 +3415,6 @@ span.important {
   -webkit-transition: 0.7s;
   transition: 0.7s;
   opacity: 0;
-  pointer-events: none;
 }
 
 .submenu.open {
@@ -3418,10 +3422,8 @@ span.important {
   -webkit-transition: 0.7s;
   transition: 0.7s;
   opacity: 1;
-  pointer-events: auto;
   -webkit-animation: submenu 0.5s forwards;
           animation: submenu 0.5s forwards;
-  overflow: scroll;
 }
 
 .submenu .thBar {
@@ -3487,6 +3489,7 @@ span.important {
           align-items: flex-start;
   margin-top: 20vw;
   padding-bottom: 3vw;
+  overflow: scroll;
 }
 
 .submenu .side-nav a, .submenu .side-nav button, .submenu .side-nav div {
@@ -3517,6 +3520,7 @@ span.important {
 .submenu .side-nav a > ul li a, .submenu .side-nav button > ul li a, .submenu .side-nav div > ul li a {
   font-size: 4vw;
   line-height: 10vw;
+  border: 0;
 }
 
 .submenu .side-nav a > ul.open, .submenu .side-nav button > ul.open, .submenu .side-nav div > ul.open {
