@@ -8,10 +8,10 @@ export const IS_LOGGED_IN = async () => {
 
 const isBrowser = typeof window !== `undefined`;
 
-export const LOGIN = async ({ userName, password }, CallbackLogin) => {
+export const LOGIN = async ({ userName, password, langId }, CallbackLogin) => {
 	if (!isBrowser) return false;
 
-	await api_UserLogin({
+	await api_UserLogin(langId, {
 		UserName: userName,
 		Userpwd: password,
 		isPersistent: true

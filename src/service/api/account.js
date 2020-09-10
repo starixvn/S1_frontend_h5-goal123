@@ -6,7 +6,8 @@ export const api_SetLanguage = lang =>
 
 export const api_UserLogout = () => accountRequest.post("/SignOut");
 
-export const api_UserLogin = data => loginRequest.post("/SignIn", data);
+export const api_UserLogin = (langId, data) =>
+	loginRequest.post(`/SignIn/${langId}`, data);
 
 export const api_onlineCheck = () => accountRequest.post("/onlineCheck");
 

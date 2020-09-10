@@ -41,7 +41,7 @@ const warningLangKey = {
 
 const LoginPage = ({ ButtonTitle }) => {
 	const { i18n } = useContext(i18nContext);
-	const { setUserInfo } = useContext(userInfoContext);
+	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { nav, setNav } = useContext(navContext);
 	const [userValueState, setUserValueState] = useState(initState);
 	const [redirectPath, setRedirectPath] = useState(null);
@@ -132,7 +132,8 @@ const LoginPage = ({ ButtonTitle }) => {
 			LOGIN(
 				{
 					userName: userValueState.UserName,
-					password: userValueState.Password
+					password: userValueState.Password,
+					langId: userInfo.langId
 				},
 				CallBackLogin
 			);
