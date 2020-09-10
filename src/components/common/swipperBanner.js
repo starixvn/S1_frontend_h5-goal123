@@ -18,7 +18,8 @@ export const ClickLink = (
 	isOuterLink,
 	urlWithLang,
 	isLogin,
-	setNav
+	setNav,
+	matchid
 ) => {
 	if (href === "Casino/Lobby") {
 		window.location.href = `/${path.casino.root}${tpId ? `/${tpId}` : ""}`;
@@ -41,6 +42,7 @@ export const ClickLink = (
 			langId: lang,
 			tpId,
 			gameId,
+			matchid,
 			isLogin: isLogin === true,
 			loginCallback: () => {
 				setNav(defNavPanel.login);
@@ -56,13 +58,35 @@ const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 
 	useEffect(() => {
 		let mounted = true;
-		api_GetBanner(ImgFolder, "", userInfo.langId, filterHideInHome).then(
-			res => {
-				if (res.data.errorCode === 0 && mounted) {
-					setBanner(res.data.data);
-				}
-			}
-		);
+		if (ImgFolder) {
+			const fetchData = folder => {
+				return api_GetBanner(
+					folder,
+					"",
+					userInfo.langId,
+					filterHideInHome
+				);
+			};
+
+			Promise.all(ImgFolder?.map(m => fetchData(m))).then(res => {
+				let result = [];
+				res.forEach((r, idx) => {
+					if (r.data.errorCode === 0 && mounted) {
+						result = [
+							...result,
+							...r.data.data.map(d => {
+								let imgFolder = d.imgFolder
+									? d.imgFolder
+									: ImgFolder[idx];
+								return { ...d, imgFolder: imgFolder };
+							})
+						];
+					}
+				});
+
+				setBanner(result);
+			});
+		}
 
 		return () => (mounted = false);
 	}, [userInfo, ImgFolder, filterHideInHome]);
@@ -94,7 +118,8 @@ const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 					b.outerLink === true,
 					b.urlWithLang,
 					userInfo.isLogin,
-					setNav
+					setNav,
+					b.matchid
 				)}
 				key={`${lang}-${b.img}-${b_idx}`}>
 				<img src={imgSRC} className="banner" alt={b.img ?? ""} />

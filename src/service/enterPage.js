@@ -27,6 +27,7 @@ export const GET_ENTER_PAGE = ({
 	langId,
 	tpId,
 	gameId,
+	matchid,
 	isLogin,
 	loginCallback
 }) => {
@@ -36,7 +37,7 @@ export const GET_ENTER_PAGE = ({
 	let LoginUrl = `${appUrl}${path.login.root}`;
 	let lobbyUrl = ``;
 	let cashierUrl = `${appUrl}${path.deposit.root}`;
-	let entPageUrl = `${config.openURL}/${langId}/entPage?homeUrl=${homeUrl}&signupUrl=${signupUrl}&LoginUrl=${LoginUrl}&tpId=${tpId}&gameId=${gameId}&CashierUrl=${cashierUrl}&&LobbyUrl=${lobbyUrl}`;
+	let entPageUrl = `${config.openURL}/${langId}/entPage?homeUrl=${homeUrl}&signupUrl=${signupUrl}&LoginUrl=${LoginUrl}&tpId=${tpId}&gameId=${gameId}&CashierUrl=${cashierUrl}&LobbyUrl=${lobbyUrl}&matchid=${matchid}`;
 	let result = setResult("", true, _ACTION_TYPE.blank);
 
 	if (tpId === 1) {

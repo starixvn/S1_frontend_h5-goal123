@@ -2,5 +2,5 @@ import React from "react";
 import SwipperBanner from "../common/swipperBanner";
 
 export default () => {
-	return <SwipperBanner ImgFolder="Casino" />;
+	return <SwipperBanner ImgFolder={["Casino"]} />;
 };
