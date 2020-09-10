@@ -468,13 +468,9 @@ header .headerButton .icon-chat .amount {
 
 main {
   width: 100%;
+  height: calc(100% - 12vw);
   padding-top: 12vw;
   background: #0f2346;
-}
-
-main #content {
-  position: relative;
-  top: 30vw;
 }
 
 main.stopScroll {
@@ -516,7 +512,7 @@ main #Marquee {
   -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
   position: fixed;
-  z-index: 3;
+  z-index: 5;
   width: 100%;
   top: 38vw;
   overflow: hidden;
@@ -570,7 +566,8 @@ main .sideBar {
   -webkit-box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.2);
   position: fixed;
-  z-index: 1;
+  top: 43vw;
+  z-index: 3;
   overflow-y: scroll;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -608,8 +605,9 @@ main .sideBar button.icon div {
 }
 
 main .gameList {
+  position: absolute;
+  top: 60vw;
   padding-bottom: 30vw;
-  padding-top: 15vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3403,17 +3401,9 @@ span.important {
 }
 
 .submenu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   width: calc(100% - 16vw);
-  padding: 4vw 8vw 20vw;
-  min-height: 100%;
-  position: absolute;
+  padding: 4vw 8vw 0;
+  position: fixed;
   top: 0;
   left: 0;
   color: white;
@@ -3423,6 +3413,8 @@ span.important {
   -webkit-transition: 0.7s;
   transition: 0.7s;
   opacity: 0;
+  height: 100%;
+  overflow: scroll;
 }
 
 .submenu.open {
@@ -3600,7 +3592,8 @@ span.important {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  z-index: 2;
+  z-index: 4;
+  top: 43vw;
 }
 
 .menuBtn button {
