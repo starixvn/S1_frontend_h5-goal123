@@ -292,5 +292,6 @@
 	"msg__UsernameLength": "Tên người dùng phải dài từ 6 đến 18 ký tự",
 	"msg__UsernameNotAvailable": "Tên người dùng đã tồn tại",
 	"msg__UsernameReq": "Tên người dùng là bắt buộc",
-	"msg__WrongAmount": "Wrong amount"
+	"msg__WrongAmount": "Wrong amount",
+	"lbl_ProfileModifyWarning":"Nhằm đảm bảo an toàn tài khoản, Thông tin cá nhân không thể thay đổi sau khi xác nhận"
 }

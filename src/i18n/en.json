@@ -292,5 +292,6 @@
 	"msg_UsernameLength": "Username must between 6 and 18 characters long.",
 	"msg_UsernameNotAvailable": "Username is no longer available.",
 	"msg_UsernameReq": "Username is required.",
-	"msg_WrongAmount": "Wrong amount"
+	"msg_WrongAmount": "Wrong amount",
+	"lbl_ProfileModifyWarning":"Ensure account security,Personal information cannot be modified after filling."
 }

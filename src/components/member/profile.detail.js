@@ -473,7 +473,7 @@ const Panel = () => {
 			setPopBox({
 				isOpen: true,
 				title: i18n.lbl_ImportantNote,
-				content: i18n.msg_ConfirmRealNameAlert,
+				content: i18n.lbl_ProfileModifyWarning,
 				hasBtn: true,
 				btnBar: (
 					<div className="btn-group">

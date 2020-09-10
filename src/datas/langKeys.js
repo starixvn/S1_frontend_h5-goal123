@@ -298,5 +298,6 @@ export default [
 	"lbl_Promotions",
 	"msg_OTPSendCode",
 	"lbl_CockFighting",
-	"lbl_SabaClub"
+	"lbl_SabaClub",
+	"lbl_ProfileModifyWarning"
 ];
