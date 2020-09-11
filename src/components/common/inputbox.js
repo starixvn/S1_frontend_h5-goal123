@@ -4,20 +4,42 @@ import PropTypes from "prop-types";
 const Inputbox = props => {
 	return (
 		<div className="inputBox">
-			<i className={`icon ${props.icon}`}></i>
-			<input
-				type={props.inputType ?? "text"}
-				placeholder={props.placeholder}
-				onFocus={props.onFocus}
-				onBlur={props.onBlur}
-				onChange={props.onChange}
-				value={
-					props.value === null || props.value === undefined
-						? ""
-						: props.value
-				}
-				max={props.max ? props.max : null}
-			/>
+			{props.label ? (
+				<label className="inputdate">
+					<i className={`icon ${props.icon}`}></i>
+					<input
+						type={props.inputType ?? "text"}
+						placeholder={props.placeholder}
+						onFocus={props.onFocus}
+						onBlur={props.onBlur}
+						onChange={props.onChange}
+						value={
+							props.value === null || props.value === undefined
+								? ""
+								: props.value
+						}
+						max={props.max ? props.max : null}
+					/>
+				</label>
+			) : (
+				<>
+					<i className={`icon ${props.icon}`}></i>
+					<input
+						type={props.inputType ?? "text"}
+						placeholder={props.placeholder}
+						onFocus={props.onFocus}
+						onBlur={props.onBlur}
+						onChange={props.onChange}
+						value={
+							props.value === null || props.value === undefined
+								? ""
+								: props.value
+						}
+						max={props.max ? props.max : null}
+					/>
+				</>
+			)}
+
 			{props.Warning?.status || props.WarningIcon ? (
 				<div className="icon-module">
 					<i className="icon icon-warning"></i>

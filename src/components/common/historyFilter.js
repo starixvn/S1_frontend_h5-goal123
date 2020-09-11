@@ -88,6 +88,7 @@ const Panel = props => {
 					onChange={EditField.bind(null, "startDay")}
 					value={startDayState}
 					max={moment().format("YYYY-MM-DD")}
+					label={true}
 				/>
 
 				<Inputbox
@@ -96,6 +97,7 @@ const Panel = props => {
 					onChange={EditField.bind(null, "endDay")}
 					value={endDayState}
 					max={moment().format("YYYY-MM-DD")}
+					label={true}
 				/>
 			</div>
 
