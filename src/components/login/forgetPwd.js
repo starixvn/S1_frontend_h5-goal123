@@ -48,6 +48,10 @@ export default () => {
 	};
 
 	const clickSubmit = () => {
+		const clickClose = () => {
+			setPopBox({ isOpen: false });
+		};
+
 		if (userEmail === "") {
 			setWarning({ status: true, msg: i18n.msg_MailWrongFormat });
 		} else if (!warning.status) {
@@ -64,7 +68,17 @@ export default () => {
 							setPopBox({
 								isOpen: true,
 								title: i18n.lbl_ImportantNote,
-								content: res.data.message
+								content: i18n.lbl_ForgetPwdSuccess,
+								hasBtn: true,
+								btnBar: (
+									<div className="btn-group">
+										<button
+											className="orange"
+											onClick={clickClose}>
+											OK
+										</button>
+									</div>
+								)
 							});
 						}
 					}

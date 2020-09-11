@@ -130,9 +130,15 @@ export default () => {
 							};
 							setPopBox({
 								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: res.data.message,
-								hideCloseBtn: true,
+								title: i18n.lbl_ResetPassword,
+								content: (
+									<>
+										{i18n.msg_changePswUpdateSuccess}
+										<br />
+										{i18n.msg_changePswSuccessHint}
+									</>
+								),
+								handlePopBox: RedirectToHome,
 								hasBtn: true,
 								btnBar: (
 									<div className="btn-group">

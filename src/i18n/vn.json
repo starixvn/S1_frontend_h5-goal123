@@ -293,5 +293,8 @@
 	"msg_UsernameNotAvailable": "Tên người dùng đã tồn tại",
 	"msg_UsernameReq": "Tên người dùng là bắt buộc",
 	"msg_WrongAmount": "Wrong amount",
-	"lbl_ProfileModifyWarning":"Nhằm đảm bảo an toàn tài khoản, Thông tin cá nhân không thể thay đổi sau khi xác nhận"
+	"lbl_ProfileModifyWarning":"Nhằm đảm bảo an toàn tài khoản, Thông tin cá nhân không thể thay đổi sau khi xác nhận",
+	"msg_changePswUpdateSuccess":"Mật khẩu đã đổi thành công!",
+	"msg_changePswSuccessHint":"Bạn có thể sử dụng mật khẩu mới trong lần đăng nhập tiếp theo",
+	"lbl_ForgetPwdSuccess":"Mật khẩu mới của bạn đã được gửi đến địa chỉ email đã đăng ký của bạn."
 }

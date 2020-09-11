@@ -293,5 +293,8 @@
 	"msg_UsernameNotAvailable": "Username is no longer available.",
 	"msg_UsernameReq": "Username is required.",
 	"msg_WrongAmount": "Wrong amount",
-	"lbl_ProfileModifyWarning":"Ensure account security,Personal information cannot be modified after filling."
+	"lbl_ProfileModifyWarning":"Ensure account security,Personal information cannot be modified after filling.",
+	"msg_changePswUpdateSuccess":"The update is successful!",
+	"msg_changePswSuccessHint":"You can use the new password when you login in next time.",
+	"lbl_ForgetPwdSuccess":"Your new password has been sent to your registered e-mail address."
 }
