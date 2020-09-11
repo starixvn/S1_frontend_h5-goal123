@@ -74,7 +74,7 @@ const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 					if (r.data.errorCode === 0 && mounted) {
 						result = [
 							...result,
-							...r.data.data.map(d => {
+							...r.data.data?.map(d => {
 								let imgFolder = d.imgFolder
 									? d.imgFolder
 									: ImgFolder[idx];

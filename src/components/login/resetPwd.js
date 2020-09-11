@@ -9,7 +9,7 @@ import { Redirect } from "@reach/router";
 export default () => {
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
-	const { setUserInfo } = useContext(userInfoContext);
+	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const [newPsw, setNewPsw] = useState("");
 	const [pswState, setPswState] = useState(false);
 	const [warning, setWarning] = useState({ status: false, msg: "" });
@@ -29,7 +29,7 @@ export default () => {
 
 	useEffect(() => {
 		let key = getUrlParameter("key");
-		if (key) {
+		if (userInfo.isLogin === false && key) {
 			api_CheckResetPwdToken(key).then(
 				res => {
 					if (isMountedRef.current) {
@@ -42,7 +42,8 @@ export default () => {
 						} else if (res.data.errorCode === 0) {
 							setUserInfo(prevState => ({
 								...prevState,
-								isLogin: true
+								isLogin: true,
+								loginFromResetPwd: true
 							}));
 						} else {
 							setRedirectPath("/");
@@ -64,12 +65,19 @@ export default () => {
 					}
 				}
 			);
-		} else {
+		} else if (userInfo.isLogin && !userInfo.loginFromResetPwd) {
 			if (isMountedRef.current) {
 				setRedirectPath("/");
 			}
 		}
-	}, [redirectPath, i18n, setPopBox, setUserInfo]);
+	}, [
+		redirectPath,
+		i18n,
+		setPopBox,
+		setUserInfo,
+		userInfo.isLogin,
+		userInfo.loginFromResetPwd
+	]);
 
 	const showPswHandler = () => {
 		setPswState(!pswState);
