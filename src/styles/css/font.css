@@ -58,6 +58,10 @@
   font-size: 4vw !important;
 }
 
+.icon-saba:before {
+  content: "\e98c";
+}
+
 .icon-cock:before {
   content: "\e988";
 }
@@ -490,6 +494,14 @@
   content: "\e933";
 }
 
+.icon-close:before {
+  content: "\e98a";
+}
+
+.icon-checkmark:before {
+  content: "\e98b";
+}
+
 .icon-information-solid:before {
   content: "\e951";
 }
@@ -662,7 +674,7 @@
   content: "\ea0f";
 }
 
-.icon-checkmark:before {
+.icon-checkmark1:before {
   content: "\ea10";
 }
 

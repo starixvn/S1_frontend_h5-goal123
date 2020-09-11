@@ -133,10 +133,13 @@ export const Main = props => {
 		return (
 			<div key={`deposit-mobilepay-${p.groupId}`}>
 				<button
-					className={`icon icon-${p.groupName}${
-						selGroupId === p.groupId ? " switch open" : ""
-					}`}
-					onClick={SelectPayment.bind(this, p.groupId)}></button>
+					className={`${selGroupId === p.groupId ? "open" : ""}`}
+					onClick={SelectPayment.bind(this, p.groupId)}>
+					<img
+						src={`${config.imgUrl}/common/images/MobilePay/${p.groupName}.png`}
+						alt={p.groupName}
+					/>
+				</button>
 				<span>{p.groupName}</span>
 			</div>
 		);

@@ -6,6 +6,7 @@ import { api_GetOnlinePaymentList } from "../../service/api/payment";
 import PageVerify from "./deposit.pageVerify";
 import path from "../../path";
 import Loading from "../common/loading";
+import config from "../../config";
 
 export const Panel = props => props.children;
 
@@ -89,9 +90,11 @@ export const Main = props => {
 					to={`${p.payName}`}
 					state={{
 						payId: p.payId
-					}}
-					className={`icon icon-${p.payName}`}
-				/>
+					}}>
+					<img
+						src={`${config.imgUrl}/common/images/Payment/${p.payName}.png`}
+						alt={p.payName}></img>
+				</Link>
 				<span>{p.payName}</span>
 			</div>
 		);

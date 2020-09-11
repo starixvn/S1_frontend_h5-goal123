@@ -1740,6 +1740,7 @@ footer > a.open .circleAnimation + span {
 
 .depositType .icon:before {
   font-size: 10vw;
+  color: #1E85EC;
 }
 
 .depositType .localBank {
@@ -1767,7 +1768,7 @@ footer > a.open .circleAnimation + span {
           justify-content: space-between;
 }
 
-.depositType div a {
+.depositType div a, .depositType div button {
   border-radius: 100%;
   border: 1px solid #134DAE;
   width: 20vw;
@@ -1781,26 +1782,14 @@ footer > a.open .circleAnimation + span {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background: white;
 }
 
-.depositType div button {
-  border-radius: 100%;
-  border: 1px solid #134DAE;
-  width: 20vw;
-  height: 20vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  color: white;
+.depositType div a img, .depositType div button img {
+  width: 100%;
 }
 
-.depositType div button.open {
+.depositType div a.open, .depositType div button.open {
   background: #fab617;
 }
 

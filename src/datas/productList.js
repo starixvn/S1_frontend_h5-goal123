@@ -8,18 +8,12 @@ import LIVEcasino_AG from "../styles/img/LIVEcasino_AG.jpg";
 import LIVEcasino_AB from "../styles/img/LIVEcasino_AB.jpg";
 import LIVEcasino_SA from "../styles/img/LIVEcasino_SA.jpg";
 import Coming_soon from "../styles/img/coming_soon.jpg";
-import Casino_ow from "../styles/img/casino_OW.jpg";
-import Casino_PP from "../styles/img/casino_PP.jpg";
-import Casino_SG from "../styles/img/casino_SG.jpg";
-import Casino_PG from "../styles/img/casino_PG.jpg";
-import Casino_JOKER from "../styles/img/casino_JOKER.jpg";
-import Casino_YGG from "../styles/img/casino_YGG.jpg";
-import Casino_GPI from "../styles/img/casino_GPI.jpg";
 import Fish from "../styles/img/fish.jpg";
-import Id4d from "../styles/img/id4d.jpg";
 import Keno from "../styles/img/keno.jpg";
 import Lottery from "../styles/img/lottery.jpg";
-import Number_game from "../styles/img/number_game.jpg";
+import SabaClub from "../styles/img/saba.jpg";
+import Cockfighting from "../styles/img/cockfighting.jpg";
+import Casino from "../styles/img/casino.jpg";
 
 export const defGameInfo = {
 	Sports: { tpId: 1, gameId: 1 },
@@ -33,6 +27,7 @@ export const defGameInfo = {
 	LIVEcasinoAB: { gameId: 12, tpId: 12 },
 	LIVEcasinoSA: { gameId: 2, tpId: 2 },
 	Casino_ow: { gameId: 208, tpId: 1 },
+	Casino_All: { tpId: 0 },
 	Casino_PP: { tpId: 5 },
 	Casino_SG: { tpId: 10 },
 	Casino_PG: { tpId: 14 },
@@ -71,7 +66,51 @@ const gameList = [
 		]
 	},
 	{
-		category: "virtualsports",
+		category: "cockFighting",
+		categoryIcon: "e-sports",
+		translateKey: "lbl_CockFighting",
+		items: [
+			{
+				...defGameInfo.CockFighting,
+				icon: "e-sports",
+				img: Cockfighting,
+				spanTextKey: "lbl_CockFighting"
+			}
+		]
+	},
+	{
+		category: "game",
+		categoryIcon: "game",
+		translateKey: "lbl_Games",
+		items: [
+			{
+				...defGameInfo.sabaClub,
+				icon: "game",
+				img: SabaClub,
+				spanTextKey: "lbl_SabaClub"
+			},
+			{
+				...defGameInfo.Fishing,
+				icon: "game",
+				img: Fish,
+				spanTextKey: "lbl_Fishing"
+			},
+			{
+				...defGameInfo.Keno,
+				icon: "keno",
+				img: Keno,
+				spanTextKey: "lbl_Keno"
+			},
+			{
+				...defGameInfo.lottery,
+				icon: "lottery",
+				img: Lottery,
+				spanTextKey: "lbl_Lottery"
+			}
+		]
+	},
+	{
+		category: "eSports",
 		categoryIcon: "e-sports",
 		translateKey: "lbl_eSports",
 		items: [
@@ -80,6 +119,18 @@ const gameList = [
 				icon: "e-sports",
 				img: Esports,
 				spanTextKey: "lbl_eSports"
+			}
+		]
+	},
+	{
+		category: "slots",
+		categoryIcon: "casino",
+		translateKey: "lbl_Slots",
+		items: [
+			{
+				...defGameInfo.Casino_All,
+				parameter: { tpId: defGameInfo.Casino_All.tpId },
+				img: Casino
 			}
 		]
 	},
@@ -113,94 +164,6 @@ const gameList = [
 			{
 				...defGameInfo.LIVEcasinoSA,
 				img: LIVEcasino_SA
-			}
-		]
-	},
-	{
-		category: "casino",
-		categoryIcon: "casino",
-		className: "casinoList",
-		translateKey: "lbl_Casino",
-		comingSoonImg: Coming_soon,
-		items: [
-			{
-				...defGameInfo.Casino_ow,
-				img: Casino_ow
-			},
-			{
-				...defGameInfo.Casino_PP,
-				parameter: { tpId: defGameInfo.Casino_PP.tpId },
-				img: Casino_PP
-			},
-			{
-				...defGameInfo.Casino_SG,
-				parameter: { tpId: defGameInfo.Casino_SG.tpId },
-				img: Casino_SG
-			},
-			{
-				...defGameInfo.Casino_PG,
-				parameter: { tpId: defGameInfo.Casino_PG.tpId },
-				img: Casino_PG
-			},
-			{
-				...defGameInfo.Casino_JOKER,
-				parameter: { tpId: defGameInfo.Casino_JOKER.tpId },
-				img: Casino_JOKER
-			},
-			{
-				...defGameInfo.Casino_YGG,
-				parameter: { tpId: defGameInfo.Casino_YGG.tpId },
-				img: Casino_YGG
-			},
-			{
-				...defGameInfo.Casino_GPI,
-				parameter: { tpId: defGameInfo.Casino_GPI.tpId },
-				img: Casino_GPI
-			}
-		]
-	},
-	{
-		category: "game",
-		categoryIcon: "game",
-		translateKey: "lbl_Fishing",
-		items: [
-			{
-				...defGameInfo.Fishing,
-				icon: "game",
-				img: Fish,
-				spanTextKey: "lbl_Fishing"
-			}
-		]
-	},
-	{
-		category: "kelo",
-		categoryIcon: "kelo",
-		translateKey: "lbl_Lottery",
-		items: [
-			{
-				...defGameInfo.Indo4d,
-				icon: "lottery",
-				img: Id4d,
-				spanTextKey: "lbl_Indo4d",
-				allowCurrency: [4, 15]
-			},
-			{
-				...defGameInfo.Keno,
-				icon: "keno",
-				img: Keno,
-				spanTextKey: "lbl_Keno"
-			},
-			{
-				...defGameInfo.lottery,
-				icon: "lottery",
-				img: Lottery,
-				spanTextKey: "lbl_Lottery"
-			},
-			{
-				...defGameInfo.NumberGame,
-				icon: "lottery",
-				img: Number_game,
-				spanTextKey: "lbl_NumberGame"
 			}
 		]
 	}
