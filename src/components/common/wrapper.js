@@ -72,6 +72,9 @@ export const Wrapper = ({ children }) => {
 	}, [userInfo.isLogin]);
 
 	const OnlineCheckCallBack = (errorCode, errMsg) => {
+		const clickClose = () => {
+			setPopBox({ isOpen: false });
+		};
 		if (errorCode !== 0 && isMountedRef.current) {
 			setUserInfo(prevState => ({
 				isLogin: false,
@@ -80,7 +83,15 @@ export const Wrapper = ({ children }) => {
 			setPopBox({
 				isOpen: true,
 				title: i18n.lbl_ImportantNote,
-				content: errMsg ?? i18n.msg_ForceLogedoutHint
+				content: errMsg ?? i18n.msg_ForceLogedoutHint,
+				hasBtn: true,
+				btnBar: (
+					<div className="btn-group">
+						<button className="orange" onClick={clickClose}>
+							OK
+						</button>
+					</div>
+				)
 			});
 		}
 	};
