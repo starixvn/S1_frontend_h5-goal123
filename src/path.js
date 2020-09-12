@@ -5,6 +5,9 @@ export default {
 	promotion: {
 		root: "promotion"
 	},
+	promotionInfo: {
+		root: "promotion/promotionInfo"
+	},
 	wallet: {
 		root: "wallet"
 	},

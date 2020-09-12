@@ -9,6 +9,7 @@ import {
 } from "../../components/common/context";
 import { GET_ENTER_PAGE } from "../../service/enterPage";
 import path from "../../path";
+import { Link } from "@reach/router";
 
 export const ClickLink = (
 	tpId,
@@ -107,24 +108,32 @@ const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 			? b.imgURL
 			: `${config.imgUrl}/CMS/${config.siteName}/${_imgFolder}/${lang}/${b.img}`;
 
-		return (
-			<button
-				onClick={ClickLink.bind(
-					this,
-					b.tpId,
-					b.gameId,
-					lang,
-					actionLink,
-					b.outerLink === true,
-					b.urlWithLang,
-					userInfo.isLogin,
-					setNav,
-					b.matchid
-				)}
-				key={`${lang}-${b.img}-${b_idx}`}>
-				<img src={imgSRC} className="banner" alt={b.img ?? ""} />
-			</button>
-		);
+		if (actionLink.startsWith("promotion/promotionInfo?BonusCode=")) {
+			return (
+				<Link key={`${lang}-${b.img}-${b_idx}`} to={actionLink}>
+					<img src={imgSRC} className="banner" alt={b.img ?? ""} />
+				</Link>
+			);
+		} else {
+			return (
+				<button
+					onClick={ClickLink.bind(
+						this,
+						b.tpId,
+						b.gameId,
+						lang,
+						actionLink,
+						b.outerLink === true,
+						b.urlWithLang,
+						userInfo.isLogin,
+						setNav,
+						b.matchid
+					)}
+					key={`${lang}-${b.img}-${b_idx}`}>
+					<img src={imgSRC} className="banner" alt={b.img ?? ""} />
+				</button>
+			);
+		}
 	});
 
 	return <Autoplay Rows={rows} />;
