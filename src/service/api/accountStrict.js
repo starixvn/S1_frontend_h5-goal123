@@ -13,7 +13,7 @@ export const api_SetProfile = ({
 	PhoneNo,
 	Email
 }) =>
-	accountStrictRequest.post("/SetProfile", {
+	accountStrictRequest.post("/SetProfileV2", {
 		AccountName,
 		Birth_d,
 		Birth_m,
