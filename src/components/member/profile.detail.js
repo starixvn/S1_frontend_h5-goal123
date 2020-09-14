@@ -311,7 +311,7 @@ const Panel = () => {
 		let val = e.target.value;
 
 		if (col === "AccountName") {
-			val = val.replace(/[\W]/g, "");
+			val = val.replace(/[^a-zA-Z\s]/g, "");
 		} else if (col === "Phone") {
 			val = val.replace(/^(0+)|[^\d]+/g, "");
 		}
