@@ -146,7 +146,6 @@ const Wallet = ({
 				<div>
 					<span className="text-org">
 						{i18n[`Currency_${currencyId}`]}
-						{i18n["lbl_Cash"]}
 					</span>{" "}
 					{number_format(balance, isConvert(currencyId))}
 				</div>
