@@ -300,5 +300,11 @@
 	"lbl_Days": "ngày",
 	"lbl_Hours": "giờ",
 	"lbl_RemainingTime": "Thời gian còn lại",
-	"lbl_RollOver": "Số vòng cược"
+	"lbl_RollOver": "Số vòng cược",
+	"lbl_TurnoverAccumulated": "Turnover Accumulated",
+	"lbl_Req": "Req.",
+	"lbl_PromoJoinNow": "Tham Gia Ngay",
+	"lbl_GoNow": "Go Now!",
+	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
+	"lbl_UpdateSuccessful": "Cập nhật thành công!"
 }

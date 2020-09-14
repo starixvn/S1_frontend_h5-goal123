@@ -300,5 +300,11 @@
 	"lbl_Days": "days",
 	"lbl_Hours": "hours",
 	"lbl_RemainingTime": "REMAINING TIME",
-	"lbl_RollOver": "Rollover"
+	"lbl_RollOver": "Rollover",
+	"lbl_TurnoverAccumulated": "Turnover Accumulated",
+	"lbl_Req": "Req.",
+	"lbl_PromoJoinNow": "Join Now",
+	"lbl_GoNow": "Go Now!",
+	"msg_OTPHint":"Please complete your profile and verify your phone to enjoy our promotions.",
+	"lbl_UpdateSuccessful": "Update Successful"
 }
