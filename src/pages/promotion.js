@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { userInfoContext, i18nContext } from "../components/common/context";
 import { api_GetBanner } from "../service/api/site";
 import config, { siteInfo } from "../config";
+import path from "../path";
+import { Link } from "@reach/router";
 
 const IndexPage = () => {
 	const { userInfo } = useContext(userInfoContext);
@@ -35,10 +37,6 @@ const IndexPage = () => {
 			? actionLinkByLang.link
 			: p.actionLink;
 
-		let href = `${config.t_and_cURL}${
-			p.urlWithLang || p.fromDB ? `/${lang}` : ""
-		}/${actionLink}`;
-
 		let imgSRC = p.fromDB
 			? p.imgURL
 			: `${config.imgUrl}/CMS/${siteInfo().siteName}/Promotion/${lang}/${
@@ -46,8 +44,8 @@ const IndexPage = () => {
 			  }`;
 
 		return (
-			<a
-				href={href}
+			<Link
+				to={`/${actionLink}`}
 				className="promodule"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -58,7 +56,7 @@ const IndexPage = () => {
 				<div className="btn-group">
 					<button className="orange">{i18n.lbl_Details}</button>
 				</div>
-			</a>
+			</Link>
 		);
 	});
 };

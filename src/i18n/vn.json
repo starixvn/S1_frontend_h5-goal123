@@ -1,5 +1,5 @@
 {
-    "Currency_1": "SGD",
+	"Currency_1": "SGD",
 	"Currency_2": "MYR",
 	"Currency_3": "USD",
 	"Currency_4": "THB",
@@ -293,8 +293,18 @@
 	"msg_UsernameNotAvailable": "Tên người dùng đã tồn tại",
 	"msg_UsernameReq": "Tên người dùng là bắt buộc",
 	"msg_WrongAmount": "Wrong amount",
-	"lbl_ProfileModifyWarning":"Nhằm đảm bảo an toàn tài khoản, Thông tin cá nhân không thể thay đổi sau khi xác nhận",
-	"msg_changePswUpdateSuccess":"Mật khẩu đã đổi thành công!",
-	"msg_changePswSuccessHint":"Bạn có thể sử dụng mật khẩu mới trong lần đăng nhập tiếp theo",
-	"lbl_ForgetPwdSuccess":"Mật khẩu mới của bạn đã được gửi đến địa chỉ email đã đăng ký của bạn."
+	"lbl_ProfileModifyWarning": "Nhằm đảm bảo an toàn tài khoản, Thông tin cá nhân không thể thay đổi sau khi xác nhận",
+	"msg_changePswUpdateSuccess": "Mật khẩu đã đổi thành công!",
+	"msg_changePswSuccessHint": "Bạn có thể sử dụng mật khẩu mới trong lần đăng nhập tiếp theo",
+	"lbl_ForgetPwdSuccess": "Mật khẩu mới của bạn đã được gửi đến địa chỉ email đã đăng ký của bạn.",
+	"lbl_Days": "ngày",
+	"lbl_Hours": "giờ",
+	"lbl_RemainingTime": "Thời gian còn lại",
+	"lbl_RollOver": "Số vòng cược",
+	"lbl_TurnoverAccumulated": "Turnover Accumulated",
+	"lbl_Req": "Req.",
+	"lbl_PromoJoinNow": "Tham Gia Ngay",
+	"lbl_GoNow": "Go Now!",
+	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
+	"lbl_UpdateSuccessful": "Cập nhật thành công!"
 }

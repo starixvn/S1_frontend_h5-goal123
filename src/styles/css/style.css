@@ -2575,7 +2575,7 @@ button.clickBtn:before {
       -ms-flex: 1;
           flex: 1;
   color: white;
-  border: 1px solid #fab617;
+  border: 1px solid #1E85EC;
   border-radius: 3px;
   padding: 1vw 0;
   margin-right: 2vw;
@@ -2586,8 +2586,7 @@ button.clickBtn:before {
 }
 
 .filterBtn button.open {
-  background: #fab617;
-  color: #1D3662;
+  background: #1E85EC;
 }
 
 .search {
@@ -2997,6 +2996,7 @@ span.important {
   width: 100%;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
+  margin-bottom: 2vw;
 }
 
 .promotions .filterBtn {
@@ -3005,7 +3005,7 @@ span.important {
 
 .promotions a.promodule {
   padding: 3vw;
-  border: 1px dotted #fab617;
+  border: 1px dotted #1E85EC;
   margin-bottom: 3vw;
   background: rgba(0, 0, 0, 0.3);
   display: -webkit-box;
@@ -3019,7 +3019,7 @@ span.important {
 
 .promotions a.promodule .protitle {
   margin-top: 1vw;
-  color: #fab617;
+  color: #1E85EC;
   font-weight: bold;
   padding-left: 1vw;
   overflow: hidden;
@@ -3040,7 +3040,6 @@ span.important {
 }
 
 .promotions div.promodule {
-  padding: 3vw;
   border: 0;
   background: transparent;
   line-height: 24px;
@@ -3315,9 +3314,6 @@ span.important {
 }
 
 .progressBarModule .bounsName {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   margin-bottom: 1vw;
   font-weight: bold;
 }
@@ -3330,7 +3326,7 @@ span.important {
 
 .progressBarModule .progressBar .bar {
   height: 1vw;
-  border: 1px solid #f77900;
+  border: 1px solid #1E85EC;
   border-radius: 10px;
   margin-top: 2vw;
   -webkit-box-flex: 1;
@@ -3339,13 +3335,13 @@ span.important {
 }
 
 .progressBarModule .progressBar .bar .progress {
-  background: #f77900;
+  background: #1E85EC;
   height: 100%;
 }
 
 .progressBarModule .progressBar .percentage {
   text-align: right;
-  color: #f77900;
+  color: #1E85EC;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
@@ -3354,10 +3350,13 @@ span.important {
 
 .progressBarModule .turnover {
   color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .progressBarModule .turnover span {
-  color: #f77900;
+  color: #1E85EC;
 }
 
 .otp {
@@ -3595,5 +3594,32 @@ span.important {
 
 .menuBtn span {
   font-size: 6vw;
+}
+
+.btn-check {
+  background: #1E85EC;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  padding: 2vw;
+  font-size: 3vw;
+}
+
+.rollover div {
+  color: white;
+  font-size: 12px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  line-height: 24px;
+}
+
+.rollover .icon {
+  color: #64789b;
 }
 /*# sourceMappingURL=style.css.map */

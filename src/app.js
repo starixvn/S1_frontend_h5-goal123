@@ -60,6 +60,7 @@ import Kyc from "./components/withdrawal/kyc";
 import KycWaiting from "./components/withdrawal/kycWaiting";
 
 import Whoami from "./pages/whoami";
+import PromotionInfo from "./pages/promotionInfo";
 
 const Index = () => {
 	let history = createHistory(window);
@@ -72,7 +73,8 @@ const Index = () => {
 						<ForgetPwd path={path.forgetPassword.root} />
 						<ResetPwd path={path.resetPassword.root} />
 						<ChangePwd path={path.changePassword.root} />
-						<Promotion path={path.promotion.root} />
+						<Promotion path={path.promotion.root}></Promotion>
+						<PromotionInfo path={path.promotionInfo.root} />
 						<Wallet path={path.wallet.root} />
 						<LiveChat path={path.livechat.root} />
 						<Member path={path.member.root}>
