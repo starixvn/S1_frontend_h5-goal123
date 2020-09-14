@@ -94,6 +94,12 @@ const HeaderBtn = props => {
 		isConvert(userInfo.currencyId)
 	);
 
+	const ClickUserName = () => {
+		if (userInfo.isLogin) {
+			setRedirectPath(`/${path.member.root}`);
+		}
+	};
+
 	return redirectPath === null ? (
 		userInfo?.isLogin ? (
 			<>
@@ -101,6 +107,7 @@ const HeaderBtn = props => {
 					userName={userInfo?.userName}
 					currency={i18n[`Currency_${userInfo.currencyId}`]}
 					amount={balance}
+					ClickUserName={ClickUserName}
 				/>
 				<ReloadSpin func={GetBalance} />
 				<div className="headerButton">
@@ -125,7 +132,9 @@ const HeaderBtn = props => {
 const HeaderInfo = props => {
 	return (
 		<div className="headerInfo">
-			<div className="MemberID">{props.userName}</div>
+			<div className="MemberID" onClick={props.ClickUserName}>
+				{props.userName}
+			</div>
 			<div className="Balance">
 				{props.currency} {props.amount}
 			</div>
