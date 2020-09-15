@@ -51,7 +51,10 @@ const RecentDatas = props => {
 									{i18n.lbl_RecentTransactions}
 								</i>
 							</div>
-							<ReloadSpin func={props.submitHandler} />
+							<ReloadSpin func={props.GetRecentDatas} />
+						</div>
+						<div className="txt-blue2">
+							{i18n["msg_AmountFormatTip"]}
 						</div>
 						{rows}
 					</div>
