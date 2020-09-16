@@ -91,96 +91,93 @@ export default () => {
 				});
 			};
 
-			if (userInfo.phoneVerified) {
-				api_promotion_SetClaimPromotion({
-					langId: userInfo.langId,
-					BonusCode: _promo.bonusCode
-				}).then(
-					res => {
-						if (isMountedRef.current && res.data.errorCode === 0) {
-							GetPromotionDetail(
-								userInfo.langId,
-								_promo.bonusCode
-							);
+			// if (userInfo.phoneVerified) {
+			api_promotion_SetClaimPromotion({
+				langId: userInfo.langId,
+				BonusCode: _promo.bonusCode
+			}).then(
+				res => {
+					if (isMountedRef.current && res.data.errorCode === 0) {
+						GetPromotionDetail(userInfo.langId, _promo.bonusCode);
 
-							setPopBox({
-								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: (
-									<>
-										<p>{i18n.lbl_UpdateSuccessful}</p>
-									</>
-								),
-								hasBtn: true,
-								btnBar: (
-									<div className="btn-group">
-										<button
-											onClick={ClosePopBox}
-											className="btn-check">
-											OK
-										</button>
-									</div>
-								)
-							});
-						} else {
-							setPopBox({
-								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: (
-									<>
-										<p>
-											{res.data.message
-												? res.data.message
-												: `[${res.data.errorCode}] Something went wrong...`}
-										</p>
-									</>
-								),
-								hasBtn: true,
-								btnBar: (
-									<div className="btn-group">
-										<button
-											onClick={ClosePopBox}
-											className="btn-check">
-											{i18n.lbl_Close}
-										</button>
-									</div>
-								)
-							});
-						}
-					},
-					err => {
-						alert(i18n.msg_ApiServerError);
+						setPopBox({
+							isOpen: true,
+							title: i18n.lbl_ImportantNote,
+							content: (
+								<>
+									<p>{i18n.lbl_UpdateSuccessful}</p>
+								</>
+							),
+							hasBtn: true,
+							btnBar: (
+								<div className="btn-group">
+									<button
+										onClick={ClosePopBox}
+										className="btn-check">
+										OK
+									</button>
+								</div>
+							)
+						});
+					} else {
+						setPopBox({
+							isOpen: true,
+							title: i18n.lbl_ImportantNote,
+							content: (
+								<>
+									<p>
+										{res.data.message
+											? res.data.message
+											: `[${res.data.errorCode}] Something went wrong...`}
+									</p>
+								</>
+							),
+							hasBtn: true,
+							btnBar: (
+								<div className="btn-group">
+									<button
+										onClick={ClosePopBox}
+										className="btn-check">
+										{i18n.lbl_Close}
+									</button>
+								</div>
+							)
+						});
 					}
-				);
-			} else {
-				const RedirectToProfile = () => {
-					setRedirectPath(`/${path.member.root}`);
-					ClosePopBox();
-				};
+				},
+				err => {
+					alert(i18n.msg_ApiServerError);
+				}
+			);
+			// } else {
+			// 	const RedirectToProfile = () => {
+			// 		setRedirectPath(`/${path.member.root}`);
+			// 		ClosePopBox();
+			// 	};
 
-				setPopBox({
-					isOpen: true,
-					title: i18n.lbl_ImportantNote,
-					content: (
-						<>
-							<p>{i18n.msg_OTPHint}</p>
-						</>
-					),
-					hasBtn: true,
-					btnBar: (
-						<div className="btn-group">
-							<button className="blue" onClick={ClosePopBox}>
-								{i18n.lbl_Cancel}
-							</button>
-							<button
-								onClick={RedirectToProfile}
-								className="btn-check">
-								{i18n.lbl_GoNow}
-							</button>
-						</div>
-					)
-				});
-			}
+			// 	setPopBox({
+			// 		isOpen: true,
+			// 		title: i18n.lbl_ImportantNote,
+			// 		content: (
+			// 			<>
+			// 				<p>{i18n.msg_OTPHint}</p>
+			// 			</>
+			// 		),
+			// 		hasBtn: true,
+			// 		btnBar: (
+			// 			<div className="btn-group">
+			// 				<button className="blue" onClick={ClosePopBox}>
+			// 					{i18n.lbl_Cancel}
+			// 				</button>
+			// 				<button
+			// 					onClick={RedirectToProfile}
+			// 					className="btn-check">
+			// 					{i18n.lbl_GoNow}
+			// 				</button>
+			// 			</div>
+			// 		)
+			// 	});
+			// }
 		}
 	};
 
