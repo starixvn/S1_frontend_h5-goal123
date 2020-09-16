@@ -69,14 +69,14 @@ const Panel = () => {
 		return () => (isMountedRef.current = false);
 	});
 
-	// PageVerify(
-	// 	userInfo,
-	// 	i18n,
-	// 	setPopBox,
-	// 	setRedirectPath,
-	// 	setPageVerify,
-	// 	false
-	// );
+	PageVerify(
+		userInfo,
+		i18n,
+		setPopBox,
+		setRedirectPath,
+		setPageVerify,
+		false
+	);
 
 	useEffect(() => {
 		if (isMountedRef.current && redirectPath !== null) {
