@@ -13,6 +13,7 @@ import {
 import { api_ExistsEmail } from "../../service/api/site";
 import { defPopBoxType } from "../common/popbox";
 import path from "../../path";
+import { getUrlParameter } from "../common/common";
 
 const monthOptions = [
 	{ value: 1, id: 0, displayKey: "lbl_Month1" },
@@ -419,31 +420,61 @@ const Panel = () => {
 										}
 									}
 								);
-								setPopBox({
-									isOpen: true,
-									title: i18n.msg_Updatesuccessful,
-									content: i18n.msg_GoToDepositPage,
-									hasBtn: true,
-									btnBar: (
-										<div className="btn-group">
-											<button
-												className="blue"
-												onClick={closePopbox}>
-												{i18n["lbl_Cancel"]}
-											</button>
-											<button
-												className="orange"
-												onClick={closePopbox.bind(
-													null,
-													{
-														_redirectPath: `/${path.deposit.root}`
-													}
-												)}>
-												{i18n["lbl_Confirm"]}
-											</button>
-										</div>
-									)
-								});
+
+								let _prevPage = getUrlParameter("prevPage");
+								if (_prevPage === path.withdrawal.root) {
+									setPopBox({
+										isOpen: true,
+										title: i18n.msg_Updatesuccessful,
+										content: i18n.lbl_GoWithdrawalPage,
+										hasBtn: true,
+										btnBar: (
+											<div className="btn-group">
+												<button
+													className="blue"
+													onClick={closePopbox}>
+													{i18n["lbl_Later"]}
+												</button>
+												<button
+													className="orange"
+													onClick={closePopbox.bind(
+														null,
+														{
+															_redirectPath: `/${path.withdrawal.root}`
+														}
+													)}>
+													{i18n["lbl_WithdrawalNow"]}
+												</button>
+											</div>
+										)
+									});
+								} else {
+									setPopBox({
+										isOpen: true,
+										title: i18n.msg_Updatesuccessful,
+										content: i18n.msg_GoToDepositPage,
+										hasBtn: true,
+										btnBar: (
+											<div className="btn-group">
+												<button
+													className="blue"
+													onClick={closePopbox}>
+													{i18n["lbl_Later"]}
+												</button>
+												<button
+													className="orange"
+													onClick={closePopbox.bind(
+														null,
+														{
+															_redirectPath: `/${path.deposit.root}`
+														}
+													)}>
+													{i18n["lbl_DepositNow"]}
+												</button>
+											</div>
+										)
+									});
+								}
 							} else if (errorCode === 21) {
 								setWarningState(prevState => ({
 									...prevState,
@@ -470,22 +501,26 @@ const Panel = () => {
 				);
 			};
 
-			setPopBox({
-				isOpen: true,
-				title: i18n.lbl_ImportantNote,
-				content: i18n.lbl_ProfileModifyWarning,
-				hasBtn: true,
-				btnBar: (
-					<div className="btn-group">
-						<button className="blue" onClick={closePopbox}>
-							{i18n["lbl_Cancel"]}
-						</button>
-						<button className="orange" onClick={setProfile}>
-							{i18n["lbl_Submit"]}
-						</button>
-					</div>
-				)
-			});
+			if (!userInfo.accountName) {
+				setPopBox({
+					isOpen: true,
+					title: i18n.lbl_ImportantNote,
+					content: i18n.lbl_ProfileModifyWarning,
+					hasBtn: true,
+					btnBar: (
+						<div className="btn-group">
+							<button className="blue" onClick={closePopbox}>
+								{i18n["lbl_Cancel"]}
+							</button>
+							<button className="orange" onClick={setProfile}>
+								{i18n["lbl_Confirm"]}
+							</button>
+						</div>
+					)
+				});
+			} else {
+				setProfile();
+			}
 		}
 	};
 
@@ -495,7 +530,6 @@ const Panel = () => {
 		};
 
 		const clickSubmit = (otpCode, requestId) => {
-			console.log(otpCode, requestId);
 			api_VerifyPhone({
 				request_id: requestId,
 				code: otpCode

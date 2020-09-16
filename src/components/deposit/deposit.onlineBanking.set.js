@@ -39,14 +39,14 @@ const SetPayment = props => {
 		return () => (isMountedRef.current = false);
 	});
 
-	PageVerify(
-		userInfo,
-		i18n,
-		setPopBox,
-		setRedirectPath,
-		setPageVerify,
-		props.location.state !== null
-	);
+	// PageVerify(
+	// 	userInfo,
+	// 	i18n,
+	// 	setPopBox,
+	// 	setRedirectPath,
+	// 	setPageVerify,
+	// 	props.location.state !== null
+	// );
 
 	useEffect(() => {
 		if (props.location.state === null) {

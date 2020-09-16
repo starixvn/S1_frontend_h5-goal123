@@ -234,7 +234,7 @@
 	"lbl_UpdateBankDetail": "Cập nhật thông tin ngân hàng",
 	"lbl_UpdateBankInfo": "Vui lòng cập nhật thông tin tài khoản khoản ngân hàng của bạn trước khi rút tiền.",
 	"lbl_UpdatePersonalDetail": "Cập nhật thông tin cá nhân",
-	"lbl_UpdatePersonalInfo": "Vui lòng cập nhật thông tin cá nhân trước khi nạp tiền.",
+	"lbl_UpdatePersonalInfo": "Xin vui lòng cập nhật thông tin cá nhân đầy đủ trước khi thực hiện rút tiền.",
 	"lbl_UploadFile": "Tải lên tệp tin",
 	"lbl_UploadPhotoId": "Tải lên",
 	"lbl_UploadSuccess": "Tệp tin đã được tải lên thành công.",
@@ -306,5 +306,7 @@
 	"lbl_PromoJoinNow": "Tham Gia Ngay",
 	"lbl_GoNow": "Go Now!",
 	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
-	"lbl_UpdateSuccessful": "Cập nhật thành công!"
+	"lbl_UpdateSuccessful": "Cập nhật thành công!",
+	"lbl_GoWithdrawalPage":"Go to withdrawal page?",
+	"lbl_WithdrawalNow":"Rút tiền"
 }
