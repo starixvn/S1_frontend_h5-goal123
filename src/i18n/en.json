@@ -280,7 +280,7 @@
 	"msg_NeedAccountName": "Need Account Name",
 	"msg_NeedAccountNo": "Need Account Number",
 	"msg_NoData": "No Data",
-	"msg_OTPSendCode": "We have sent the verification code to your registered mobile. Please enter your code.",
+	"msg_OTPSendCode": "We had send the verification code to your register mobile. Please check your mobile and enter your verification code below.",
 	"msg_PasswordLength": "Password must between 6 and 18 characters long.",
 	"msg_PasswordReq": "Password is required.",
 	"msg_PasswordVaildate": "6-18 alphanumeric (A-Z, a-z, 0-9) characters or special characters @$*!%#?&",
@@ -306,5 +306,7 @@
 	"lbl_PromoJoinNow": "Join Now",
 	"lbl_GoNow": "Go Now!",
 	"msg_OTPHint":"Please complete your profile and verify your phone to enjoy our promotions.",
-	"lbl_UpdateSuccessful": "Update Successful"
+	"lbl_UpdateSuccessful": "Update Successful",
+	"msg_AmountFormatTip":"The amount is already formatted",
+	"msg_API_SendVerifySMS_1004": "You had try to request too many verification code at a period of time. Please try again later."
 }
