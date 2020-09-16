@@ -4,7 +4,7 @@ import {
 	api_GetWithdrawalInfoHistory,
 	api_SetWithdrawalCancel
 } from "../../service/api/payment";
-import { number_format, isConvert } from "../common/common";
+import { number_format } from "../common/common";
 import moment from "moment";
 import HistoryFilter from "../common/historyFilter";
 import AUTO_FETCHING_DATA from "../../service/autoFetchingData";
@@ -15,7 +15,6 @@ const Panel = () => {
 	const { userInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
-	const _isConvert = isConvert(userInfo.currencyId);
 	const [getHistoryState, setGetHistoryState] = useState(null);
 	const [filterData, setFilterData] = useState(null);
 	const [processing, setProcessing] = useState(false);
@@ -166,7 +165,6 @@ const Panel = () => {
 				transId={item.transId}
 				amount={item.amount}
 				status={item.status}
-				_isConvert={_isConvert}
 				ClickCancel={ClickCancel.bind(this, item.transId)}
 			/>
 		);
@@ -196,7 +194,12 @@ const Panel = () => {
 								/>
 							</div>
 							{getHistoryState.length > 0 ? (
-								<div className="infoList">{arr}</div>
+								<>
+									<div className="txt-blue2">
+										{i18n["msg_AmountFormatTip"]}
+									</div>
+									<div className="infoList">{arr}</div>
+								</>
 							) : (
 								<div className="not-found">
 									{i18n["msg_NoData"]}
@@ -242,7 +245,7 @@ export const TransactionHistory = props => {
 				</li>
 				<li>
 					<span className="title">{i18n["lbl_Amount"]}</span>
-					<span>{number_format(props.amount, props._isConvert)}</span>
+					<span>{number_format(props.amount, false)}</span>
 				</li>
 				<li>
 					<span className="title">{i18n["lbl_Status"]}</span>

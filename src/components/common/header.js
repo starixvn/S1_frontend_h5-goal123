@@ -12,7 +12,7 @@ import { api_GetBalnace } from "../../service/api/account";
 import JoinPanel from "../join/join";
 import LoginPanel from "../login/login";
 import ReloadSpin from "./reloadSpin";
-import { number_format, isConvert } from "./common";
+import { number_format } from "./common";
 import path from "../../path";
 import Logo from "../../styles/img/logo.png";
 
@@ -89,10 +89,7 @@ const HeaderBtn = props => {
 		}
 	};
 
-	let balance = number_format(
-		walletInfo.main,
-		isConvert(userInfo.currencyId)
-	);
+	let balance = number_format(walletInfo.main, false);
 
 	const ClickUserName = () => {
 		if (userInfo.isLogin) {

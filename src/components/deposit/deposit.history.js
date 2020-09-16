@@ -202,7 +202,6 @@ const Panel = () => {
 				key={`depositHistory-${item.transId}`}
 				{...item}
 				className="info"
-				_isConvert={_isConvert}
 				ClickCancel={ClickCancel.bind(this, item.transId)}
 				SubmitProof={SubmitProof.bind(this, { ...item })}
 			/>
@@ -233,7 +232,12 @@ const Panel = () => {
 								/>
 							</div>
 							{getHistoryState.length > 0 ? (
-								<div className="infoList">{arr}</div>
+								<>
+									<div className="txt-blue2">
+										{i18n["msg_AmountFormatTip"]}
+									</div>
+									<div className="infoList">{arr}</div>
+								</>
 							) : (
 								<div className="not-found">
 									{i18n["msg_NoData"]}
@@ -289,7 +293,7 @@ export const TransactionHistory = props => {
 				</li>
 				<li>
 					<span className="title">{i18n["lbl_Amount"]}</span>
-					<span>{number_format(props.amount, props._isConvert)}</span>
+					<span>{number_format(props.amount, false)}</span>
 				</li>
 				<li>
 					<span className="title">{i18n["lbl_Status"]}</span>

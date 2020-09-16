@@ -62,6 +62,9 @@ const RecentDatas = props => {
 							</div>
 							<ReloadSpin func={props.GetDepositInfoRecent} />
 						</div>
+						<div className="txt-blue2">
+							{i18n["msg_AmountFormatTip"]}
+						</div>
 						{rows}
 					</div>
 					{isOpen ? (

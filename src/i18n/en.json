@@ -113,7 +113,7 @@
 	"lbl_Indo4d": "Indo 4D",
 	"lbl_Instagram": "Instagram",
 	"lbl_Instant": "Instant",
-	"lbl_JoinNow": "Join Now",
+	"lbl_JoinNow": "Register",
 	"lbl_KYCSubmitHint": "Kindly submit either one of the ID listed as below:",
 	"lbl_Keno": "Keno",
 	"lbl_KenoAndLottery": "Keno & Lottery",
@@ -305,6 +305,6 @@
 	"lbl_Req": "Req.",
 	"lbl_PromoJoinNow": "Join Now",
 	"lbl_GoNow": "Go Now!",
-	"msg_OTPHint":"Please complete your profile and verify your phone to enjoy our promotions.",
+	"msg_OTPHint": "Please complete your profile and verify your phone to enjoy our promotions.",
 	"lbl_UpdateSuccessful": "Update Successful"
 }

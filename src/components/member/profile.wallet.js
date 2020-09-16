@@ -147,7 +147,7 @@ const Wallet = ({
 					<span className="text-org">
 						{i18n[`Currency_${currencyId}`]}
 					</span>{" "}
-					{number_format(balance, isConvert(currencyId))}
+					{number_format(balance, false)}
 				</div>
 			</div>
 			<ReloadSpin func={func_GetBalance} />

@@ -2138,6 +2138,7 @@ button.clickBtn:before {
   display: none;
   margin-top: 1vw;
   width: 100%;
+  color: #e92529;
 }
 
 .errortip.open {
@@ -3045,11 +3046,16 @@ span.important {
   line-height: 24px;
 }
 
+.promotions div.promodule > .btn-check {
+  float: left;
+}
+
 .promotions div.promodule .protitle {
   margin-top: 1vw;
   color: #fab617;
   font-weight: bold;
   padding-left: 1vw;
+  clear: both;
 }
 
 .promotions div.promodule .text {
@@ -3311,6 +3317,7 @@ span.important {
   padding: 2vw;
   border-radius: 5px;
   color: white;
+  clear: both;
 }
 
 .progressBarModule .bounsName {
@@ -3621,5 +3628,22 @@ span.important {
 
 .rollover .icon {
   color: #64789b;
+}
+
+.resend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.txt-blue2 {
+  color: #1E85EC;
 }
 /*# sourceMappingURL=style.css.map */

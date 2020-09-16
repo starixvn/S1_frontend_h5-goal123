@@ -284,10 +284,7 @@ const WalletInfo = ({ i18n, userInfo }) => {
 		}
 	};
 
-	let balance = number_format(
-		walletInfo.main,
-		isConvert(userInfo.currencyId)
-	);
+	let balance = number_format(walletInfo.main, false);
 
 	return (
 		<div className="side-info">

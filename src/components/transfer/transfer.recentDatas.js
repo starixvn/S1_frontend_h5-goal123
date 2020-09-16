@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { i18nContext, userInfoContext } from "../common/context";
 import { TransactionHistory } from "./transfer.history";
-import { isConvert, number_format } from "../common/common";
+import { number_format } from "../common/common";
 import ReloadSpin from "../common/reloadSpin";
 import { Link } from "@reach/router";
 import path from "../../path";
@@ -9,7 +9,6 @@ import path from "../../path";
 const ReacentDatas = props => {
 	const { userInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
-	const _isConvert = isConvert(userInfo.currencyId);
 	const [isOpen, setOpen] = useState(false);
 
 	const HandleOpen = () => {
@@ -48,7 +47,7 @@ const ReacentDatas = props => {
 					key={`transferRecent-${item.transId}`}
 					createTime={item.createTime}
 					transId={item.transId}
-					amount={number_format(item.amount, _isConvert)}
+					amount={number_format(item.amount, false)}
 					startWallet={_transferDirection.startWallet}
 					endWallet={_transferDirection.endWallet}
 					i18n={i18n}
@@ -80,6 +79,9 @@ const ReacentDatas = props => {
 								</i>
 							</div>
 							<ReloadSpin func={props.GetRecentDatas} />
+						</div>
+						<div className="txt-blue2">
+							{i18n["msg_AmountFormatTip"]}
 						</div>
 						<div className="infoList">{arr}</div>
 					</div>
