@@ -11,3 +11,11 @@ export default lang => {
 
 	return require(`./${_lang}.json`);
 };
+
+export const ReplaceStr = (str, patterns) => {
+	Object.keys(patterns).forEach(p => {
+		str = str.replace(`{{${p}}}`, patterns[p]);
+	});
+
+	return str;
+};
