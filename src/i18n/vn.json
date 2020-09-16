@@ -280,7 +280,7 @@
 	"msg_NeedAccountName": "Cần nhập tên tài khoản",
 	"msg_NeedAccountNo": "Cần nhập số tài khoản",
 	"msg_NoData": "Không có dữ liệu",
-	"msg_OTPSendCode": "Mã xác nhận đã được gửi đến số điện thoại đăng ký. Vui lòng nhập mã.",
+	"msg_OTPSendCode": "Mã xác nhận đã được gửi đến số điện thoại bạn đăng ký. Vui lòng kiểm tra và nhập mã xác nhận bên dưới. ",
 	"msg_PasswordLength": "Mật khẩu phải có từ 6 đến 18 ký tự",
 	"msg_PasswordReq": "Mật khẩu là bắt buộc",
 	"msg_PasswordVaildate": "6-18 ký tự chữ và số (A-Z, a-z, 0-9) hoặc Ký tự đặc biệt @$*!%#?&",
@@ -308,5 +308,8 @@
 	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
 	"lbl_UpdateSuccessful": "Cập nhật thành công!",
 	"lbl_GoWithdrawalPage":"Go to withdrawal page?",
-	"lbl_WithdrawalNow":"Rút tiền"
+	"lbl_WithdrawalNow":"Rút tiền",
+	"msg_AmountFormatTip":"The amount is already formatted",
+	"msg_API_SendVerifySMS_1004": "Bạn có nhiều yêu cầu gửi mã xác nhận trong một khoảng thời gian ngắn. Xin vui lòng thử lại sau (timer) giây nữa"
+
 }
