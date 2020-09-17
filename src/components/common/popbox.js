@@ -26,13 +26,7 @@ const PopUp = () => {
 			break;
 
 		case defPopBoxType.Otp:
-			content = (
-				<Otp
-					clickSubmit={popBox.clickSubmit}
-					resetUserInfo={popBox.resetUserInfo}
-					userInfo={popBox.userInfo}
-				/>
-			);
+			content = <Otp />;
 			break;
 
 		case defPopBoxType.Loading:

@@ -1,13 +1,17 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import { i18nContext, popBoxContext } from "../common/context";
-import { api_SendVerifySMS } from "../../service/api/accountStrict";
+import { i18nContext, popBoxContext, userInfoContext } from "../common/context";
+import {
+	api_SendVerifySMS,
+	api_VerifyPhone
+} from "../../service/api/accountStrict";
 import { ReplaceStr } from "../../i18n/config";
 
 const initErrMsg = { specialStatus: false, msg: "" };
 
-const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
+const Panel = () => {
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
+	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const [loading, setLoading] = useState(true);
 	const [otpCode, setOtpCode] = useState("");
 	const [requestId, setRequestId] = useState("");
@@ -30,19 +34,18 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 							setRequestId(response.data.message);
 							setTimer(true);
 						} else if (response.data.errorCode === 1004) {
-							if (userInfo.langId === "en") {
-								setErrorMsg(i18n.msg_API_SendVerifySMS_1004);
-							} else {
-								setErrorMsg({
-									specialStatus: true,
-									msg: i18n.msg_API_SendVerifySMS_1004
-								});
-							}
+							setErrorMsg({
+								specialStatus: userInfo.langId === "vn",
+								msg: i18n.msg_API_SendVerifySMS_1004
+							});
 							setTimer(true);
 						} else if (response.data.errorCode === 5001) {
 							resetUserInfo();
 						} else {
-							setErrorMsg(response.data.message);
+							setErrorMsg({
+								specialStatus: false,
+								msg: response.data.message
+							});
 						}
 						setLoading(false);
 					}
@@ -54,6 +57,7 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 							title: i18n.lbl_ImportantNote,
 							content: i18n.msg_ApiServerError
 						});
+						setLoading(false);
 					}
 				}
 			);
@@ -65,15 +69,14 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 		setOtpCode(val);
 	};
 
-	const checkValue = e => {
-		let msg =
-			e.target.value === "" ? "Please enter the verification number" : "";
+	const checkValue = (val, isSubmit) => {
+		let _val = isSubmit ? val : val.target.value;
+		let msg = _val === "" ? i18n.msg_VerifyCodeTip : "";
 		setWarning(msg);
 	};
 
 	const checkSubmit = async () => {
-		let msg = otpCode === "" ? "Please enter the verification number" : "";
-		setWarning(msg);
+		checkValue(otpCode, true);
 
 		if (otpCode !== "" && requestId !== "") {
 			setLoading(true);
@@ -83,18 +86,75 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 		}
 	};
 
+	const clickSubmit = async (otpCode, requestId) => {
+		await api_VerifyPhone({
+			request_id: requestId,
+			code: otpCode
+		}).then(
+			res => {
+				if (isMountedRef.current) {
+					if (res.data.errorCode === 0) {
+						setUserInfo(prev => ({
+							...prev,
+							phoneVerified: true
+						}));
+
+						setPopBox({ isOpen: false });
+					} else {
+						setPopBox({
+							isOpen: true,
+							content: res.data.message,
+							hasBtn: true,
+							btnBar: (
+								<div className="btn-group">
+									<button
+										className="blue"
+										onClick={closePopbox}>
+										{i18n["lbl_Cancel"]}
+									</button>
+								</div>
+							)
+						});
+					}
+				}
+			},
+			err => {
+				if (isMountedRef.current) {
+					setPopBox({
+						isOpen: true,
+						title: i18n.lbl_ImportantNote,
+						content: i18n.msg_ApiServerError
+					});
+				}
+			}
+		);
+	};
+
+	const resetUserInfo = () => {
+		setUserInfo(prev => ({
+			...prev,
+			phoneVerified: true
+		}));
+	};
+
 	const clickResend = () => {
-		setTimer(true);
+		setLoading(true);
 		api_SendVerifySMS().then(
 			response => {
 				if (isMountedRef.current) {
 					if (response.data.errorCode === 0) {
 						setRequestId(response.data.message);
 					} else if (response.data.errorCode === 1004) {
-						setErrorMsg(response.data.message);
+						setErrorMsg({
+							specialStatus: userInfo.langId === "vn",
+							msg: i18n.msg_API_SendVerifySMS_1004
+						});
 						setTimer(true);
 					} else {
-						setErrorMsg(response.data.message);
+						setErrorMsg({
+							specialStatus: false,
+							msg: response.data.message
+						});
 					}
 					setLoading(false);
 				}
@@ -106,6 +166,7 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 						title: i18n.lbl_ImportantNote,
 						content: i18n.msg_ApiServerError
 					});
+					setLoading(false);
 				}
 			}
 		);
@@ -125,30 +186,28 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 				<div className="otpLoading">
 					<i className="icon icon-spinner11"></i>
 				</div>
-			) : errorMsg.msg !== "" ? (
-				<>
-					{errorMsg.specialStatus ? (
-						<Counter
-							timeStop={timeStop}
-							specialStatus={errorMsg.specialStatus}
-							msg={errorMsg.msg}
-						/>
-					) : (
-						<>
-							{errorMsg}
-							{timer ? (
-								<span>
-									<Counter timeStop={timeStop} />
-								</span>
-							) : null}
-							<div className="btn-group">
-								<button className="blue" onClick={closePopbox}>
-									{i18n["lbl_Cancel"]}
-								</button>
-							</div>
-						</>
-					)}
-				</>
+			) : errorMsg.msg ? (
+				errorMsg.specialStatus ? (
+					<Counter
+						timeStop={timeStop}
+						specialStatus={errorMsg.specialStatus}
+						msg={errorMsg.msg}
+					/>
+				) : (
+					<>
+						{errorMsg.msg}
+						{timer ? (
+							<span>
+								<Counter timeStop={timeStop} />
+							</span>
+						) : null}
+						<div className="btn-group">
+							<button className="blue" onClick={closePopbox}>
+								{i18n.lbl_Cancel}
+							</button>
+						</div>
+					</>
+				)
 			) : (
 				<div className="account">
 					<div className="info">{i18n.msg_OTPSendCode}</div>
@@ -156,7 +215,7 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 						<input
 							value={otpCode}
 							onChange={editInput.bind(this)}
-							onBlur={checkValue.bind(this)}
+							onBlur={checkValue.bind(this, false)}
 						/>
 						<button className="orange" onClick={checkSubmit}>
 							{i18n.lbl_Submit}
@@ -175,7 +234,7 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 									<Counter timeStop={timeStop} />
 								</span>
 							) : (
-								<span>Retransmit</span>
+								<span>{i18n.lbl_Retransmit}</span>
 							)}
 						</button>
 					</div>
@@ -185,7 +244,7 @@ const Panel = ({ clickSubmit, resetUserInfo, userInfo }) => {
 	);
 };
 
-export const Counter = props => {
+export const Counter = ({ timeStop, specialStatus, msg }) => {
 	const [count, setCount] = useState(300);
 	const timerRef = useRef(null);
 
@@ -194,10 +253,8 @@ export const Counter = props => {
 			return ("000" + num).slice(size * -1);
 		};
 		let time = parseFloat(secondsInTime).toFixed(3);
-		let hours = Math.floor(time / 60 / 60);
 		let minutes = Math.floor(time / 60) % 60;
 		let seconds = Math.floor(time - minutes * 60);
-		let milliseconds = time.slice(-3);
 		return `${pad(minutes, 2)}:${pad(seconds, 2)}`;
 	};
 
@@ -215,12 +272,12 @@ export const Counter = props => {
 	useEffect(() => {
 		if (count === 0) {
 			clearInterval(timerRef.current);
-			props.timeStop();
+			timeStop();
 		}
-	}, [count]);
+	}, [count, timeStop]);
 
-	if (props.specialStatus) {
-		let _count = ReplaceStr(props.msg, {
+	if (specialStatus) {
+		let _count = ReplaceStr(msg, {
 			timer: ` ( ${secondsToTime(count)} ) `
 		});
 		return _count;

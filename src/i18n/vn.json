@@ -308,6 +308,9 @@
 	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
 	"lbl_UpdateSuccessful": "Cập nhật thành công!",
 	"msg_AmountFormatTip":"The amount is already formatted",
-	"msg_API_SendVerifySMS_1004": "Bạn có nhiều yêu cầu gửi mã xác nhận trong một khoảng thời gian ngắn. Xin vui lòng thử lại sau (timer) giây nữa"
+	"msg_API_SendVerifySMS_1004": "Bạn có nhiều yêu cầu gửi mã xác nhận trong một khoảng thời gian ngắn. Xin vui lòng thử lại sau {{timer}} giây nữa",
+	"lbl_Retransmit": "Retransmit",
+	"msg_VerifyCodeTip":"Please enter the verification number",
+	"lbl_MobileVerifiy": "Xác minh số điện thoại"
 
 }
