@@ -311,5 +311,4 @@
 	"lbl_WithdrawalNow":"Rút tiền",
 	"msg_AmountFormatTip":"The amount is already formatted",
 	"msg_API_SendVerifySMS_1004": "Bạn có nhiều yêu cầu gửi mã xác nhận trong một khoảng thời gian ngắn. Xin vui lòng thử lại sau (timer) giây nữa"
-
 }
