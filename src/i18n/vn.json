@@ -312,5 +312,9 @@
 	"lbl_GoWithdrawalPage":"Chuyển đến trang Rút tiền?",
 	"lbl_WithdrawalNow": "Rút tiền",
 	"lbl_GoPromotionPage":"Bạn muốn nhận khuyến mãi?",
-	"lbl_UpdatePersonalInfoPromotion":"Vui lòng cập nhật thông tin cá nhân của bạn trước khi tham gia khuyến mãi."
+	"lbl_UpdatePersonalInfoPromotion":"Vui lòng cập nhật thông tin cá nhân của bạn trước khi tham gia khuyến mãi.",
+	"lbl_Retransmit": "Retransmit",
+	"msg_VerifyCodeTip":"Please enter the verification number",
+	"lbl_MobileVerifiy": "Xác minh số điện thoại"
+
 }

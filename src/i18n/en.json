@@ -312,5 +312,8 @@
 	"lbl_GoWithdrawalPage": "Go to withdrawal page?",
 	"lbl_WithdrawalNow": "Withdrawal Now",
 	"lbl_GoPromotionPage":"Go to join promotion?",
-	"lbl_UpdatePersonalInfoPromotion":"Please update your personal information before join promotion."
+	"lbl_UpdatePersonalInfoPromotion":"Please update your personal information before join promotion.",
+	"lbl_Retransmit": "Retransmit",
+	"msg_VerifyCodeTip":"Please enter the verification number",
+	"lbl_MobileVerifiy": "Mobile verification"
 }

@@ -26,7 +26,7 @@ const PopUp = () => {
 			break;
 
 		case defPopBoxType.Otp:
-			content = <Otp clickSubmit={popBox.clickSubmit} />;
+			content = <Otp />;
 			break;
 
 		case defPopBoxType.Loading:
@@ -44,22 +44,34 @@ const PopUp = () => {
 	}
 
 	return (
-		<div id="popup" className={`${popBox.isOpen ? "show" : ""}`}>
-			<div className="popTit">
-				{popBox.hideCloseBtn === true ? null : (
-					<div className={`close open`} onClick={handlePopBox}>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
+		<>
+			{popBox.isOpen ? (
+				<>
+					<div
+						id="popup"
+						className={`${popBox.isOpen ? "show" : ""}`}>
+						<div className="popTit">
+							{popBox.hideCloseBtn === true ? null : (
+								<div
+									className={`close open`}
+									onClick={handlePopBox}>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							)}
+							{popBox.title ?? i18n.lbl_ImportantNote}
+						</div>
+						{content}
 					</div>
-				)}
-				{popBox.title ?? i18n.lbl_ImportantNote}
-			</div>
-			{content}
-		</div>
+				</>
+			) : (
+				<></>
+			)}
+		</>
 	);
 };
 export default PopUp;

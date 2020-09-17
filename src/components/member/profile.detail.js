@@ -7,8 +7,7 @@ import areaCode from "../../datas/areaCode";
 import moment from "moment";
 import {
 	api_SetProfile,
-	api_GetCustProfile,
-	api_VerifyPhone
+	api_GetCustProfile
 } from "../../service/api/accountStrict";
 import { api_ExistsEmail } from "../../service/api/site";
 import { defPopBoxType } from "../common/popbox";
@@ -555,64 +554,10 @@ const Panel = () => {
 	};
 
 	const clickOtp = () => {
-		const closePopbox = () => {
-			setPopBox({ isOpen: false });
-		};
-
-		const clickSubmit = (otpCode, requestId) => {
-			api_VerifyPhone({
-				request_id: requestId,
-				code: otpCode
-			}).then(
-				res => {
-					if (isMountedRef.current) {
-						if (res.data.errorCode === 0) {
-							setUserInfo(prev => ({
-								...prev,
-								PhoneVerified: true
-							}));
-
-							setPopBox({ isOpen: false });
-						} else {
-							setPopBox({
-								isOpen: true,
-								title: "OTP Certification",
-								content: res.data.message,
-								hasBtn: true,
-								btnBar: (
-									<div className="btn-group">
-										<button
-											className="blue"
-											onClick={closePopbox}>
-											{i18n["lbl_Cancel"]}
-										</button>
-									</div>
-								)
-							});
-						}
-					}
-				},
-				err => {
-					if (isMountedRef.current) {
-						setPopBox({
-							isOpen: true,
-							title: i18n.lbl_ImportantNote,
-							content: i18n.msg_ApiServerError
-						});
-					}
-				}
-			);
-		};
-
-		const openOtpPopbox = () => {
-			setPopBox({
-				isOpen: true,
-				popBoxType: defPopBoxType.Otp,
-				title: "OTP Certification",
-				clickSubmit: clickSubmit
-			});
-		};
-		openOtpPopbox();
+		setPopBox({
+			isOpen: true,
+			popBoxType: defPopBoxType.Otp
+		});
 	};
 
 	let arr = infoList
@@ -634,6 +579,7 @@ const Panel = () => {
 					infoTitle={item.infoTitle}
 					clickOtp={clickOtp}
 					isVerified={_isVerified}
+					i18n={i18n}
 				/>
 			);
 		});
@@ -765,14 +711,16 @@ const ColumnItem = props => {
 		<li>
 			<span className="title">
 				{props.title}
-				{props.isVerified ? <i class="icon icon-checkmark"></i> : null}
+				{props.isVerified ? (
+					<i className="icon icon-checkmark"></i>
+				) : null}
 			</span>
 			<span>{props.content}</span>
 			{props.infoTitle === "phoneNo" && !props.isVerified ? (
 				<>
 					<button className="otpBtn" onClick={props.clickOtp}>
 						<span className="icon icon-mobile"></span>
-						<span>Mobile verification</span>
+						<span>{props.i18n.lbl_MobileVerifiy}</span>
 					</button>
 				</>
 			) : null}
