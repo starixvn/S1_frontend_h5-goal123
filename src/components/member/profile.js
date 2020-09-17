@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { i18nContext } from "../common/context";
+import { i18nContext, userInfoContext } from "../common/context";
 import { Link } from "@reach/router";
 import ProfileDetail from "./profile.detail";
 import path from "../../path";
@@ -7,6 +7,7 @@ import ProfileWallet from "./profile.wallet";
 
 const Panel = () => {
 	const { i18n } = useContext(i18nContext);
+	const { userInfo } = useContext(userInfoContext);
 
 	return (
 		<>

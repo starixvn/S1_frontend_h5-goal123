@@ -37,14 +37,14 @@ export const Main = props => {
 		return () => (isMountedRef.current = false);
 	});
 
-	// PageVerify(
-	// 	userInfo,
-	// 	i18n,
-	// 	setPopBox,
-	// 	setRedirectPath,
-	// 	setPageVerify,
-	// 	props.location.state?.paymentList?.length >= 0
-	// );
+	PageVerify(
+		userInfo,
+		i18n,
+		setPopBox,
+		setRedirectPath,
+		setPageVerify,
+		props.location.state?.paymentList?.length >= 0
+	);
 
 	const _isConvert = isConvert(userInfo.currencyId);
 	useEffect(() => {

@@ -35,14 +35,14 @@ const SetMobilePay = props => {
 		return () => (isMountedRef.current = false);
 	});
 
-	// PageVerify(
-	// 	userInfo,
-	// 	i18n,
-	// 	setPopBox,
-	// 	setRedirectPath,
-	// 	setPageVerify,
-	// 	props.location.state !== null
-	// );
+	PageVerify(
+		userInfo,
+		i18n,
+		setPopBox,
+		setRedirectPath,
+		setPageVerify,
+		props.location.state !== null
+	);
 
 	useEffect(() => {
 		if (isMountedRef.current && props.location.state === null) {
