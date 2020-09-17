@@ -58,6 +58,14 @@
   font-size: 4vw !important;
 }
 
+.icon-EB:before {
+  content: "\e990";
+}
+
+.icon-VNPay:before {
+  content: "\e991";
+}
+
 .icon-saba:before {
   content: "\e98c";
 }
@@ -338,7 +346,7 @@
   content: "\e923";
 }
 
-.icon-VNPay:before {
+.icon-VN:before {
   content: "\e924";
 }
 

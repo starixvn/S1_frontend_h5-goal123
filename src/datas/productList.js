@@ -7,6 +7,7 @@ import LIVEcasino_AE from "../styles/img/LIVEcasino_AE.jpg";
 import LIVEcasino_AG from "../styles/img/LIVEcasino_AG.jpg";
 import LIVEcasino_AB from "../styles/img/LIVEcasino_AB.jpg";
 import LIVEcasino_SA from "../styles/img/LIVEcasino_SA.jpg";
+import LIVEcasino_EB from "../styles/img/LIVEcasino_EB.jpg";
 import Coming_soon from "../styles/img/coming_soon.jpg";
 import Fish from "../styles/img/fish.jpg";
 import Keno from "../styles/img/keno.jpg";
@@ -26,6 +27,7 @@ export const defGameInfo = {
 	LIVEcasinoAG: { gameId: 3, tpId: 3 },
 	LIVEcasinoAB: { gameId: 12, tpId: 12 },
 	LIVEcasinoSA: { gameId: 2, tpId: 2 },
+	LIVEcasinoEB: { gameId: 18, tpId: 18 },
 	Casino_ow: { gameId: 208, tpId: 1 },
 	Casino_All: { tpId: 0 },
 	Casino_PP: { tpId: 5 },
@@ -139,7 +141,7 @@ const gameList = [
 		categoryIcon: "livecasino",
 		className: "casinoList",
 		translateKey: "lbl_LiveCasino",
-		comingSoonImg: `coming_soon.jpg`,
+		comingSoonImg: Coming_soon,
 		items: [
 			{
 				...defGameInfo.LIVEcasinoDG,
@@ -165,6 +167,10 @@ const gameList = [
 				...defGameInfo.LIVEcasinoSA,
 				img: LIVEcasino_SA
 			}
+			// {
+			// 	...defGameInfo.LIVEcasinoEB,
+			// 	img: LIVEcasino_EB
+			// }
 		]
 	}
 ];
