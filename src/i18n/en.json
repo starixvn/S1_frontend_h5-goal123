@@ -307,6 +307,6 @@
 	"lbl_GoNow": "Go Now!",
 	"msg_OTPHint":"Please complete your profile and verify your phone to enjoy our promotions.",
 	"lbl_UpdateSuccessful": "Update Successful",
-	"msg_AmountFormatTip":"The amount is already formatted",
+	"msg_AmountFormatTip":"Please note that the expression amount of the system are as follows: 15,000 = 15,000,000 VND, fifteen million.",
 	"msg_API_SendVerifySMS_1004": "You had try to request too many verification code at a period of time. Please try again later."
 }
