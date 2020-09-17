@@ -310,5 +310,7 @@
 	"msg_AmountFormatTip":"Please note that the expression amount of the system are as follows: 15,000 = 15,000,000 VND, fifteen million.",
 	"msg_API_SendVerifySMS_1004": "You had try to request too many verification code at a period of time. Please try again later.",
 	"lbl_GoWithdrawalPage": "Go to withdrawal page?",
-	"lbl_WithdrawalNow": "Withdrawal Now"
+	"lbl_WithdrawalNow": "Withdrawal Now",
+	"lbl_GoPromotionPage":"Go to join promotion?",
+	"lbl_UpdatePersonalInfoPromotion":"Please update your personal information before join promotion."
 }

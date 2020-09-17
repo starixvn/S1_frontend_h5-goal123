@@ -58,7 +58,9 @@ const Panel = () => {
 		) {
 			const ClosePopBox = () => {
 				setPopBox({ isOpen: false });
-				setRedirectPath(`/${path.member.root}`);
+				setRedirectPath(
+					`/${path.member.root}?prevPage=${path.withdrawal.root}`
+				);
 			};
 
 			if (isMountedRef.current) {
