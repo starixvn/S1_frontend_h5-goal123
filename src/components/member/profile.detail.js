@@ -494,9 +494,9 @@ const Panel = () => {
 			setPopBox({ isOpen: false });
 		};
 
-		const clickSubmit = (otpCode, requestId) => {
-			console.log(otpCode, requestId);
-			api_VerifyPhone({
+		const clickSubmit = async (otpCode, requestId) => {
+			setPopBox({ isOpen: false });
+			await api_VerifyPhone({
 				request_id: requestId,
 				code: otpCode
 			}).then(
@@ -505,7 +505,7 @@ const Panel = () => {
 						if (res.data.errorCode === 0) {
 							setUserInfo(prev => ({
 								...prev,
-								PhoneVerified: true
+								phoneVerified: true
 							}));
 
 							setPopBox({ isOpen: false });
@@ -540,12 +540,21 @@ const Panel = () => {
 			);
 		};
 
+		const resetUserInfo = () => {
+			setUserInfo(prev => ({
+				...prev,
+				phoneVerified: true
+			}));
+		};
+
 		const openOtpPopbox = () => {
 			setPopBox({
 				isOpen: true,
 				popBoxType: defPopBoxType.Otp,
 				title: "OTP Certification",
-				clickSubmit: clickSubmit
+				clickSubmit: clickSubmit,
+				resetUserInfo: resetUserInfo,
+				userInfo: userInfo
 			});
 		};
 		openOtpPopbox();
@@ -701,7 +710,9 @@ const ColumnItem = props => {
 		<li>
 			<span className="title">
 				{props.title}
-				{props.isVerified ? <i class="icon icon-checkmark"></i> : null}
+				{props.isVerified ? (
+					<i className="icon icon-checkmark"></i>
+				) : null}
 			</span>
 			<span>{props.content}</span>
 			{props.infoTitle === "phoneNo" && !props.isVerified ? (
