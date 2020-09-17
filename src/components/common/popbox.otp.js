@@ -69,14 +69,13 @@ const Panel = () => {
 		setOtpCode(val);
 	};
 
-	const checkValue = (val, isSubmit) => {
-		let _val = isSubmit ? val : val.target.value;
-		let msg = _val === "" ? i18n.msg_VerifyCodeTip : "";
+	const checkValue = val => {
+		let msg = val === "" ? i18n.msg_VerifyCodeTip : "";
 		setWarning(msg);
 	};
 
 	const checkSubmit = async () => {
-		checkValue(otpCode, true);
+		checkValue(otpCode);
 
 		if (otpCode !== "" && requestId !== "") {
 			setLoading(true);
@@ -215,7 +214,7 @@ const Panel = () => {
 						<input
 							value={otpCode}
 							onChange={editInput.bind(this)}
-							onBlur={checkValue.bind(this, false)}
+							onBlur={e => checkValue(e.target.value)}
 						/>
 						<button className="orange" onClick={checkSubmit}>
 							{i18n.lbl_Submit}
