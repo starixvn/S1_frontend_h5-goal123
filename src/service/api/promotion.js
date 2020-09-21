@@ -12,3 +12,6 @@ export const api_promotion_SetClaimPromotion = ({ langId, BonusCode }) =>
 	promotionRequest.post(`/SetClaimPromotion/${langId}`, {
 		BonusCode
 	});
+
+export const api_promotion_GetPromotionListV2 = ({ langId }) =>
+	promotionRequest.post(`/GetPromotionListV2/${langId}`);
