@@ -166,11 +166,11 @@ const gameList = [
 			{
 				...defGameInfo.LIVEcasinoSA,
 				img: LIVEcasino_SA
+			},
+			{
+				...defGameInfo.LIVEcasinoEB,
+				img: LIVEcasino_EB
 			}
-			// {
-			// 	...defGameInfo.LIVEcasinoEB,
-			// 	img: LIVEcasino_EB
-			// }
 		]
 	}
 ];
