@@ -336,7 +336,7 @@ const ProcessBar = ({
 					{i18n[`Currency_${currencyId}`]}{" "}
 					{number_format(custTurnOver, false)}
 				</span>{" "}
-				/ ({i18n.lbl_Req}. {i18n[`Currency_${currencyId}`]}{" "}
+				/ ({i18n.lbl_Req} {i18n[`Currency_${currencyId}`]}{" "}
 				{number_format(custRollOver, false)})
 				<ReloadSpin func={RefreshProcessBar} />
 			</div>
