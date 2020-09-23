@@ -102,55 +102,57 @@ export default () => {
 					BonusCode: _promo.bonusCode
 				}).then(
 					res => {
-						if (isMountedRef.current && res.data.errorCode === 0) {
-							GetPromotionDetail(
-								userInfo.langId,
-								_promo.bonusCode
-							);
+						if (isMountedRef.current) {
+							if (res.data.errorCode === 0) {
+								GetPromotionDetail(
+									userInfo.langId,
+									_promo.bonusCode
+								);
 
-							setPopBox({
-								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: (
-									<>
-										<p>{i18n.lbl_UpdateSuccessful}</p>
-									</>
-								),
-								hasBtn: true,
-								btnBar: (
-									<div className="btn-group">
-										<button
-											onClick={ClosePopBox}
-											className="btn-check">
-											OK
-										</button>
-									</div>
-								)
-							});
-						} else {
-							setPopBox({
-								isOpen: true,
-								title: i18n.lbl_ImportantNote,
-								content: (
-									<>
-										<p>
-											{res.data.message
-												? res.data.message
-												: `[${res.data.errorCode}] Something went wrong...`}
-										</p>
-									</>
-								),
-								hasBtn: true,
-								btnBar: (
-									<div className="btn-group">
-										<button
-											onClick={ClosePopBox}
-											className="btn-check">
-											{i18n.lbl_Close}
-										</button>
-									</div>
-								)
-							});
+								setPopBox({
+									isOpen: true,
+									title: i18n.lbl_ImportantNote,
+									content: (
+										<>
+											<p>{i18n.lbl_UpdateSuccessful}</p>
+										</>
+									),
+									hasBtn: true,
+									btnBar: (
+										<div className="btn-group">
+											<button
+												onClick={ClosePopBox}
+												className="btn-check">
+												OK
+											</button>
+										</div>
+									)
+								});
+							} else {
+								setPopBox({
+									isOpen: true,
+									title: i18n.lbl_ImportantNote,
+									content: (
+										<>
+											<p>
+												{res.data.message
+													? res.data.message
+													: `[${res.data.errorCode}] Something went wrong...`}
+											</p>
+										</>
+									),
+									hasBtn: true,
+									btnBar: (
+										<div className="btn-group">
+											<button
+												onClick={ClosePopBox}
+												className="btn-check">
+												{i18n.lbl_Close}
+											</button>
+										</div>
+									)
+								});
+							}
 						}
 					},
 					err => {
