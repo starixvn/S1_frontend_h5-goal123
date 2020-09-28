@@ -108,7 +108,7 @@ const Panel = ({ ImgFolder, filterHideInHome = false }) => {
 			? b.imgURL
 			: `${config.imgUrl}/CMS/${config.siteName}/${_imgFolder}/${lang}/${b.img}`;
 
-		if (actionLink.startsWith("promotion/promotionInfo?BonusCode=")) {
+		if (actionLink?.startsWith("promotion/promotionInfo?BonusCode=")) {
 			return (
 				<Link key={`${lang}-${b.img}-${b_idx}`} to={actionLink}>
 					<img src={imgSRC} className="banner" alt={b.img ?? ""} />
