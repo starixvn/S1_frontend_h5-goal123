@@ -8,7 +8,7 @@ import {
 	popBoxContext,
 	msgCountContext
 } from "../common/context";
-import { api_GetBalnace } from "../../service/api/account";
+import { api_GetWalletInfo } from "../../service/api/account";
 import JoinPanel from "../join/join";
 import LoginPanel from "../login/login";
 import ReloadSpin from "./reloadSpin";
@@ -48,6 +48,12 @@ const HeaderBtn = props => {
 	});
 
 	useEffect(() => {
+		if (userInfo.isLogin) {
+			GetBalance();
+		}
+	}, [userInfo.isLogin]);
+
+	useEffect(() => {
 		if (isMountedRef.current && redirectPath !== null) {
 			setRedirectPath(null);
 		}
@@ -57,13 +63,24 @@ const HeaderBtn = props => {
 		if (!processing) {
 			setProcessing(true);
 
-			api_GetBalnace().then(
+			api_GetWalletInfo().then(
 				res => {
 					if (isMountedRef.current) {
 						if (res.data.errorCode === 0) {
+							let _data = res.data.data;
+							let mainWalletBalance = _data.balance;
+
+							let otherWalletBalance = _data.tpWallets?.reduce(
+								(prev, curr) => {
+									return prev + curr.balance;
+								},
+								0
+							);
+
 							setWalletInfo(prevState => ({
 								...prevState,
-								main: res.data.data
+								allBalance:
+									mainWalletBalance + otherWalletBalance
 							}));
 						} else {
 							setPopBox({
@@ -89,7 +106,9 @@ const HeaderBtn = props => {
 		}
 	};
 
-	let balance = number_format(walletInfo.main, false);
+	let balance = !walletInfo.allBalance
+		? 0
+		: number_format(walletInfo.allBalance, false);
 
 	const ClickUserName = () => {
 		if (userInfo.isLogin) {
