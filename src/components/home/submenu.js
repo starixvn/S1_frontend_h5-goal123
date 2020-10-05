@@ -10,8 +10,8 @@ import {
 } from "../common/context";
 import { Link } from "@reach/router";
 import path from "../../path";
-import { api_GetBalnace } from "../../service/api/account";
-import { isConvert, number_format } from "../common/common";
+import { api_GetWalletInfo } from "../../service/api/account";
+import { number_format } from "../common/common";
 import ReloadSpin from "../common/reloadSpin";
 import { defGameInfo } from "../../datas/productList";
 import { GET_ENTER_PAGE } from "../../service/enterPage";
@@ -252,13 +252,24 @@ const WalletInfo = ({ i18n, userInfo }) => {
 		if (!processing) {
 			setProcessing(true);
 
-			api_GetBalnace().then(
+			api_GetWalletInfo().then(
 				res => {
 					if (isMountedRef.current) {
 						if (res.data.errorCode === 0) {
+							let _data = res.data.data;
+							let mainWalletBalance = _data.balance;
+
+							let otherWalletBalance = _data.tpWallets?.reduce(
+								(prev, curr) => {
+									return prev + curr.balance;
+								},
+								0
+							);
+
 							setWalletInfo(prevState => ({
 								...prevState,
-								main: res.data.data
+								allBalance:
+									mainWalletBalance + otherWalletBalance
 							}));
 						} else {
 							setPopBox({
@@ -284,7 +295,9 @@ const WalletInfo = ({ i18n, userInfo }) => {
 		}
 	};
 
-	let balance = number_format(walletInfo.main, false);
+	let balance = !walletInfo.allBalance
+		? 0
+		: number_format(walletInfo.allBalance, false);
 
 	return (
 		<div className="side-info">
