@@ -17,8 +17,8 @@ export const api_CheckSignIn = () => siteRequest.post(`/CheckSignIn/`);
 
 export const api_GetGamelist = () => siteRequest.post(`/GetGamelist`);
 
-export const api_ForgetPwd = ({ Email }) =>
-	siteRequest.post(`/ForgetPwdV2`, { Email: Email, flag: 2 });
+export const api_ForgetPwd = ({ Email, langId }) =>
+	siteRequest.post(`/ForgetPwdV2/${langId}`, { Email: Email, flag: 2 });
 
 export const api_GetTpIds = () => siteRequest.post(`/GetTpIds`);
 

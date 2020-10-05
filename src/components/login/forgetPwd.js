@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { i18nContext, popBoxContext } from "../common/context";
+import { i18nContext, popBoxContext, userInfoContext } from "../common/context";
 import { api_ForgetPwd } from "../../service/api/site";
 import Inputbox from "../common/inputbox";
 import { Redirect } from "@reach/router";
@@ -8,6 +8,7 @@ import path from "../../path";
 export default () => {
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
+	const { userInfo } = useContext(userInfoContext);
 	const [userEmail, setUserEmail] = useState("");
 	const [warning, setWarning] = useState({ status: false, msg: "" });
 	const isMountedRef = useRef(null);
@@ -55,7 +56,7 @@ export default () => {
 		if (userEmail === "") {
 			setWarning({ status: true, msg: i18n.msg_MailWrongFormat });
 		} else if (!warning.status) {
-			api_ForgetPwd({ Email: userEmail }).then(
+			api_ForgetPwd({ Email: userEmail, langId: userInfo.langId }).then(
 				res => {
 					if (isMountedRef.current) {
 						if (res.data.errorCode !== 0) {
