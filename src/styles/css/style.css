@@ -2838,12 +2838,7 @@ input.error {
 }
 
 .webmap div {
-  width: 48%;
   margin-bottom: 5vw;
-}
-
-.webmap div:nth-child(even) {
-  margin-left: 3vw;
 }
 
 .webmap div span {

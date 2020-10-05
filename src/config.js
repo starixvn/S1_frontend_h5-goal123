@@ -25,8 +25,13 @@ export default process.env.NODE_ENV === "production"
 			// t_and_cURL: "http://localhost:60930",
 			// openURL: "http://localhost:60930"
 
-			apiURL: "http://www.n88dev.com",
-			imgUrl: "http://www.n88dev.com",
-			t_and_cURL: "http://www.n88dev.com",
-			openURL: "http://www.n88dev.com"
+			apiURL: "http://52.77.157.115:5068",
+			imgUrl: "http://52.77.157.115:5068",
+			t_and_cURL: "http://52.77.157.115:5068",
+			openURL: "http://52.77.157.115:5068"
+
+			// apiURL: "http://www.n88dev.com",
+			// imgUrl: "http://www.n88dev.com",
+			// t_and_cURL: "http://www.n88dev.com",
+			// openURL: "http://www.n88dev.com"
 	  };
