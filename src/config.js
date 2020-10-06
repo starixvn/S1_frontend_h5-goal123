@@ -1,18 +1,22 @@
 export const siteName = "Goal123";
 
-const getAffiliate = () => {
+const getAffiliate = ({ langId }) => {
+	if (typeof window === `undefined`) return "";
+
 	let fullPath = window.location.hostname;
 	let arr = fullPath.split(".");
 
 	return arr.length === 3
-		? `https://aff.${arr.filter((p, idx) => idx !== 0).join(".")}`
-		: `https://aff.${arr.join(".")}`;
+		? `https://aff.${arr
+				.filter((p, idx) => idx !== 0)
+				.join(".")}/?lang=${langId}`
+		: `https://aff.${arr.join(".")}/?lang=${langId}`;
 };
 
-export const siteInfo = () => {
+export const siteInfo = ({ langId }) => {
 	return {
 		siteName: "Goal123",
-		affiliateLink: getAffiliate(),
+		affiliateLink: getAffiliate({ langId }),
 		siteDefaultLang: "vn",
 		siteLangList: ["en", "vn"],
 		liveChatId: 12171870
