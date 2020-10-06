@@ -50,7 +50,7 @@ const Panel = () => {
 						let tpWalletsArr = data.tpWallets.map(i => {
 							return {
 								id: i.tpId,
-								displayKey: i.displayKey,
+								displayKey: `lbl_TpWallet_${i.tpId}`,
 								balance: i.balance
 							};
 						});
@@ -93,7 +93,7 @@ const Panel = () => {
 						let tpWalletsArr = data.tpWallets.map(i => {
 							return {
 								id: i.tpId,
-								displayKey: i.displayKey,
+								displayKey: `lbl_TpWallet_${i.tpId}`,
 								balance: i.balance
 							};
 						});
