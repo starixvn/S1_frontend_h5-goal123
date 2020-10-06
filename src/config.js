@@ -1,9 +1,18 @@
 export const siteName = "Goal123";
 
+const getAffiliate = () => {
+	let fullPath = window.location.hostname;
+	let arr = fullPath.split(".");
+
+	return arr.length === 3
+		? `https://aff.${arr.filter((p, idx) => idx !== 0).join(".")}`
+		: `https://aff.${arr.join(".")}`;
+};
+
 export const siteInfo = () => {
 	return {
 		siteName: "Goal123",
-		affiliateLink: `https://aff.${window.location.hostname}`,
+		affiliateLink: getAffiliate(),
 		siteDefaultLang: "vn",
 		siteLangList: ["en", "vn"],
 		liveChatId: 12171870
