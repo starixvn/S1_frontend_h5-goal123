@@ -3,6 +3,7 @@ export const siteName = "Goal123";
 export const siteInfo = () => {
 	return {
 		siteName: "Goal123",
+		affiliateLink: `https://aff.${window.location.hostname}`,
 		siteDefaultLang: "vn",
 		siteLangList: ["en", "vn"],
 		liveChatId: 12171870

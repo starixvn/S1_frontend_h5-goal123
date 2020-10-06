@@ -315,5 +315,6 @@
 	"lbl_UpdatePersonalInfoPromotion":"Please update your personal information before join promotion.",
 	"lbl_Retransmit": "Retransmit",
 	"msg_VerifyCodeTip":"Please enter the verification number",
-	"lbl_MobileVerifiy": "Mobile verification"
+	"lbl_MobileVerifiy": "Mobile verification",
+	"lbl_Affiliates":"Affiliates"
 }
