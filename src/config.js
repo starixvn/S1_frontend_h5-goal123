@@ -1,6 +1,6 @@
 export const siteName = "Goal123";
 
-const getAffiliate = ({ langId }) => {
+const getAffiliate = langId => {
 	if (typeof window === `undefined`) return "";
 
 	let fullPath = window.location.hostname;
@@ -13,10 +13,10 @@ const getAffiliate = ({ langId }) => {
 		: `https://aff.${arr.join(".")}/?lang=${langId}`;
 };
 
-export const siteInfo = ({ langId }) => {
+export const siteInfo = langId => {
 	return {
 		siteName: "Goal123",
-		affiliateLink: getAffiliate({ langId }),
+		affiliateLink: getAffiliate(langId),
 		siteDefaultLang: "vn",
 		siteLangList: ["en", "vn"],
 		liveChatId: 12171870
