@@ -315,5 +315,7 @@
 	"lbl_UpdatePersonalInfoPromotion":"Please update your personal information before join promotion.",
 	"lbl_Retransmit": "Retransmit",
 	"msg_VerifyCodeTip":"Please enter the verification number",
-	"lbl_MobileVerifiy": "Mobile verification"
+	"lbl_MobileVerifiy": "Mobile verification",
+	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
+	"msg_OTP_Invalid": "Invalid OTP Code"
 }
