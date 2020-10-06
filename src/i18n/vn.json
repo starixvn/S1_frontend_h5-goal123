@@ -315,5 +315,6 @@
 	"lbl_UpdatePersonalInfoPromotion":"Vui lòng cập nhật thông tin cá nhân của bạn trước khi tham gia khuyến mãi.",
 	"lbl_Retransmit": "Gửi lại mã",
 	"msg_VerifyCodeTip":"Please enter the verification number",
-	"lbl_MobileVerifiy": "Xác minh số điện thoại"
+	"lbl_MobileVerifiy": "Xác minh số điện thoại",
+	"lbl_Affiliates":"Đại lý"
 }
