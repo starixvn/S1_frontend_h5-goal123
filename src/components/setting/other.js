@@ -76,6 +76,7 @@ export default () => {
 			<div>
 				<span>{i18n.lbl_Title}</span>
 				<a
+					style={{ fontWeight: "bold" }}
 					href={siteInfo().affiliateLink}
 					rel="noopener noreferrer"
 					target="_blank">
