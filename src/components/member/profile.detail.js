@@ -711,19 +711,19 @@ const ColumnItem = props => {
 		<li>
 			<span className="title">
 				{props.title}
-				{/* {props.isVerified ? (
+				{props.isVerified ? (
 					<i className="icon icon-checkmark"></i>
-				) : null} */}
+				) : null}
 			</span>
 			<span>{props.content}</span>
-			{/* {props.infoTitle === "phoneNo" && !props.isVerified ? (
+			{props.infoTitle === "phoneNo" && !props.isVerified ? (
 				<>
 					<button className="otpBtn" onClick={props.clickOtp}>
 						<span className="icon icon-mobile"></span>
 						<span>{props.i18n.lbl_MobileVerifiy}</span>
 					</button>
 				</>
-			) : null} */}
+			) : null}
 		</li>
 	);
 };
