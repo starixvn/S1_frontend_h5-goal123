@@ -38,17 +38,17 @@ const Panel = () => {
 				},
 				err => {
 					if (isMountedRef.current) {
+						setLoading(false);
 						setPopBox({
 							isOpen: true,
 							title: i18n.lbl_ImportantNote,
 							content: i18n.msg_ApiServerError
 						});
-						setLoading(false);
 					}
 				}
 			);
 		}
-	}, [i18n.lbl_ImportantNote, i18n.msg_ApiServerError, setPopBox]);
+	}, []);
 
 	const editInput = e => {
 		let val = e.target.value;
@@ -65,9 +65,7 @@ const Panel = () => {
 
 		if (otpCode !== "") {
 			setLoading(true);
-
-			await clickSubmit(otpCode);
-			setLoading(false);
+			clickSubmit(otpCode);
 		}
 	};
 
@@ -83,10 +81,13 @@ const Panel = () => {
 							phoneVerified: true
 						}));
 
+						setLoading(false);
 						setPopBox({ isOpen: false });
 					} else if (res.data.errorCode === 1000) {
+						setLoading(false);
 						setErrorMsg(i18n.msg_OTP_Invalid);
 					} else {
+						setLoading(false);
 						setPopBox({
 							isOpen: true,
 							content: res.data.message,
@@ -106,6 +107,7 @@ const Panel = () => {
 			},
 			err => {
 				if (isMountedRef.current) {
+					setLoading(false);
 					setPopBox({
 						isOpen: true,
 						title: i18n.lbl_ImportantNote,
@@ -122,7 +124,9 @@ const Panel = () => {
 			response => {
 				if (isMountedRef.current) {
 					if (response.data.errorCode === 0) {
+						setWarning("");
 						setStartUnixTime(response.data.data.startUnixTime);
+						setTimer(true);
 					} else if (response.data.errorCode === 5002) {
 						setErrorMsg(i18n.msg_API_SendOTPSMS_5002);
 					} else {
@@ -133,12 +137,12 @@ const Panel = () => {
 			},
 			err => {
 				if (isMountedRef.current) {
+					setLoading(false);
 					setPopBox({
 						isOpen: true,
 						title: i18n.lbl_ImportantNote,
 						content: i18n.msg_ApiServerError
 					});
-					setLoading(false);
 				}
 			}
 		);
