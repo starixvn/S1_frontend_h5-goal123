@@ -11,6 +11,7 @@ import { GET_ENTER_PAGE } from "../../service/enterPage";
 import { Redirect, Link } from "@reach/router";
 import { api_GetTpIds } from "../../service/api/site";
 import path from "../../path";
+import { siteInfo } from "../../config";
 
 const Category = props => {
 	const { i18n } = useContext(i18nContext);
@@ -80,6 +81,7 @@ const Category = props => {
 			casinoTpIds={casinoTpIds}
 			userCurrencyId={userInfo.currencyId}
 			setNav={setNav}
+			langId={userInfo.langId}
 		/>
 	);
 };
@@ -91,7 +93,7 @@ class CateGoryContent extends Component {
 		this.mounted = false;
 		this.RefItems = {};
 		this.setCategory = false;
-		productList.forEach((item, idx) => {
+		productList(this.props.langId).forEach((item, idx) => {
 			this.RefItems[`${item.category}`] = {
 				First: React.createRef(),
 				Last: React.createRef()
@@ -180,7 +182,7 @@ class CateGoryContent extends Component {
 	render() {
 		let sideBarItems = [];
 		let products = [];
-		productList.forEach(item => {
+		productList(this.props.langId).forEach(item => {
 			let _open = this.state.category === item.category;
 			sideBarItems.push(
 				<CategoryItem
@@ -244,6 +246,7 @@ class CateGoryContent extends Component {
 								img={subItem.img}
 								spanText={this.props.i18n[subItem.spanTextKey]}
 								icon={subItem.icon}
+								href={item.href}
 							/>
 						);
 					}
@@ -297,7 +300,9 @@ const CategoryItem = props => {
 const ProductItem = props => {
 	return (
 		<a
-			onClick={props.clickGame}
+			href={props.href}
+			target={props.href ? "_blank" : null}
+			onClick={!props.href ? props.clickGame : null}
 			ref={props._ref}
 			className={props.isShow ? "open" : ""}>
 			<img src={props.img} alt={props.icon ?? ""} />

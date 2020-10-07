@@ -15,6 +15,8 @@ import Lottery from "../styles/img/lottery.jpg";
 import SabaClub from "../styles/img/saba.jpg";
 import Cockfighting from "../styles/img/cockfighting.jpg";
 import Casino from "../styles/img/casino.jpg";
+import Affiliate from "../styles/img/affiliate.jpg";
+import { siteInfo } from "../config";
 
 export const defGameInfo = {
 	Sports: { tpId: 1, gameId: 1 },
@@ -47,7 +49,7 @@ export const defGameInfo = {
 	}
 };
 
-const gameList = [
+const gameList = langId => [
 	{
 		category: "sports",
 		categoryIcon: "sports",
@@ -170,6 +172,19 @@ const gameList = [
 			{
 				...defGameInfo.LIVEcasinoEB,
 				img: LIVEcasino_EB
+			}
+		]
+	},
+	{
+		category: "affiliate",
+		categoryIcon: "affiliate",
+		translateKey: "lbl_Affiliates",
+		href: siteInfo(langId).affiliateLink,
+		items: [
+			{
+				icon: "affiliate",
+				img: Affiliate,
+				spanTextKey: "lbl_Affiliates"
 			}
 		]
 	}

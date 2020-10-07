@@ -58,6 +58,18 @@
   font-size: 4vw !important;
 }
 
+.icon-affiliate:before {
+  content: "\e997";
+}
+
+.icon-icon_1_cop:before {
+  content: "\e996";
+}
+
+.icon-line:before {
+  content: "\e993";
+}
+
 .icon-EB:before {
   content: "\e990";
 }
