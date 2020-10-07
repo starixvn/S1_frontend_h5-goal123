@@ -85,7 +85,7 @@ const Panel = () => {
 						setPopBox({ isOpen: false });
 					} else if (res.data.errorCode === 1000) {
 						setLoading(false);
-						setErrorMsg(i18n.msg_OTP_Invalid);
+						setWarning(i18n.msg_OTP_Invalid);
 					} else {
 						setLoading(false);
 						setPopBox({
