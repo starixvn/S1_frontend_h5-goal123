@@ -1592,6 +1592,11 @@ footer > a.open .circleAnimation + span {
   color: #1D3662;
 }
 
+.btn-group button.yellow, .btn-group a.yellow {
+  background: #fab617;
+  color: white;
+}
+
 .bankAccount {
   margin: 1vw 0;
 }
@@ -2838,6 +2843,7 @@ input.error {
 }
 
 .webmap div {
+  width: 100%;
   margin-bottom: 5vw;
 }
 
@@ -2996,7 +3002,7 @@ span.important {
 }
 
 .promotions .filterBtn {
-  margin: 0 0 3vw;
+  margin: 14vw 0 3vw;
 }
 
 .promotions a.promodule {
@@ -3011,6 +3017,37 @@ span.important {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
+}
+
+.promotions a.promodule .claimed {
+  position: absolute;
+  background: rgba(233, 37, 41, 0.8);
+  width: 17vw;
+  height: 17vw;
+  border-radius: 100%;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 3vw;
+  top: -3vw;
+  left: -3vw;
+  display: none;
+}
+
+.promotions a.promodule .claimed:before {
+  content: "CLAIMED";
+}
+
+.promotions a.promodule.alreadyJoin .claimed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .promotions a.promodule .protitle {
@@ -3039,10 +3076,6 @@ span.important {
   border: 0;
   background: transparent;
   line-height: 24px;
-}
-
-.promotions div.promodule > .btn-check {
-  float: left;
 }
 
 .promotions div.promodule .protitle {
@@ -3598,6 +3631,15 @@ span.important {
   font-size: 6vw;
 }
 
+.btn-cancel {
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+  color: #1E85EC;
+  padding: 2vw;
+  font-size: 3vw;
+}
+
 .btn-check {
   background: #1E85EC;
   border-radius: 5px;
@@ -3640,5 +3682,16 @@ span.important {
 
 .txt-blue2 {
   color: #1E85EC;
+}
+
+.Expired > a {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+
+.affiliate {
+  position: absolute;
+  left: 5vw;
+  bottom: 3vw;
 }
 /*# sourceMappingURL=style.css.map */
