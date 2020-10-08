@@ -31,7 +31,11 @@ const Panel = () => {
 						} else if (response.data.errorCode === 5002) {
 							setErrorMsg(i18n.msg_API_SendOTPSMS_5002);
 						} else {
-							setErrorMsg(response.data.message);
+							setErrorMsg(
+								response.data.message
+									? response.data.message
+									: `[${response.data.errorCode}] ${i18n.msg_ApiServerError}`
+							);
 						}
 						setLoading(false);
 					}

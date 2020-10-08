@@ -263,7 +263,7 @@
 	"lbl_badminton": "Cầu lông",
 	"lbl_eSports": "Thể thao điện tử",
 	"lbl_eSportsBetting": "Cá cược eSports",
-	"msg_ApiServerError": "API Server Error.",
+	"msg_ApiServerError": "Rất tiếc! Đã xảy ra lỗi, vui lòng thử lại.",
 	"msg_BalanceHint": "Số dư hiện tại của bạn là",
 	"msg_ConfirmRealNameAlert": "Để đảm bảo giao dịch chính xác, vui lòng đảm bảo tên thật của bạn giống với tên trên tài khoản ngân hàng.",
 	"msg_CreditSignUpHint_1": "Kính gửi quý khách hàng,",

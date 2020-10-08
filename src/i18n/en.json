@@ -263,7 +263,7 @@
 	"lbl_badminton": "Badminton",
 	"lbl_eSports": "E-Sport",
 	"lbl_eSportsBetting": "E-Sport Betting",
-	"msg_ApiServerError": "API Server Error.",
+	"msg_ApiServerError": "Oops! Something wrong, please try again.",
 	"msg_BalanceHint": "Your current balance is",
 	"msg_ConfirmRealNameAlert": "To ensure all transations correct, please make sure your real name is same with your bank account name",
 	"msg_CreditSignUpHint_1": "Dear Valued customer",
