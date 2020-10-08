@@ -316,5 +316,7 @@
 	"lbl_Retransmit": "Gửi lại mã",
 	"msg_VerifyCodeTip": "Please enter the verification number",
 	"lbl_MobileVerifiy": "Xác minh số điện thoại",
-	"lbl_Affiliates": "Đại lý"
+	"lbl_Affiliates": "Đại lý",
+	"lbl_SelectBank":"Chọn ngân hàng"
+
 }

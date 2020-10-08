@@ -316,5 +316,6 @@
 	"lbl_Retransmit": "Retransmit",
 	"msg_VerifyCodeTip":"Please enter the verification number",
 	"lbl_MobileVerifiy": "Mobile verification",
-	"lbl_Affiliates":"Affiliates"
+	"lbl_Affiliates":"Affiliates",
+	"lbl_SelectBank":"Please select the bank"
 }
