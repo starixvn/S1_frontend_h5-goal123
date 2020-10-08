@@ -27,7 +27,7 @@ export const Panel = props => props.children;
 
 export const Main = props => {
 	const { i18n } = useContext(i18nContext);
-	const { userInfo } = useContext(userInfoContext);
+	const { userInfo, setUserInfo } = useContext(userInfoContext);
 	const { setPopBox } = useContext(popBoxContext);
 	const { setbankSlipPopBox } = useContext(bankSlipPopBoxContext);
 
@@ -288,10 +288,21 @@ export const Main = props => {
 				};
 
 				const setAccountName = () => {
-					api_SetAccountName({ name: accountName }).then(
+					api_SetAccountName({
+						name: accountName ? accountName : userInfo.accountName
+					}).then(
 						res => {
 							if (isMountedRef.current) {
-								if (res.data.errorCode === 0) {
+								if (
+									res.data.errorCode === 0 ||
+									res.data.errorCode === -5
+								) {
+									if (res.data.errorCode === 0) {
+										setUserInfo(prevState => ({
+											...prevState,
+											accountName: accountName
+										}));
+									}
 									openConfirmPopBox();
 								} else {
 									setPopBox(prevState => ({
@@ -358,7 +369,7 @@ export const Main = props => {
 						)
 					});
 				} else {
-					openConfirmPopBox();
+					setAccountName();
 				}
 			} else {
 				setWarning({
