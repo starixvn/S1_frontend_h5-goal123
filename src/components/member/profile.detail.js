@@ -720,7 +720,7 @@ const ColumnItem = props => {
 				<>
 					<button className="otpBtn" onClick={props.clickOtp}>
 						<span className="icon icon-mobile"></span>
-						<span>{props.i18n.lbl_MobileVerifiy}</span>
+						<span>{props.i18n.lbl_MobileVerify}</span>
 					</button>
 				</>
 			) : null}
