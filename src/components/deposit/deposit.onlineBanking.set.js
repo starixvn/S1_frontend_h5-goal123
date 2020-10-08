@@ -152,8 +152,8 @@ const SetPayment = props => {
 	const VaildAmount = _amount => {
 		let result = checkAmount(
 			_amount,
-			selBank.bank.minAmount,
-			selBank.bank.maxAmount,
+			selBank.bank?.minAmount,
+			selBank.bank?.maxAmount,
 			_isConvert,
 			i18n
 		);
@@ -173,23 +173,31 @@ const SetPayment = props => {
 
 	const EditAmount = e => {
 		let value = e.target.value;
-		VaildAmount(value);
-		setAmount(value);
+
+		if (selBank.bank) {
+			VaildAmount(value);
+			setAmount(value);
+		} else {
+			setWarning({
+				status: true,
+				msg: i18n.lbl_SelectBank
+			});
+		}
 	};
 
 	const ClickSubmit = () => {
-		let result = VaildAmount(amount);
+		let result = VaildAmount(amount) && selBank.idx !== null;
 
 		if (result) {
 			const RedirectToNext = real_amount => {
 				window.open(
 					`${config.openURL}/${userInfo.langId}/Cashier/DepositReqOnlineBanking` +
 						"?sysId=" +
-						selBank.bank.sysId +
+						selBank.bank?.sysId +
 						"&payId=" +
-						selBank.bank.payId +
+						selBank.bank?.payId +
 						"&ChannelId=" +
-						selBank.bank.channelId +
+						selBank.bank?.channelId +
 						"&Amount=" +
 						real_amount
 				);
@@ -208,8 +216,8 @@ const SetPayment = props => {
 					<>
 						<p>{i18n.lbl_ConfirmDeposit}</p>
 						<img
-							src={`${config.imgUrl}/common/images/BankLogo/${selBank.bank.bankLogo}`}
-							alt={selBank.bank.bankName}
+							src={`${config.imgUrl}/common/images/BankLogo/${selBank.bank?.bankLogo}`}
+							alt={selBank.bank?.bankName}
 						/>
 						<div className="tip">
 							<span>{i18n.lbl_DepositAmount} :</span>{" "}
