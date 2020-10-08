@@ -122,7 +122,7 @@ export const Main = props => {
 				)
 			});
 		}
-	}, []);
+	}, [userInfo.isLogin, userInfo.userName]);
 
 	const SelectPayment = groupId => {
 		if (pageVerify && selGroupId !== groupId) {
