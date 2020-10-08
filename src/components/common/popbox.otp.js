@@ -1,21 +1,16 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { i18nContext, popBoxContext, userInfoContext } from "../common/context";
-import {
-	api_SendVerifySMS,
-	api_VerifyPhone
-} from "../../service/api/accountStrict";
-import { ReplaceStr } from "../../i18n/config";
-
-const initErrMsg = { specialStatus: false, msg: "" };
+import { api_SendOTPSMS, api_VerifyOTP } from "../../service/api/accountStrict";
+import moment from "moment";
 
 const Panel = () => {
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
-	const { userInfo, setUserInfo } = useContext(userInfoContext);
+	const { setUserInfo } = useContext(userInfoContext);
 	const [loading, setLoading] = useState(true);
 	const [otpCode, setOtpCode] = useState("");
-	const [requestId, setRequestId] = useState("");
-	const [errorMsg, setErrorMsg] = useState(initErrMsg);
+	const [startUnixTime, setStartUnixTime] = useState(null);
+	const [errorMsg, setErrorMsg] = useState("");
 	const [timer, setTimer] = useState(false);
 	const [warning, setWarning] = useState("");
 	const isMountedRef = useRef(null);
@@ -27,42 +22,37 @@ const Panel = () => {
 
 	useEffect(() => {
 		if (isMountedRef.current) {
-			api_SendVerifySMS().then(
+			api_SendOTPSMS().then(
 				response => {
 					if (isMountedRef.current) {
 						if (response.data.errorCode === 0) {
-							setRequestId(response.data.message);
+							setStartUnixTime(response.data.data.startUnixTime);
 							setTimer(true);
-						} else if (response.data.errorCode === 1004) {
-							setErrorMsg({
-								specialStatus: userInfo.langId === "vn",
-								msg: i18n.msg_API_SendVerifySMS_1004
-							});
-							setTimer(true);
-						} else if (response.data.errorCode === 5001) {
-							resetUserInfo();
+						} else if (response.data.errorCode === 5002) {
+							setErrorMsg(i18n.msg_API_SendOTPSMS_5002);
 						} else {
-							setErrorMsg({
-								specialStatus: false,
-								msg: response.data.message
-							});
+							setErrorMsg(
+								response.data.message
+									? response.data.message
+									: `[${response.data.errorCode}] ${i18n.msg_ApiServerError}`
+							);
 						}
 						setLoading(false);
 					}
 				},
 				err => {
 					if (isMountedRef.current) {
+						setLoading(false);
 						setPopBox({
 							isOpen: true,
 							title: i18n.lbl_ImportantNote,
 							content: i18n.msg_ApiServerError
 						});
-						setLoading(false);
 					}
 				}
 			);
 		}
-	}, [i18n.lbl_ImportantNote, i18n.msg_ApiServerError, setPopBox]);
+	}, []);
 
 	const editInput = e => {
 		let val = e.target.value;
@@ -77,18 +67,15 @@ const Panel = () => {
 	const checkSubmit = async () => {
 		checkValue(otpCode);
 
-		if (otpCode !== "" && requestId !== "") {
+		if (otpCode !== "") {
 			setLoading(true);
-
-			await clickSubmit(otpCode, requestId);
-			setLoading(false);
+			clickSubmit(otpCode);
 		}
 	};
 
-	const clickSubmit = async (otpCode, requestId) => {
-		await api_VerifyPhone({
-			request_id: requestId,
-			code: otpCode
+	const clickSubmit = async otpCode => {
+		await api_VerifyOTP({
+			inputOTPcode: otpCode
 		}).then(
 			res => {
 				if (isMountedRef.current) {
@@ -98,8 +85,13 @@ const Panel = () => {
 							phoneVerified: true
 						}));
 
+						setLoading(false);
 						setPopBox({ isOpen: false });
+					} else if (res.data.errorCode === 1000) {
+						setLoading(false);
+						setWarning(i18n.msg_OTP_Invalid);
 					} else {
+						setLoading(false);
 						setPopBox({
 							isOpen: true,
 							content: res.data.message,
@@ -119,6 +111,7 @@ const Panel = () => {
 			},
 			err => {
 				if (isMountedRef.current) {
+					setLoading(false);
 					setPopBox({
 						isOpen: true,
 						title: i18n.lbl_ImportantNote,
@@ -129,43 +122,31 @@ const Panel = () => {
 		);
 	};
 
-	const resetUserInfo = () => {
-		setUserInfo(prev => ({
-			...prev,
-			phoneVerified: true
-		}));
-	};
-
 	const clickResend = () => {
 		setLoading(true);
-		api_SendVerifySMS().then(
+		api_SendOTPSMS().then(
 			response => {
 				if (isMountedRef.current) {
 					if (response.data.errorCode === 0) {
-						setRequestId(response.data.message);
-					} else if (response.data.errorCode === 1004) {
-						setErrorMsg({
-							specialStatus: userInfo.langId === "vn",
-							msg: i18n.msg_API_SendVerifySMS_1004
-						});
+						setWarning("");
+						setStartUnixTime(response.data.data.startUnixTime);
 						setTimer(true);
+					} else if (response.data.errorCode === 5002) {
+						setErrorMsg(i18n.msg_API_SendOTPSMS_5002);
 					} else {
-						setErrorMsg({
-							specialStatus: false,
-							msg: response.data.message
-						});
+						setErrorMsg(response.data.message);
 					}
 					setLoading(false);
 				}
 			},
 			err => {
 				if (isMountedRef.current) {
+					setLoading(false);
 					setPopBox({
 						isOpen: true,
 						title: i18n.lbl_ImportantNote,
 						content: i18n.msg_ApiServerError
 					});
-					setLoading(false);
 				}
 			}
 		);
@@ -185,28 +166,15 @@ const Panel = () => {
 				<div className="otpLoading">
 					<i className="icon icon-spinner11"></i>
 				</div>
-			) : errorMsg.msg ? (
-				errorMsg.specialStatus ? (
-					<Counter
-						timeStop={timeStop}
-						specialStatus={errorMsg.specialStatus}
-						msg={errorMsg.msg}
-					/>
-				) : (
-					<>
-						{errorMsg.msg}
-						{timer ? (
-							<span>
-								<Counter timeStop={timeStop} />
-							</span>
-						) : null}
-						<div className="btn-group">
-							<button className="blue" onClick={closePopbox}>
-								{i18n.lbl_Cancel}
-							</button>
-						</div>
-					</>
-				)
+			) : errorMsg ? (
+				<>
+					{errorMsg}
+					<div className="btn-group">
+						<button className="blue" onClick={closePopbox}>
+							{i18n.lbl_Cancel}
+						</button>
+					</div>
+				</>
 			) : (
 				<div className="account">
 					<div className="info">{i18n.msg_OTPSendCode}</div>
@@ -230,7 +198,10 @@ const Panel = () => {
 							disabled={timer}>
 							{timer ? (
 								<span>
-									<Counter timeStop={timeStop} />
+									<Counter
+										startUnixTime={startUnixTime}
+										timeStop={timeStop}
+									/>
 								</span>
 							) : (
 								<span>{i18n.lbl_Retransmit}</span>
@@ -243,8 +214,9 @@ const Panel = () => {
 	);
 };
 
-export const Counter = ({ timeStop, specialStatus, msg }) => {
-	const [count, setCount] = useState(300);
+export const Counter = ({ startUnixTime, timeStop }) => {
+	let now = moment().unix();
+	const [count, setCount] = useState(startUnixTime + 300 - now);
 	const timerRef = useRef(null);
 
 	const secondsToTime = secondsInTime => {
@@ -275,12 +247,6 @@ export const Counter = ({ timeStop, specialStatus, msg }) => {
 		}
 	}, [count, timeStop]);
 
-	if (specialStatus) {
-		let _count = ReplaceStr(msg, {
-			timer: ` ( ${secondsToTime(count)} ) `
-		});
-		return _count;
-	}
 	return ` ( ${secondsToTime(count)} ) `;
 };
 

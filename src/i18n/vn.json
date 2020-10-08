@@ -263,7 +263,7 @@
 	"lbl_badminton": "Cầu lông",
 	"lbl_eSports": "Thể thao điện tử",
 	"lbl_eSportsBetting": "Cá cược eSports",
-	"msg_ApiServerError": "API Server Error.",
+	"msg_ApiServerError": "Rất tiếc! Đã xảy ra lỗi, vui lòng thử lại.",
 	"msg_BalanceHint": "Số dư hiện tại của bạn là",
 	"msg_ConfirmRealNameAlert": "Để đảm bảo giao dịch chính xác, vui lòng đảm bảo tên thật của bạn giống với tên trên tài khoản ngân hàng.",
 	"msg_CreditSignUpHint_1": "Kính gửi quý khách hàng,",
@@ -317,6 +317,8 @@
 	"msg_VerifyCodeTip": "Please enter the verification number",
 	"lbl_MobileVerifiy": "Xác minh số điện thoại",
 	"lbl_Affiliates": "Đại lý",
-	"lbl_SelectBank":"Chọn ngân hàng"
-
+	"lbl_SelectBank":"Chọn ngân hàng",
+	"lbl_MobileVerify": "Xác minh số điện thoại",
+	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
+	"msg_OTP_Invalid": "Invalid OTP Code"
 }

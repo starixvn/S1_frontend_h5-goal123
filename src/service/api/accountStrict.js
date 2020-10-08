@@ -50,13 +50,11 @@ export const api_UploadCustPhotoId = formData =>
 		}
 	});
 
-export const api_SendVerifySMS = () =>
-	accountStrictRequest.post("/SendVerifySMS");
+export const api_SendOTPSMS = () => accountStrictRequest.post("/SendOTPSMS");
 
-export const api_VerifyPhone = ({ request_id, code }) =>
-	accountStrictRequest.post("/VerifyPhone", {
-		request_id,
-		code
+export const api_VerifyOTP = ({ inputOTPcode }) =>
+	accountStrictRequest.post("/VerifyOTP", {
+		inputOTPcode
 	});
 
 export const api_SetAccountName = ({ name }) =>
