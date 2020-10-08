@@ -58,3 +58,6 @@ export const api_VerifyPhone = ({ request_id, code }) =>
 		request_id,
 		code
 	});
+
+export const api_SetAccountName = ({ name }) =>
+	accountStrictRequest.post("/SetAccountName", { name: name });
