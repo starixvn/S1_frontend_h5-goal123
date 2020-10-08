@@ -208,6 +208,7 @@ const SetMobilePay = props => {
 			) : (
 				<InputBox
 					icon="icon-pencil"
+					placeholder={i18n["lbl_Amount"]}
 					value={amount}
 					inputType="tel"
 					onChange={EditAmount}

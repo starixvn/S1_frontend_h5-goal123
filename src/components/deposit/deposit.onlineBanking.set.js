@@ -278,6 +278,7 @@ const SetPayment = props => {
 				<InputBox
 					icon="icon-pencil"
 					value={amount}
+					placeholder={i18n["lbl_Amount"]}
 					inputType="tel"
 					onChange={EditAmount}
 					Warning={warning}
