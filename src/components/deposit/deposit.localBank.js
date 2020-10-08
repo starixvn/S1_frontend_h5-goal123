@@ -21,6 +21,7 @@ import PageVerify from "./deposit.pageVerify";
 import path from "../../path";
 import Loading from "../common/loading";
 import Promotion from "./deposit.promotion";
+import { api_SetAccountName } from "../../service/api/accountStrict";
 
 export const Panel = props => props.children;
 
@@ -286,6 +287,50 @@ export const Main = props => {
 					});
 				};
 
+				const setAccountName = () => {
+					api_SetAccountName({ name: accountName }).then(
+						res => {
+							if (isMountedRef.current) {
+								if (res.data.errorCode === 0) {
+									openConfirmPopBox();
+								} else {
+									setPopBox(prevState => ({
+										...prevState,
+										title: i18n.lbl_ImportantNote,
+										content: res.data.message,
+										hasBtn: true,
+										btnBar: (
+											<div className="btn-group">
+												<button
+													className="blue"
+													onClick={() =>
+														setPopBox(
+															prevState => ({
+																...prevState,
+																isOpen: false
+															})
+														)
+													}>
+													{i18n["lbl_Cancel"]}
+												</button>
+											</div>
+										)
+									}));
+								}
+							}
+						},
+						err => {
+							if (isMountedRef.current) {
+								setPopBox({
+									isOpen: true,
+									title: i18n.lbl_ImportantNote,
+									content: i18n.msg_ApiServerError
+								});
+							}
+						}
+					);
+				};
+
 				if (!userInfo.accountName) {
 					setPopBox({
 						isOpen: true,
@@ -306,7 +351,7 @@ export const Main = props => {
 								</button>
 								<button
 									className="orange"
-									onClick={openConfirmPopBox}>
+									onClick={setAccountName}>
 									{i18n["lbl_Submit"]}
 								</button>
 							</div>
