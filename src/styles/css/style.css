@@ -1998,18 +1998,22 @@ input {
 
 input::-webkit-input-placeholder {
   color: white;
+  text-align: left;
 }
 
 input:-ms-input-placeholder {
   color: white;
+  text-align: left;
 }
 
 input::-ms-input-placeholder {
   color: white;
+  text-align: left;
 }
 
 input::placeholder {
   color: white;
+  text-align: left;
 }
 
 input[type="file"] {
@@ -3005,22 +3009,7 @@ span.important {
   margin: 14vw 0 3vw;
 }
 
-.promotions a.promodule {
-  padding: 3vw;
-  border: 1px dotted #1E85EC;
-  margin-bottom: 3vw;
-  background: rgba(0, 0, 0, 0.3);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: relative;
-}
-
-.promotions a.promodule .claimed {
+.promotions .claimed {
   position: absolute;
   background: rgba(233, 37, 41, 0.8);
   width: 17vw;
@@ -3038,16 +3027,41 @@ span.important {
   top: -3vw;
   left: -3vw;
   display: none;
+  z-index: 1;
+  color: white;
 }
 
-.promotions a.promodule .claimed:before {
+.promotions .claimed:before {
   content: "CLAIMED";
 }
 
-.promotions a.promodule.alreadyJoin .claimed {
+.promotions a.promodule {
+  padding: 3vw;
+  border: 1px dotted #1E85EC;
+  margin-bottom: 3vw;
+  background: rgba(0, 0, 0, 0.3);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+.promotions a.promodule.open {
+  background: #666;
+}
+
+.promotions a.promodule.open .claimed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.promotions a.promodule.open .btn-group button:nth-child(2) {
+  display: none;
 }
 
 .promotions a.promodule .protitle {
@@ -3076,6 +3090,18 @@ span.important {
   border: 0;
   background: transparent;
   line-height: 24px;
+  position: relative;
+}
+
+.promotions div.promodule.open img {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+
+.promotions div.promodule.open .claimed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .promotions div.promodule .protitle {
@@ -3664,7 +3690,7 @@ span.important {
 }
 
 .rollover .icon {
-  color: #64789b;
+  color: #1E85EC;
 }
 
 .resend {
@@ -3684,14 +3710,54 @@ span.important {
   color: #1E85EC;
 }
 
-.Expired > a {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
-}
-
 .affiliate {
   position: absolute;
   left: 5vw;
   bottom: 3vw;
+}
+
+.Expired > a.promodule {
+  background: #f0eff5;
+}
+
+.Expired > a.promodule img, .Expired > a.promodule div:not(.btn-group):not(.claimed) {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+
+.Expired > a.promodule .text, .Expired > a.promodule .rollover div {
+  color: #1E85EC;
+}
+
+.Expired > div.promodule img, .Expired > div.promodule div:not(.btn-group):not(.claimed) {
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+
+.minAmount {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 12px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.minAmount > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.minAmount > div > div {
+  border: 1px solid #1E85EC;
+  padding: 5px 10px;
+  background: rgba(30, 133, 236, 0.3);
+  color: #1E85EC;
+}
+
+.minAmount > div > div:last-child {
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
 }
 /*# sourceMappingURL=style.css.map */

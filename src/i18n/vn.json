@@ -315,8 +315,10 @@
 	"lbl_UpdatePersonalInfoPromotion": "Vui lòng cập nhật thông tin cá nhân của bạn trước khi tham gia khuyến mãi.",
 	"lbl_Retransmit": "Gửi lại mã",
 	"msg_VerifyCodeTip": "Please enter the verification number",
+	"lbl_MobileVerifiy": "Xác minh số điện thoại",
+	"lbl_Affiliates": "Đại lý",
+	"lbl_SelectBank":"Chọn ngân hàng",
 	"lbl_MobileVerify": "Xác minh số điện thoại",
 	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
-	"msg_OTP_Invalid": "Invalid OTP Code",
-	"lbl_Affiliates": "Đại lý"
+	"msg_OTP_Invalid": "Invalid OTP Code"
 }

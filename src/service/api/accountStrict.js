@@ -56,3 +56,6 @@ export const api_VerifyOTP = ({ inputOTPcode }) =>
 	accountStrictRequest.post("/VerifyOTP", {
 		inputOTPcode
 	});
+
+export const api_SetAccountName = ({ name }) =>
+	accountStrictRequest.post("/SetAccountName", { name: name });
