@@ -13,37 +13,8 @@ export default (
 		let mounted = true;
 		if (mounted) {
 			if (!propsFromParent) {
-				if (
-					userInfo.isLogin &&
-					userInfo.currencyId &&
-					(!userInfo.accountName || !userInfo.phoneNo)
-				) {
-					const ClosePopBox = () => {
-						setPopBox({ isOpen: false });
-						setRedirectPath(`/${path.member.root}`);
-					};
-
-					setPopBox({
-						isOpen: true,
-						title: i18n.lbl_ImportantNote,
-						content: i18n.lbl_UpdatePersonalInfo,
-						hasBtn: true,
-						hideCloseBtn: true,
-						btnBar: (
-							<div className="btn-group">
-								<button className="blue" onClick={ClosePopBox}>
-									{i18n.lbl_UpdatePersonalDetail}
-								</button>
-							</div>
-						)
-					});
-					if (mounted) {
-						setPageVerify(false);
-					}
-				} else {
-					if (mounted) {
-						setPageVerify(true);
-					}
+				if (mounted) {
+					setPageVerify(true);
 				}
 			}
 		}
