@@ -53,8 +53,8 @@ const SetMobilePay = props => {
 	const VaildAmount = _amount => {
 		let result = checkAmount(
 			_amount,
-			paymentInfo.minAmount,
-			paymentInfo.maxAmount,
+			paymentInfo?.minAmount,
+			paymentInfo?.maxAmount,
 			_isConvert,
 			i18n
 		);
@@ -181,7 +181,9 @@ const SetMobilePay = props => {
 					<div className="info">
 						<ul>
 							<li>
-								<span className="title">Zalo</span>
+								<span className="title">
+									{paymentInfo.groupName}
+								</span>
 								<LimitTip
 									minAmount={paymentInfo.minAmount}
 									maxAmount={paymentInfo.maxAmount}

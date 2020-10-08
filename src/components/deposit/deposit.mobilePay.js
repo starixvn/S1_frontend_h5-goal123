@@ -96,6 +96,34 @@ export const Main = props => {
 		i18n.msg_ApiServerError
 	]);
 
+	useEffect(() => {
+		if (
+			userInfo.isLogin &&
+			userInfo.currencyId &&
+			(!userInfo.accountName || !userInfo.phoneNo)
+		) {
+			const ClosePopBox = () => {
+				setPopBox({ isOpen: false });
+				setRedirectPath(`/${path.member.root}`);
+			};
+
+			setPopBox({
+				isOpen: true,
+				title: i18n.lbl_ImportantNote,
+				content: i18n.lbl_UpdatePersonalInfo,
+				hasBtn: true,
+				hideCloseBtn: true,
+				btnBar: (
+					<div className="btn-group">
+						<button className="blue" onClick={ClosePopBox}>
+							{i18n.lbl_UpdatePersonalDetail}
+						</button>
+					</div>
+				)
+			});
+		}
+	}, []);
+
 	const SelectPayment = groupId => {
 		if (pageVerify && selGroupId !== groupId) {
 			setSelGroupId(() => groupId);
