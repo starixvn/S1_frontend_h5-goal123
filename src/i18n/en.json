@@ -320,5 +320,6 @@
 	"lbl_SelectBank":"Please select the bank",
 	"lbl_MobileVerify": "Mobile verification",
 	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
-	"msg_OTP_Invalid": "Invalid OTP Code"
+	"msg_OTP_Invalid": "Invalid OTP Code",
+	"msg_RealnameTip":"Please enter your full real name for smooth transactions!"
 }

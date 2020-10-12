@@ -414,13 +414,18 @@ export const Main = props => {
 					/>
 				</div>
 				{!userInfo.accountName ? (
-					<InputBox
-						icon="icon-member"
-						placeholder={i18n["lbl_RealName"]}
-						value={accountName}
-						onChange={EditField.bind(this, "accountName")}
-						Warning={warning.accountName}
-					/>
+					<>
+						<InputBox
+							icon="icon-member"
+							placeholder={i18n["lbl_RealName"]}
+							value={accountName}
+							onChange={EditField.bind(this, "accountName")}
+							Warning={warning.accountName}
+						/>
+						<div className="info">
+							<div className="open">{i18n.msg_RealnameTip}</div>
+						</div>
+					</>
 				) : (
 					<></>
 				)}
