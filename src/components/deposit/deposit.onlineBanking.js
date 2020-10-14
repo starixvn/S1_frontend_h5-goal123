@@ -89,7 +89,8 @@ export const Main = props => {
 				<Link
 					to={`${p.payName}`}
 					state={{
-						payId: p.payId
+						payId: p.payId,
+						selBank: p.selBank
 					}}>
 					<img
 						src={`${config.imgUrl}/common/images/Payment/${p.payName}.png`}
