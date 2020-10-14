@@ -86,13 +86,7 @@ export const Main = props => {
 	let rows = paymentList?.map(p => {
 		return (
 			<div key={`onlinebanking-${p.payId}-${p.channelId}`}>
-				<Link
-					to={`${p.payName}`}
-					state={{
-						payId: p.payId,
-						selBank: p.selBank,
-						channelId: p.channelId
-					}}>
+				<Link to={`${p.payName}`} state={{ ...p }}>
 					<img
 						src={`${config.imgUrl}/common/images/Payment/${p.payName}.png`}
 						alt={p.payName}></img>

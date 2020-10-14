@@ -56,7 +56,7 @@ const SetPayment = props => {
 				setLoading(false);
 			}
 		} else {
-			if (userInfo.isLogin) {
+			if (userInfo.isLogin && _selBank) {
 				setLoading(true);
 				api_GetOnlineBankInfoSysList({
 					payId: props.location.state.payId
@@ -74,7 +74,7 @@ const SetPayment = props => {
 							});
 
 							if (isMountedRef.current) {
-								if (datas.length > 0) {
+								if (datas.length > 0 || _selBank === false) {
 									setBankList(datas);
 								} else {
 									setRedirectPath(`/${path.deposit.root}`);
@@ -106,6 +106,7 @@ const SetPayment = props => {
 					}
 				);
 			}
+			setLoading(false);
 		}
 	}, [
 		props.location.state,
@@ -263,8 +264,8 @@ const SetPayment = props => {
 			<>
 				<Step step={3} />
 
-				{_selBank ? (
-					<div className="inputBox">
+				<div className="inputBox">
+					{_selBank ? (
 						<DropdownIMG
 							mainKey={"onlineBanking-bankList"}
 							onSelectItem={SelectBank}
@@ -274,15 +275,23 @@ const SetPayment = props => {
 							ImgURL={`${config.imgUrl}/common/images/BankLogo/`}
 							className="bankLogo"
 						/>
-						<LimitTip
-							displayTextLimit={i18n.lbl_Limit}
-							displayTextUnLimit={i18n.lbl_Unlimited}
-							_isConvert={_isConvert}
-							minAmount={selBank?.bank?.minAmount}
-							maxAmount={selBank?.bank?.maxAmount}
-						/>
-					</div>
-				) : null}
+					) : null}
+					<LimitTip
+						displayTextLimit={i18n.lbl_Limit}
+						displayTextUnLimit={i18n.lbl_Unlimited}
+						_isConvert={_isConvert}
+						minAmount={
+							_selBank
+								? selBank?.bank?.minAmount
+								: props.location.state.minAmount
+						}
+						maxAmount={
+							_selBank
+								? selBank?.bank?.maxAmount
+								: props.location.state.maxAmount
+						}
+					/>
+				</div>
 
 				<InputBox
 					icon="icon-pencil"
