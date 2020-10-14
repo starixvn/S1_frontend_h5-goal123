@@ -90,7 +90,8 @@ export const Main = props => {
 					to={`${p.payName}`}
 					state={{
 						payId: p.payId,
-						selBank: p.selBank
+						selBank: p.selBank,
+						channelId: p.channelId
 					}}>
 					<img
 						src={`${config.imgUrl}/common/images/Payment/${p.payName}.png`}

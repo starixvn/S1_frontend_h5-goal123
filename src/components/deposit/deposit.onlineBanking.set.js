@@ -187,6 +187,7 @@ const SetPayment = props => {
 	};
 
 	const ClickSubmit = () => {
+		let _sysId = _selBank ? selBank.bank?.sysId : 0;
 		let selBankCheck = _selBank ? selBank.idx !== null : true;
 		let result = VaildAmount(amount) && selBankCheck;
 
@@ -195,11 +196,11 @@ const SetPayment = props => {
 				window.open(
 					`${config.openURL}/${userInfo.langId}/Cashier/DepositReqOnlineBanking` +
 						"?sysId=" +
-						selBank.bank?.sysId +
+						_sysId +
 						"&payId=" +
-						selBank.bank?.payId +
+						props.location.state?.payId +
 						"&ChannelId=" +
-						selBank.bank?.channelId +
+						props.location.state?.channelId +
 						"&Amount=" +
 						real_amount
 				);
