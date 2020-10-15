@@ -74,7 +74,7 @@ const SetPayment = props => {
 							});
 
 							if (isMountedRef.current) {
-								if (datas.length > 0 || _selBank === false) {
+								if (datas.length > 0) {
 									setBankList(datas);
 								} else {
 									setRedirectPath(`/${path.deposit.root}`);
@@ -152,10 +152,17 @@ const SetPayment = props => {
 	};
 
 	const VaildAmount = _amount => {
+		let _mixAmount = _selBank
+			? selBank.bank?.minAmount
+			: props.location.state.minAmount;
+		let _maxAmount = _selBank
+			? selBank.bank?.maxAmount
+			: props.location.state.maxAmount;
+
 		let result = checkAmount(
 			_amount,
-			selBank.bank?.minAmount,
-			selBank.bank?.maxAmount,
+			_mixAmount,
+			_maxAmount,
 			_isConvert,
 			i18n
 		);
