@@ -32,7 +32,7 @@ const SetPayment = props => {
 
 	const [pageVerify, setPageVerify] = useState(true);
 	const [loading, setLoading] = useState(true);
-	const _selBank = props.location.state.selBank;
+	const _selBank = props.location.state?.selBank;
 
 	const isMountedRef = useRef(null);
 	useEffect(() => {
@@ -290,12 +290,12 @@ const SetPayment = props => {
 						minAmount={
 							_selBank
 								? selBank?.bank?.minAmount
-								: props.location.state.minAmount
+								: props.location.state?.minAmount
 						}
 						maxAmount={
 							_selBank
 								? selBank?.bank?.maxAmount
-								: props.location.state.maxAmount
+								: props.location.state?.maxAmount
 						}
 					/>
 				</div>
