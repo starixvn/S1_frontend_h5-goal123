@@ -32,6 +32,7 @@ const SetPayment = props => {
 
 	const [pageVerify, setPageVerify] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const _selBank = props.location.state?.selBank;
 
 	const isMountedRef = useRef(null);
 	useEffect(() => {
@@ -55,7 +56,7 @@ const SetPayment = props => {
 				setLoading(false);
 			}
 		} else {
-			if (userInfo.isLogin) {
+			if (userInfo.isLogin && _selBank) {
 				setLoading(true);
 				api_GetOnlineBankInfoSysList({
 					payId: props.location.state.payId
@@ -105,6 +106,7 @@ const SetPayment = props => {
 					}
 				);
 			}
+			setLoading(false);
 		}
 	}, [
 		props.location.state,
@@ -150,10 +152,17 @@ const SetPayment = props => {
 	};
 
 	const VaildAmount = _amount => {
+		let _mixAmount = _selBank
+			? selBank.bank?.minAmount
+			: props.location.state.minAmount;
+		let _maxAmount = _selBank
+			? selBank.bank?.maxAmount
+			: props.location.state.maxAmount;
+
 		let result = checkAmount(
 			_amount,
-			selBank.bank?.minAmount,
-			selBank.bank?.maxAmount,
+			_mixAmount,
+			_maxAmount,
 			_isConvert,
 			i18n
 		);
@@ -174,7 +183,7 @@ const SetPayment = props => {
 	const EditAmount = e => {
 		let value = e.target.value;
 
-		if (selBank.bank) {
+		if (selBank.bank || _selBank === false) {
 			VaildAmount(value);
 			setAmount(value);
 		} else {
@@ -186,18 +195,20 @@ const SetPayment = props => {
 	};
 
 	const ClickSubmit = () => {
-		let result = VaildAmount(amount) && selBank.idx !== null;
+		let _sysId = _selBank ? selBank.bank?.sysId : 0;
+		let selBankCheck = _selBank ? selBank.idx !== null : true;
+		let result = VaildAmount(amount) && selBankCheck;
 
 		if (result) {
 			const RedirectToNext = real_amount => {
 				window.open(
 					`${config.openURL}/${userInfo.langId}/Cashier/DepositReqOnlineBanking` +
 						"?sysId=" +
-						selBank.bank?.sysId +
+						_sysId +
 						"&payId=" +
-						selBank.bank?.payId +
+						props.location.state?.payId +
 						"&ChannelId=" +
-						selBank.bank?.channelId +
+						props.location.state?.channelId +
 						"&Amount=" +
 						real_amount
 				);
@@ -215,10 +226,12 @@ const SetPayment = props => {
 				content: (
 					<>
 						<p>{i18n.lbl_ConfirmDeposit}</p>
-						<img
-							src={`${config.imgUrl}/common/images/BankLogo/${selBank.bank?.bankLogo}`}
-							alt={selBank.bank?.bankName}
-						/>
+						{_selBank ? (
+							<img
+								src={`${config.imgUrl}/common/images/BankLogo/${selBank.bank?.bankLogo}`}
+								alt={selBank.bank?.bankName}
+							/>
+						) : null}
 						<div className="tip">
 							<span>{i18n.lbl_DepositAmount} :</span>{" "}
 							{number_format(real_amount, _isConvert)}
@@ -257,24 +270,36 @@ const SetPayment = props => {
 		) : pageVerify ? (
 			<>
 				<Step step={3} />
+
 				<div className="inputBox">
-					<DropdownIMG
-						mainKey={"onlineBanking-bankList"}
-						onSelectItem={SelectBank}
-						options={bankList}
-						selectedIdx={selBank?.idx}
-						i18n={i18n}
-						ImgURL={`${config.imgUrl}/common/images/BankLogo/`}
-						className="bankLogo"
-					/>
+					{_selBank ? (
+						<DropdownIMG
+							mainKey={"onlineBanking-bankList"}
+							onSelectItem={SelectBank}
+							options={bankList}
+							selectedIdx={selBank?.idx}
+							i18n={i18n}
+							ImgURL={`${config.imgUrl}/common/images/BankLogo/`}
+							className="bankLogo"
+						/>
+					) : null}
 					<LimitTip
 						displayTextLimit={i18n.lbl_Limit}
 						displayTextUnLimit={i18n.lbl_Unlimited}
 						_isConvert={_isConvert}
-						minAmount={selBank?.bank?.minAmount}
-						maxAmount={selBank?.bank?.maxAmount}
+						minAmount={
+							_selBank
+								? selBank?.bank?.minAmount
+								: props.location.state?.minAmount
+						}
+						maxAmount={
+							_selBank
+								? selBank?.bank?.maxAmount
+								: props.location.state?.maxAmount
+						}
 					/>
 				</div>
+
 				<InputBox
 					icon="icon-pencil"
 					value={amount}
