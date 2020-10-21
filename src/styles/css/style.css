@@ -3035,7 +3035,7 @@ span.important {
   content: "CLAIMED";
 }
 
-.promotions a.promodule {
+.promotions .tag ~ div.promodule {
   padding: 3vw;
   border: 1px dotted #1E85EC;
   margin-bottom: 3vw;
@@ -3050,21 +3050,21 @@ span.important {
   position: relative;
 }
 
-.promotions a.promodule.open {
+.promotions .tag ~ div.promodule.open {
   background: #666;
 }
 
-.promotions a.promodule.open .claimed {
+.promotions .tag ~ div.promodule.open .claimed {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.promotions a.promodule.open .btn-group button:nth-child(2) {
+.promotions .tag ~ div.promodule.open .btn-group button:nth-child(2) {
   display: none;
 }
 
-.promotions a.promodule .protitle {
+.promotions .tag ~ div.promodule .protitle {
   margin-top: 1vw;
   color: #1E85EC;
   font-weight: bold;
@@ -3074,7 +3074,7 @@ span.important {
   white-space: nowrap;
 }
 
-.promotions a.promodule .text {
+.promotions .tag ~ div.promodule .text {
   max-width: calc(100% - 1vw);
   padding-left: 1vw;
   overflow: hidden;
@@ -3082,7 +3082,7 @@ span.important {
   white-space: nowrap;
 }
 
-.promotions a.promodule .text + .btn-group button {
+.promotions .tag ~ div.promodule .text + .btn-group button {
   padding: 1vw;
 }
 
@@ -3716,20 +3716,7 @@ span.important {
   bottom: 3vw;
 }
 
-.Expired > a.promodule {
-  background: #f0eff5;
-}
-
-.Expired > a.promodule img, .Expired > a.promodule div:not(.btn-group):not(.claimed) {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
-}
-
-.Expired > a.promodule .text, .Expired > a.promodule .rollover div {
-  color: #1E85EC;
-}
-
-.Expired > div.promodule img, .Expired > div.promodule div:not(.btn-group):not(.claimed) {
+.Expired img, .Expired div:not(.btn-group):not(.claimed) {
   -webkit-filter: grayscale(1);
           filter: grayscale(1);
 }
@@ -3759,5 +3746,36 @@ span.important {
 .minAmount > div > div:last-child {
   color: white;
   background: rgba(0, 0, 0, 0.3);
+}
+
+.new {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: #fab617;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: white;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.new:before {
+  content: "NEW";
+}
+
+.new.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=style.css.map */
