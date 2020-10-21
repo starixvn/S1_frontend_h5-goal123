@@ -74,6 +74,7 @@ const Index = () => {
 						<ResetPwd path={path.resetPassword.root} />
 						<ChangePwd path={path.changePassword.root} />
 						<Promotion path={path.promotion.root}></Promotion>
+
 						<PromotionInfo path={path.promotionInfo.root} />
 						<Wallet path={path.wallet.root} />
 						<LiveChat path={path.livechat.root} />

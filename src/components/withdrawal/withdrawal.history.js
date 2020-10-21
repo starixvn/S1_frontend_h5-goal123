@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { i18nContext, popBoxContext, userInfoContext } from "../common/context";
+import { i18nContext, popBoxContext } from "../common/context";
 import {
 	api_GetWithdrawalInfoHistory,
 	api_SetWithdrawalCancel
@@ -12,7 +12,6 @@ import ReloadSpin from "../common/reloadSpin";
 import Loading from "../common/loading";
 
 const Panel = () => {
-	const { userInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
 	const [getHistoryState, setGetHistoryState] = useState(null);

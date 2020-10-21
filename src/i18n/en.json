@@ -321,5 +321,12 @@
 	"lbl_MobileVerify": "Mobile verification",
 	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
 	"msg_OTP_Invalid": "Invalid OTP Code",
-	"msg_RealnameTip":"Please enter your full real name for smooth transactions!"
+	"msg_RealnameTip":"Please enter your full real name for smooth transactions!",
+	"lbl_Processing":"Processing",
+	"lbl_PromoCategory_5":"Expired",
+	"lbl_PromotionCategory1":"First Deposit",
+	"lbl_FreeBet": "Free Bet",
+	"lbl_MinAmount": "Min Amount",
+	"lbl_RequireMinAmountHint_Front": "The minimum amount of deposit are required to be at least ",
+    "lbl_RequireMinAmountHint_Back":"Deposit now?"
 }

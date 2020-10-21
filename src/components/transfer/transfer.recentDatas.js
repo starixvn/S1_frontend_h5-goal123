@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { i18nContext, userInfoContext } from "../common/context";
+import { i18nContext } from "../common/context";
 import { TransactionHistory } from "./transfer.history";
 import { number_format } from "../common/common";
 import ReloadSpin from "../common/reloadSpin";
@@ -7,7 +7,6 @@ import { Link } from "@reach/router";
 import path from "../../path";
 
 const ReacentDatas = props => {
-	const { userInfo } = useContext(userInfoContext);
 	const { i18n } = useContext(i18nContext);
 	const [isOpen, setOpen] = useState(false);
 

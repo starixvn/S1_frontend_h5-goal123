@@ -202,7 +202,7 @@ export const TransactionHistory = props => {
 				<li>
 					<span className="title">{props.i18n["lbl_Direction"]}</span>
 					<span>
-						<span>{props.startWallet}</span> >
+						<span>{props.startWallet}</span>
 						<span>{props.endWallet}</span>
 					</span>
 				</li>
