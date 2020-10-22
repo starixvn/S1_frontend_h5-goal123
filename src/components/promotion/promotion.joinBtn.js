@@ -129,6 +129,33 @@ export default ({ userInfo, i18n, p, GetPromotion, isList, setPopBox }) => {
 										</div>
 									)
 								});
+							} else if (res.data.errorCode === -5) {
+								const RedirectToProfile = () => {
+									setRedirectPath(
+										`/${path.member.root}?prevPage=${path.promotionInfo.root}&BonusCode=${p.bonusCode}`
+									);
+									ClosePopBox();
+								};
+								setPopBox({
+									isOpen: true,
+									title: i18n.lbl_ImportantNote,
+									content: <p>{i18n.msg_OTPHint}</p>,
+									hasBtn: true,
+									btnBar: (
+										<div className="btn-group">
+											<button
+												className="blue"
+												onClick={ClosePopBox}>
+												{i18n.lbl_Later}
+											</button>
+											<button
+												onClick={RedirectToProfile}
+												className="btn-check">
+												{i18n.lbl_GoNow}
+											</button>
+										</div>
+									)
+								});
 							} else {
 								setPopBox({
 									isOpen: true,
