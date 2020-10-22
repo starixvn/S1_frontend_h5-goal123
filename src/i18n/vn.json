@@ -305,7 +305,7 @@
 	"lbl_Req": "Yêu cầu.",
 	"lbl_PromoJoinNow": "Tham Gia Ngay",
 	"lbl_GoNow": "Tham gia ngay",
-	"msg_OTPHint": "Vui lòng xác nhận hồ sơ và số điện thoại của bạn để tận hưởng các khuyến mãi hấp dẫn.",
+	"msg_OTPHint": "Vui lòng hoàn tất thông tin của bạn và xác minh số điện thoại của bạn để được hưởng các chương trình khuyến mãi của chúng tôi.",
 	"lbl_UpdateSuccessful": "Cập nhật thành công!",
 	"msg_AmountFormatTip": "Xin lưu ý cách thể hiện số tiền của hệ thống như sau : 15,000 = 15,000,000 VNĐ, mười lăm triệu đồng. ",
 	"msg_API_SendVerifySMS_1004": "Bạn có nhiều yêu cầu gửi mã xác nhận trong một khoảng thời gian ngắn. Xin vui lòng thử lại sau {{timer}} giây nữa",
@@ -328,7 +328,11 @@
 	"lbl_FreeBet": "Cược Miễn Phí",
 	"lbl_MinAmount": "Số tiền tối thiểu",
 	"lbl_RequireMinAmountHint_Front": "Tiền gửi tối thiểu là: ",
-    "lbl_RequireMinAmountHint_Back":"Nạp tiền ngay??"
+	"lbl_RequireMinAmountHint_Back":"Nạp tiền ngay??",
+	"lbl_VerifyHint1": "Xác minh số điện thoại?",
+	"lbl_VerifyHint2": "Bạn sẽ có cơ hội tham gia những ưu đãi đặc biệt",
+	"lbl_VerifyNow": "Xác minh ngay bây giờ",
+	"lbl_Hi": "Hi!"
 
 
 }
