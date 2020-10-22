@@ -90,8 +90,7 @@ const Panel = ({ ClosePopbox }) => {
 						setLoading(false);
 						setPopBox({ isOpen: false });
 
-						let _prevPage = getUrlParameter("prevPage");
-						redirectToPrev(_prevPage, i18n, setPopBox, ClosePopbox);
+						redirectToPrev(i18n, setPopBox, ClosePopbox);
 					} else if (res.data.errorCode === 1000) {
 						setLoading(false);
 						setWarning(i18n.msg_OTP_Invalid);

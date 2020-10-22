@@ -449,13 +449,7 @@ const Panel = () => {
 									}
 								);
 
-								let _prevPage = getUrlParameter("prevPage");
-								redirectToPrev(
-									_prevPage,
-									i18n,
-									setPopBox,
-									closePopbox
-								);
+								redirectToPrev(i18n, setPopBox, closePopbox);
 							} else if (errorCode === 21) {
 								setWarningState(prevState => ({
 									...prevState,

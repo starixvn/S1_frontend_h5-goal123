@@ -2,7 +2,8 @@ import React from "react";
 import { getUrlParameter } from "../common/common";
 import path from "../../path";
 
-export const redirectToPrev = (_prevPage, i18n, setPopBox, closePopbox) => {
+export const redirectToPrev = (i18n, setPopBox, closePopbox) => {
+	let _prevPage = getUrlParameter("prevPage");
 	if (_prevPage === path.withdrawal.root) {
 		setPopBox({
 			isOpen: true,
