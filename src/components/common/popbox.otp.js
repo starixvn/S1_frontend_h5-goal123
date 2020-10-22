@@ -2,8 +2,10 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import { i18nContext, popBoxContext, userInfoContext } from "../common/context";
 import { api_SendOTPSMS, api_VerifyOTP } from "../../service/api/accountStrict";
 import moment from "moment";
+import { getUrlParameter } from "../common/common";
+import { redirectToPrev } from "../member/profile.redirect";
 
-const Panel = () => {
+const Panel = ({ ClosePopbox }) => {
 	const { i18n } = useContext(i18nContext);
 	const { setPopBox } = useContext(popBoxContext);
 	const { setUserInfo } = useContext(userInfoContext);
@@ -87,6 +89,8 @@ const Panel = () => {
 
 						setLoading(false);
 						setPopBox({ isOpen: false });
+
+						redirectToPrev(i18n, setPopBox, ClosePopbox);
 					} else if (res.data.errorCode === 1000) {
 						setLoading(false);
 						setWarning(i18n.msg_OTP_Invalid);
