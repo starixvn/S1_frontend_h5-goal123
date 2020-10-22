@@ -13,6 +13,7 @@ import { api_ExistsEmail } from "../../service/api/site";
 import { defPopBoxType } from "../common/popbox";
 import path from "../../path";
 import { getUrlParameter } from "../common/common";
+import { redirectToPrev } from "./profile.redirect";
 
 const monthOptions = [
 	{ value: 1, id: 0, displayKey: "lbl_Month1" },
@@ -371,6 +372,30 @@ const Panel = () => {
 				}
 			};
 
+			const openOtpHint = () => {
+				setPopBox({
+					isOpen: true,
+					title: i18n.msg_Updatesuccessful,
+					content: (
+						<>
+							<div>{i18n["lbl_VerifyHint1"]}</div>
+							<div>{i18n["lbl_VerifyHint2"]}</div>
+						</>
+					),
+					hasBtn: true,
+					btnBar: (
+						<div className="btn-group">
+							<button className="blue" onClick={closePopbox}>
+								{i18n["lbl_Later"]}
+							</button>
+							<button className="orange" onClick={clickOtp}>
+								{i18n["lbl_VerifyNow"]}
+							</button>
+						</div>
+					)
+				});
+			};
+
 			const setProfile = () => {
 				let profileData = {
 					AccountName: userValue.AccountName ?? userInfo.accountName,
@@ -398,6 +423,10 @@ const Panel = () => {
 													...prevState,
 													...res.data.data
 												}));
+
+												if (!userInfo.phoneVerified) {
+													openOtpHint();
+												}
 											} else {
 												setPopBox({
 													isOpen: true,
@@ -421,93 +450,12 @@ const Panel = () => {
 								);
 
 								let _prevPage = getUrlParameter("prevPage");
-								if (_prevPage === path.withdrawal.root) {
-									setPopBox({
-										isOpen: true,
-										title: i18n.msg_Updatesuccessful,
-										content: i18n.lbl_GoWithdrawalPage,
-										hasBtn: true,
-										btnBar: (
-											<div className="btn-group">
-												<button
-													className="blue"
-													onClick={closePopbox}>
-													{i18n["lbl_Cancel"]}
-												</button>
-												<button
-													className="orange"
-													onClick={closePopbox.bind(
-														null,
-														{
-															_redirectPath: `/${path.withdrawal.root}`
-														}
-													)}>
-													{i18n["lbl_Confirm"]}
-												</button>
-											</div>
-										)
-									});
-								} else if (
-									_prevPage === path.promotionInfo.root
-								) {
-									setPopBox({
-										isOpen: true,
-										title: i18n.msg_Updatesuccessful,
-										content: i18n.lbl_GoPromotionPage,
-										hasBtn: true,
-										btnBar: (
-											<div className="btn-group">
-												<button
-													className="blue"
-													onClick={closePopbox}>
-													{i18n["lbl_Cancel"]}
-												</button>
-												<button
-													className="orange"
-													onClick={closePopbox.bind(
-														null,
-														{
-															_redirectPath: `/${
-																path
-																	.promotionInfo
-																	.root
-															}?BonusCode=${getUrlParameter(
-																"BonusCode"
-															)}`
-														}
-													)}>
-													{i18n["lbl_Confirm"]}
-												</button>
-											</div>
-										)
-									});
-								} else {
-									setPopBox({
-										isOpen: true,
-										title: i18n.msg_Updatesuccessful,
-										content: i18n.msg_GoToDepositPage,
-										hasBtn: true,
-										btnBar: (
-											<div className="btn-group">
-												<button
-													className="blue"
-													onClick={closePopbox}>
-													{i18n["lbl_Cancel"]}
-												</button>
-												<button
-													className="orange"
-													onClick={closePopbox.bind(
-														null,
-														{
-															_redirectPath: `/${path.deposit.root}`
-														}
-													)}>
-													{i18n["lbl_Confirm"]}
-												</button>
-											</div>
-										)
-									});
-								}
+								redirectToPrev(
+									_prevPage,
+									i18n,
+									setPopBox,
+									closePopbox
+								);
 							} else if (errorCode === 21) {
 								setWarningState(prevState => ({
 									...prevState,
@@ -537,7 +485,14 @@ const Panel = () => {
 			setPopBox({
 				isOpen: true,
 				title: i18n.lbl_ImportantNote,
-				content: i18n.lbl_ProfileModifyWarning,
+				content: (
+					<>
+						<div className="title">
+							{i18n["lbl_Hi"]} {userValue.AccountName}
+						</div>
+						<div>{i18n["lbl_ProfileModifyWarning"]}</div>
+					</>
+				),
 				hasBtn: true,
 				btnBar: (
 					<div className="btn-group">
@@ -554,9 +509,17 @@ const Panel = () => {
 	};
 
 	const clickOtp = () => {
+		const ClosePopbox = ({ _redirectPath }) => {
+			setPopBox({ isOpen: false });
+			if (_redirectPath) {
+				setRedirectPath(_redirectPath);
+			}
+		};
+
 		setPopBox({
 			isOpen: true,
-			popBoxType: defPopBoxType.Otp
+			popBoxType: defPopBoxType.Otp,
+			ClosePopbox: ClosePopbox
 		});
 	};
 
