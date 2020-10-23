@@ -280,7 +280,7 @@
 	"msg_NeedAccountName": "Need Account Name",
 	"msg_NeedAccountNo": "Need Account Number",
 	"msg_NoData": "No Data",
-	"msg_OTPSendCode": "We had send the verification code to your register mobile. Please check your mobile and enter your verification code below.",
+	"msg_OTPSendCode": "We had send the verification code to your registered mobile no. Please check and enter the verification code below.",
 	"msg_PasswordLength": "Password must between 6 and 18 characters long.",
 	"msg_PasswordReq": "Password is required.",
 	"msg_PasswordVaildate": "6-18 alphanumeric (A-Z, a-z, 0-9) characters or special characters @$*!%#?&",
@@ -329,8 +329,7 @@
 	"lbl_MinAmount": "Min Amount",
 	"lbl_RequireMinAmountHint_Front": "The minimum amount of deposit are required to be at least ",
 	"lbl_RequireMinAmountHint_Back": "Deposit now?",
-	"lbl_VerifyHint1": "Vertify your contact number?",
-	"lbl_VerifyHint2": "You will have the opportunity to enjoy better offers",
+	"lbl_VertifyContactConfirm": "Verify your contact number to enjoy our promotions?",
 	"lbl_VerifyNow": "Vertify Now",
 	"lbl_Hi": "Hi!"
 }

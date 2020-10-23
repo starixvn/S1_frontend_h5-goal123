@@ -280,7 +280,7 @@
 	"msg_NeedAccountName": "Cần nhập tên tài khoản",
 	"msg_NeedAccountNo": "Cần nhập số tài khoản",
 	"msg_NoData": "Không có dữ liệu",
-	"msg_OTPSendCode": "Mã xác nhận đã được gửi đến số điện thoại bạn đăng ký. Vui lòng kiểm tra và nhập mã xác nhận bên dưới. ",
+	"msg_OTPSendCode": "Chúng tôi đã gửi mã xác minh đến số điện thoại đăng ký của bạn. Vui lòng kiểm tra và nhập mã xác minh bên dưới.",
 	"msg_PasswordLength": "Mật khẩu phải có từ 6 đến 18 ký tự",
 	"msg_PasswordReq": "Mật khẩu là bắt buộc",
 	"msg_PasswordVaildate": "6-18 ký tự chữ và số (A-Z, a-z, 0-9) hoặc Ký tự đặc biệt @$*!%#?&",
@@ -329,8 +329,7 @@
 	"lbl_MinAmount": "Số tiền tối thiểu",
 	"lbl_RequireMinAmountHint_Front": "Tiền gửi tối thiểu là: ",
 	"lbl_RequireMinAmountHint_Back":"Nạp tiền ngay??",
-	"lbl_VerifyHint1": "Xác minh số điện thoại?",
-	"lbl_VerifyHint2": "Bạn sẽ có cơ hội tham gia những ưu đãi đặc biệt",
+	"lbl_VertifyContactConfirm": "Vui lòng xác minh số điện thoại của bạn để được hưởng các chương trình khuyến mãi hấp dẫn?",
 	"lbl_VerifyNow": "Xác minh ngay bây giờ",
 	"lbl_Hi": "Hi!"
 

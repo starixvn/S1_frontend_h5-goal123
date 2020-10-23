@@ -376,12 +376,7 @@ const Panel = () => {
 				setPopBox({
 					isOpen: true,
 					title: i18n.msg_Updatesuccessful,
-					content: (
-						<>
-							<div>{i18n["lbl_VerifyHint1"]}</div>
-							<div>{i18n["lbl_VerifyHint2"]}</div>
-						</>
-					),
+					content: <div>{i18n["lbl_VertifyContactConfirm"]}</div>,
 					hasBtn: true,
 					btnBar: (
 						<div className="btn-group">
