@@ -12,11 +12,12 @@ export const isExpiry = ({
 	isLogin,
 	isJoin,
 	custExpiryTime,
-	status
+	status,
+	promotionType
 }) => {
 	let bonusExpiry = false;
 
-	if (isLogin && isJoin) {
+	if (isLogin && isJoin && promotionType !== 6 && promotionType !== 7) {
 		bonusExpiry =
 			moment(moment.unix(custExpiryTime)).isBefore(new moment()) ||
 			(status !== promoStatus.Running &&
