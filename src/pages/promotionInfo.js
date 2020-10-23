@@ -167,7 +167,9 @@ export default () => {
 				/>
 			) : null}
 
-			{promotionInfo.isJoin ? (
+			{promotionInfo.isJoin &&
+			promotionInfo.promotionType !== 6 &&
+			promotionInfo.promotionType !== 7 ? (
 				<ProcessBar
 					i18n={i18n}
 					currencyId={userInfo.currencyId}
