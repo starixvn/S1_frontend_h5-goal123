@@ -11,10 +11,28 @@ const isBrowser = typeof window !== `undefined`;
 export const LOGIN = async ({ userName, password, langId }, CallbackLogin) => {
 	if (!isBrowser) return false;
 
+	let url,
+		platform,
+		userAgent,
+		screen,
+		di = "";
+	if (typeof window !== undefined) {
+		url = window.location.origin;
+		platform = navigator.platform;
+		userAgent = navigator.userAgent;
+		screen = `${window.screen.width}:${window.screen.height}:${window.screen.colorDepth}`;
+		di = document.getElementById("__di").value;
+	}
+
 	await api_UserLogin(langId, {
 		UserName: userName,
 		Userpwd: password,
-		isPersistent: true
+		isPersistent: true,
+		url,
+		platform,
+		userAgent,
+		screen,
+		di
 	}).then(
 		res => {
 			if (res.data.errorCode === 0) {
