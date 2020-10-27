@@ -21,6 +21,7 @@ import {
 	isNew
 } from "../components/promotion/promotion.common";
 import JoinBtn from "../components/promotion/promotion.joinBtn";
+import { defPromotionType } from "../components/promotion/promotion.def";
 
 export default () => {
 	const { userInfo } = useContext(userInfoContext);
@@ -154,8 +155,8 @@ export default () => {
 
 			{promotionInfo.canJoin &&
 			!promotionInfo.isJoin &&
-			(promotionInfo.promotionType === 1 ||
-				promotionInfo.promotionType === 2) ? (
+			(promotionInfo.promotionType === defPromotionType.firstDeposit ||
+				promotionInfo.promotionType === defPromotionType.reDeposit) ? (
 				<DepositForm
 					i18n={i18n}
 					depositId={promotionInfo.depositId}
@@ -167,19 +168,12 @@ export default () => {
 				/>
 			) : null}
 
-			{promotionInfo.isJoin &&
-			promotionInfo.promotionType !== 6 &&
-			promotionInfo.promotionType !== 7 ? (
-				<ProcessBar
-					i18n={i18n}
-					currencyId={userInfo.currencyId}
-					{...promotionInfo}
-					RefreshProcessBar={RefreshProcessBar.bind(
-						this,
-						promotionInfo
-					)}
-				/>
-			) : null}
+			<ProcessBar
+				{...promotionInfo}
+				i18n={i18n}
+				currencyId={userInfo.currencyId}
+				RefreshProcessBar={RefreshProcessBar.bind(this, promotionInfo)}
+			/>
 
 			<div className="info">
 				<ul>
@@ -197,16 +191,21 @@ export default () => {
 						<></>
 					)}
 					<li>
-						<span className="title">{i18n.lbl_RollOver}</span>
-						<span>{promotionInfo.rollOver}x</span>
-					</li>
-					<li>
 						<span className="title">{i18n.lbl_RemainingTime}</span>
 						<span>
 							{displayExpiryTime({
 								...promotionInfo,
 								i18n: i18n
 							})}
+						</span>
+					</li>
+					<li>
+						<span className="title">{i18n.lbl_RollOver}</span>
+						<span>
+							{promotionInfo.rollOver
+								? promotionInfo.rollOver
+								: 1}
+							x
 						</span>
 					</li>
 				</ul>
@@ -225,34 +224,44 @@ const ProcessBar = ({
 	currencyId,
 	custTurnOver,
 	custRollOver,
-	RefreshProcessBar
+	RefreshProcessBar,
+	promotionType,
+	isJoin
 }) => {
-	let percentage =
-		custTurnOver > custRollOver
-			? 100
-			: ((custTurnOver / custRollOver) * 100).toFixed(2);
-	return (
-		<div className="progressBarModule">
-			<div className="bounsName">{i18n.lbl_TurnoverAccumulated}</div>
-			<div className="turnover">
-				<span>
-					{i18n[`Currency_${currencyId}`]}{" "}
-					{number_format(custTurnOver, false)}
-				</span>{" "}
-				/ ({i18n.lbl_Req} {i18n[`Currency_${currencyId}`]}{" "}
-				{number_format(custRollOver, false)})
-				<ReloadSpin func={RefreshProcessBar} />
-			</div>
-			<div className="progressBar">
-				<div className="bar">
-					<div
-						className="progress"
-						style={{ width: `${percentage}%` }}></div>
+	if (
+		isJoin &&
+		promotionType !== defPromotionType.rebate &&
+		promotionType !== defPromotionType.cashback
+	) {
+		let percentage =
+			custTurnOver > custRollOver
+				? 100
+				: ((custTurnOver / custRollOver) * 100).toFixed(2);
+		return (
+			<div className="progressBarModule">
+				<div className="bounsName">{i18n.lbl_TurnoverAccumulated}</div>
+				<div className="turnover">
+					<span>
+						{i18n[`Currency_${currencyId}`]}{" "}
+						{number_format(custTurnOver, false)}
+					</span>{" "}
+					/ ({i18n.lbl_Req} {i18n[`Currency_${currencyId}`]}{" "}
+					{number_format(custRollOver, false)})
+					<ReloadSpin func={RefreshProcessBar} />
 				</div>
-				<div className="percentage">{percentage}%</div>
+				<div className="progressBar">
+					<div className="bar">
+						<div
+							className="progress"
+							style={{ width: `${percentage}%` }}></div>
+					</div>
+					<div className="percentage">{percentage}%</div>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return <></>;
+	}
 };
 
 const DepositForm = ({ i18n, depositId, depositAmount, displayCurrency }) => {

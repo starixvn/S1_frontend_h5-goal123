@@ -1,26 +1,5 @@
 import React from "react";
-
-export const defFilterType = {
-	all: 0,
-	expiry: 999,
-	firstDeposit: 1,
-	freeBet: 3
-};
-
-const defPromoNavs = [
-	{
-		displayKey: "lbl_All",
-		value: defFilterType.all
-	},
-	{
-		displayKey: "lbl_PromotionCategory1",
-		value: defFilterType.firstDeposit
-	},
-	{
-		displayKey: "lbl_FreeBet",
-		value: defFilterType.freeBet
-	}
-];
+import { defPromoNavs } from "./promotion.def";
 
 export default ({ i18n, selected, selectPromoType }) => {
 	let arr = defPromoNavs.map(p => {

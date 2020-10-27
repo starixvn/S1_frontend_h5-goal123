@@ -4,7 +4,7 @@ import path from "../../path";
 import { Link, Redirect } from "@reach/router";
 import { api_promotion_SetClaimPromotion } from "../../service/api/promotion";
 import { number_format, isConvert } from "../common/common";
-import { promoStatus } from "./promotion.common";
+import { promoStatus } from "./promotion.def";
 
 export default ({ userInfo, i18n, p, GetPromotion, isList, setPopBox }) => {
 	const [redirectPath, setRedirectPath] = useState(null);
