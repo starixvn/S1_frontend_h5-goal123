@@ -7,9 +7,7 @@ import {
 import { api_promotion_GetPromotionListV2 } from "../service/api/promotion";
 import path from "../path";
 import { Link } from "@reach/router";
-import PromotionNavBar, {
-	defFilterType
-} from "../components/promotion/promotion.nav";
+import PromotionNavBar from "../components/promotion/promotion.nav";
 import {
 	isExpiry,
 	displayExpiryTime,
@@ -18,6 +16,10 @@ import {
 } from "../components/promotion/promotion.common";
 import { number_format, isConvert } from "../components/common/common";
 import JoinBtn from "../components/promotion/promotion.joinBtn";
+import {
+	defPromotionType,
+	defFilterType
+} from "../components/promotion/promotion.def";
 
 const IndexPage = () => {
 	const { userInfo } = useContext(userInfoContext);
@@ -84,7 +86,8 @@ const IndexPage = () => {
 		} else if (filterType === defFilterType.firstDeposit) {
 			afterFilterList = promoList.filter(
 				p =>
-					(p.promotionType === filterType || p.promotionType === 5) &&
+					(p.promotionType === filterType ||
+						p.promotionType === defPromotionType.walletBonus) &&
 					!isExpiry({ ...p, isLogin: userInfo.isLogin })
 			);
 		} else {
@@ -161,7 +164,7 @@ const IndexPage = () => {
 						<div className="icon icon-icon32px_">
 							{i18n.lbl_RollOver}
 						</div>
-						<div>{p.rollOver}X</div>
+						<div>{p.rollOver ? p.rollOver : 1}X</div>
 					</div>
 				</div>
 				<div className="btn-group">
