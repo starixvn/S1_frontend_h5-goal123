@@ -19,6 +19,7 @@ const Inputbox = props => {
 								: props.value
 						}
 						max={props.max ? props.max : null}
+						disabled={props.disabled ? props.disabled : null}
 					/>
 				</label>
 			) : (
@@ -36,6 +37,7 @@ const Inputbox = props => {
 								: props.value
 						}
 						max={props.max ? props.max : null}
+						disabled={props.disabled ? props.disabled : null}
 					/>
 				</>
 			)}
