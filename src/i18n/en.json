@@ -331,5 +331,7 @@
 	"lbl_RequireMinAmountHint_Back": "Deposit now?",
 	"lbl_VertifyContactConfirm": "Verify your contact number to enjoy our promotions?",
 	"lbl_VerifyNow": "Vertify Now",
-	"lbl_Hi": "Hi!"
+	"lbl_Hi": "Hi!",
+	"lbl_Affiliate_ID":"Affiliate ID/Referral",
+	"lbl_Please_enter_Affiliate_ID":"Please enter Affiliate ID (Optional), it can not change once enter!"
 }

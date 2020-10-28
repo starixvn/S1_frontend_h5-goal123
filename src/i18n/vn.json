@@ -331,7 +331,8 @@
 	"lbl_RequireMinAmountHint_Back":"Nạp tiền ngay??",
 	"lbl_VertifyContactConfirm": "Vui lòng xác minh số điện thoại của bạn để được hưởng các chương trình khuyến mãi hấp dẫn?",
 	"lbl_VerifyNow": "Xác minh ngay bây giờ",
-	"lbl_Hi": "Hi!"
-
+	"lbl_Hi": "Hi!",
+	"lbl_Affiliate_ID":"ID Đại lý/ Người giới thiệu",
+	"lbl_Please_enter_Affiliate_ID":"Vui lòng nhập ID Đại lý (tùy chọn), thông tin không thể thay đổi sau khi đã nhập!"
 
 }
