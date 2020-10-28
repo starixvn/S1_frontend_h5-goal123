@@ -44,19 +44,28 @@ export const Wrapper = ({ children }) => {
 		let AffId = getUrlParameter("AffId");
 		let RefId = getUrlParameter("RefId");
 		let Aff = getUrlParameter("Aff");
+		let affiliateid = getUrlParameter("affiliateid");
 
 		if (AffId) {
 			setCookie("AffId", AffId, 7);
 			deleteCookie("RefId");
 			deleteCookie("Aff");
+			deleteCookie("affiliateid");
 		} else if (RefId) {
 			setCookie("RefId", RefId, 7);
 			deleteCookie("AffId");
 			deleteCookie("Aff");
+			deleteCookie("affiliateid");
 		} else if (Aff) {
 			setCookie("Aff", Aff, 7);
 			deleteCookie("AffId");
 			deleteCookie("RefId");
+			deleteCookie("affiliateid");
+		} else if (affiliateid) {
+			setCookie("affiliateid", affiliateid, 7);
+			deleteCookie("AffId");
+			deleteCookie("RefId");
+			deleteCookie("Aff");
 		}
 	}, []);
 

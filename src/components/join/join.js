@@ -41,6 +41,7 @@ const initState = {
 	Password: "",
 	// Email: "",
 	Currency: null,
+	AffiliateId: "",
 	Checkbox: false
 };
 
@@ -59,6 +60,10 @@ const initWarningState = {
 	// },
 	Currency: {
 		status: false
+	},
+	AffiliateId: {
+		status: false,
+		msg: ""
 	},
 	Checkbox: {
 		status: false,
@@ -88,13 +93,14 @@ const Join = () => {
 	const [checkboxState, setCheckboxState] = useState(false);
 	const [redirectPath, setRedirectPath] = useState(null);
 	const [banner, setBanner] = useState([]);
-
 	const [hideCurrency, setHideCurrency] = useState(false);
+	const [affiliateidExist, setAffiliateidExist] = useState("");
 
 	const [showTipsState, setShowTipsState] = useState({
 		UserName: false,
 		Password: false,
 		// Email: false,
+		AffiliateId: false,
 		Currency: false
 	});
 
@@ -124,9 +130,10 @@ const Join = () => {
 	}, [nav, userInfo.langId]);
 
 	useEffect(() => {
-		let AffId = getUrlParameter("AffId") || getCookie("AffId");
-		if (AffId && isMountedRef) {
-			setHideCurrency(true);
+		let affiliateid =
+			getUrlParameter("affiliateid") || getCookie("affiliateid");
+		if (affiliateid && isMountedRef) {
+			setAffiliateidExist(affiliateid);
 		}
 	}, []);
 
@@ -715,6 +722,22 @@ const Join = () => {
 						</Tips>
 					</div>
 				)}
+
+				<Inputbox
+					icon="icon-affiliate"
+					ClassName="JoinRule"
+					placeholder={i18n["lbl_Affiliate_ID"]}
+					value={
+						affiliateidExist !== ""
+							? affiliateidExist
+							: userValueState.AffiliateId
+					}
+					onFocus={showTipsHandler.bind(null, "AffiliateId")}
+					onChange={EditField.bind(null, "AffiliateId")}
+					showTips={showTipsState.AffiliateId}
+					Tips={i18n["lbl_Please_enter_Affiliate_ID"]}
+					Warning={warningState.AffiliateId}
+					disabled={affiliateidExist}></Inputbox>
 
 				<Checkbox
 					Checked={checkboxState}
