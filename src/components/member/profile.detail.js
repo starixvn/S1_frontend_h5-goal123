@@ -12,7 +12,6 @@ import {
 import { api_ExistsEmail } from "../../service/api/site";
 import { defPopBoxType } from "../common/popbox";
 import path from "../../path";
-import { getUrlParameter } from "../common/common";
 import { redirectToPrev } from "./profile.redirect";
 
 const monthOptions = [
