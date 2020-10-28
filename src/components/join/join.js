@@ -93,7 +93,6 @@ const Join = () => {
 	const [checkboxState, setCheckboxState] = useState(false);
 	const [redirectPath, setRedirectPath] = useState(null);
 	const [banner, setBanner] = useState([]);
-	const [hideCurrency, setHideCurrency] = useState(false);
 	const [affiliateidExist, setAffiliateidExist] = useState("");
 
 	const [showTipsState, setShowTipsState] = useState({
@@ -700,28 +699,23 @@ const Join = () => {
 					Warning={warningState.Email}
 					value={userValueState.Email}></Inputbox> */}
 
-				{hideCurrency ? null : (
-					<div className="inputBox">
-						<Dropdown
-							mainKey="join-curr"
-							colName={colName[3]}
-							selectedIdx={currencyState}
-							options={siteCurrencyState}
-							clickDropdown={showTipsHandler.bind(
-								null,
-								"Currency"
-							)}
-							onSelectItem={dropdownStateHandler}
-							value={userValueState.Currency}
-							i18n={i18n}></Dropdown>
-						<Tips
-							Icon="icon-coin-dollar"
-							IsOpen={showTipsState.Currency}
-							ClassName="JoinRule">
-							{i18n["lbl_PreferredCurrencyToolTip"]}
-						</Tips>
-					</div>
-				)}
+				<div className="inputBox">
+					<Dropdown
+						mainKey="join-curr"
+						colName={colName[3]}
+						selectedIdx={currencyState}
+						options={siteCurrencyState}
+						clickDropdown={showTipsHandler.bind(null, "Currency")}
+						onSelectItem={dropdownStateHandler}
+						value={userValueState.Currency}
+						i18n={i18n}></Dropdown>
+					<Tips
+						Icon="icon-coin-dollar"
+						IsOpen={showTipsState.Currency}
+						ClassName="JoinRule">
+						{i18n["lbl_PreferredCurrencyToolTip"]}
+					</Tips>
+				</div>
 
 				<Inputbox
 					icon="icon-affiliate"
