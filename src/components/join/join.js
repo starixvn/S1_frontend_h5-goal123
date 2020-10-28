@@ -28,55 +28,12 @@ import path from "../../path";
 import config from "../../config";
 import PromoPopup from "./join.promotion";
 import Logo from "../../styles/img/logo.png";
-
-const colName = [
-	"UserName",
-	"Password",
-	// "Email",
-	"Currency"
-];
-
-const initState = {
-	UserName: "",
-	Password: "",
-	// Email: "",
-	Currency: null,
-	AffiliateId: "",
-	Checkbox: false
-};
-
-const initWarningState = {
-	UserName: {
-		status: false,
-		msg: ""
-	},
-	Password: {
-		status: false,
-		msg: ""
-	},
-	// Email: {
-	// 	status: false,
-	// 	msg: ""
-	// },
-	Currency: {
-		status: false
-	},
-	AffiliateId: {
-		status: false,
-		msg: ""
-	},
-	Checkbox: {
-		status: false,
-		msg: ""
-	}
-};
-
-const initChecklistState = {
-	UserName: false,
-	Password: false,
-	// Email: false,
-	Checkbox: false
-};
+import {
+	colName,
+	initState,
+	initWarningState,
+	initChecklistState
+} from "./join.def";
 
 const defaultLangId = GET_LANG_ID();
 const currencyDefaultSelectIdx = 0;
@@ -533,6 +490,8 @@ const Join = () => {
 			regData["RefId"] = getUrlParameter("RefId") || getCookie("RefId");
 			regData["AffId"] = getUrlParameter("AffId") || getCookie("AffId");
 			regData["Aff"] = getUrlParameter("Aff") || getCookie("Aff");
+			regData["affiliateid"] =
+				getUrlParameter("affiliateid") || getCookie("affiliateid");
 
 			api_Register(regData).then(
 				response => {
