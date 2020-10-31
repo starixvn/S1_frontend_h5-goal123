@@ -46,7 +46,7 @@ const ReacentDatas = props => {
 					key={`transferRecent-${item.transId}`}
 					createTime={item.createTime}
 					transId={item.transId}
-					amount={number_format(item.amount, false)}
+					amount={item.amount}
 					startWallet={_transferDirection.startWallet}
 					endWallet={_transferDirection.endWallet}
 					i18n={i18n}
@@ -62,9 +62,8 @@ const ReacentDatas = props => {
 				<button className="orange switch" onClick={HandleOpen}>
 					{i18n["lbl_RecentTransactions"]}
 					<i
-						className={`icon icon-circle-right${
-							isOpen ? " open" : ""
-						}`}></i>
+						className={`icon icon-circle-right${isOpen ? " open" : ""
+							}`}></i>
 				</button>
 			</div>
 
