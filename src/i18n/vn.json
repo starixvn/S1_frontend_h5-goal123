@@ -322,7 +322,7 @@
 	"msg_API_SendOTPSMS_5002": "Entered the wrong phone number.",
 	"msg_OTP_Invalid": "Invalid OTP Code",
 	"msg_RealnameTip":"Xin vui lòng điền Họ tên thật của bạn để giao dịch được diễn ra thuận tiện, tránh phát sinh sai sót hoặc khiếu nại!",
-	"lbl_Processing":"Đang xử lý",
+	"lbl_Processing":"Đang diễn ra",
 	"lbl_PromoCategory_5":"Hết hạn",
 	"lbl_PromotionCategory1": "Nạp Lần Đầu",
 	"lbl_FreeBet": "Cược Miễn Phí",
